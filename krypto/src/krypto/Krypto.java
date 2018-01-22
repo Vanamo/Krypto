@@ -16,10 +16,13 @@ public class Krypto {
         
         //List all five-letter words
         fiveLetterWords = lexicon.xLetterWords(wordList, 5);
+        
         for (String word : fiveLetterWords) {
             System.out.println(word);
         }
         System.out.println(fiveLetterWords.size() + " words");
+
+        
     }
 
 }
