@@ -1,6 +1,7 @@
 package config;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
@@ -10,10 +11,11 @@ public class Lexicon {
     public Lexicon() {
     }
 
-    public List getLexicon() throws JDOMException {
+    public ArrayList<String> getLexicon() throws JDOMException {
         //Import lexicon using DOM
 
         List<Element> elementList = null;
+        ArrayList<String> wordList = new ArrayList<>();
         
         try {
             File inputFile = new File("./kotus-sanalista_v1/kotus-sanalista_v1.xml");
@@ -23,6 +25,11 @@ public class Lexicon {
 
             elementList = classElement.getChildren("st");
 
+            for (int i = 0; i < elementList.size(); i++) {
+                Element elementListElement = elementList.get(i);
+                String word = elementListElement.getChildText("s");
+                wordList.add(word);
+            }
 
         } catch (JDOMException e) {
             e.printStackTrace();
@@ -30,7 +37,16 @@ public class Lexicon {
             ex.printStackTrace();
         }
 
-        return elementList;
+        return wordList;
     }
 
+    public ArrayList<String> xLetterWords(ArrayList<String> wordList, int wordLength) {
+        ArrayList<String> xLetterWords= new ArrayList<>();
+        for (String word : wordList) {
+            if (word.length() == wordLength) {
+                xLetterWords.add(word);
+            }
+        }  
+        return xLetterWords;
+    }
 }
