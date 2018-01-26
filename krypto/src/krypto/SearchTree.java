@@ -3,7 +3,7 @@ package krypto;
 import java.util.ArrayList;
 
 /**
- * Generates a search tree for words. Words can be added to the tree as a list
+ * Generates a search tree for strings. Strings can be added to the tree as a list
  * or one by one.
  *
  * @author Vanamo Piirainen
@@ -65,12 +65,11 @@ public class SearchTree {
     }
 
     public void printTree() {
-        System.out.println("Search Tree");
         preorderTreeWalk(this.root);
     }
 
     private void preorderTreeWalk(Node node) {
-        System.out.println(node.getKey() + " (" + node.getWord() + ")");
+        System.out.println(node.getKey() + " (" + node.getWord() + ") ");
         Node childNode = node.getChild();
         while (childNode != null) {
             preorderTreeWalk(childNode);

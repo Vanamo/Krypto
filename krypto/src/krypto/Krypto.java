@@ -89,4 +89,10 @@ public class Krypto {
             }
         }
     }
+
+    public char[][] getBoardOfWords() {
+        return boardOfWords;
+    }
+    
+    
 }
