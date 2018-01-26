@@ -1,36 +1,92 @@
 package krypto;
 
-import config.Lexicon;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
+import java.util.Random;
 
+/**
+ *
+ * @author Vanamo Piirainen
+ */
 public class Krypto {
 
-    public static void main(String[] args) throws JDOMException {
+    private char[][] boardOfWords;
+    private int width;
+    private int hight;
+    private String firstWord;
+    private ArrayList<String> wordList;
 
-        Lexicon lexicon = new Lexicon();
-        ArrayList<String> wordList = lexicon.getLexicon();
-        ArrayList<String> fiveLetterWords = new ArrayList<>();
-        
-        //List all five-letter words
-        fiveLetterWords = lexicon.xLetterWords(wordList, 5);
-        
-//        for (String word : fiveLetterWords) {
-//            System.out.println(word);
-//        }
-//        System.out.println(fiveLetterWords.size() + " words");
-
-        String[] sanoja = {"alkaa", "aika", "ammatti", "ammua"};
-        ArrayList<String> sanalista = new ArrayList<>(Arrays.asList(sanoja));
-        SearchTree tree = new SearchTree();
-        tree.addWordToTree("alku");
-        tree.printTree();
-        tree.addListToSearchTree(sanalista);
-        tree.printTree();
-        
+    /**
+     * Constructor with default parameters and random starting word.
+     */
+    public Krypto(ArrayList<String> wordList) {
+        this.wordList = wordList;
+        this.width = 5;
+        this.hight = 5;
+        this.firstWord = getRandomWord();
+        this.boardOfWords = new char[5][5];
+        createBoard();
     }
 
+    /**
+     * Constructor with user set parameters and starting word.
+     */
+    public Krypto(ArrayList<String> wordList,
+            int width, int hight, String firstWord) {
+        this.wordList = wordList;
+        this.width = width;
+        this.hight = hight;
+        this.firstWord = firstWord;
+        boardOfWords = new char[this.width][this.hight];
+        createBoard();
+    }
+
+    private String getRandomWord() {
+        Random rand = new Random();
+        int i = rand.nextInt(this.wordList.size());
+        return this.wordList.get(i);
+    }
+
+    /**
+     * Creates an empty board (x stands for an empty square) and adds the
+     * starting word in the upper left corner of the board.
+     */
+    private void createBoard() {
+        for (int y = 0; y < this.hight; y++) {
+            for (int x = 0; x < this.width; x++) {
+                this.boardOfWords[y][x] = 'X';
+            }
+        }
+        int x = 0;
+        int y = 0;
+        int direction = 0;
+        drawWord(this.firstWord, x, y, direction);
+    }
+
+    public void printBoard() {
+        for (int y = 0; y < this.hight; y++) {
+            for (int x = 0; x < this.width; x++) {
+                System.out.print(this.boardOfWords[y][x] + "\t");
+            }
+            System.out.println("\n");
+        }
+    }
+
+    /**
+     * Draws the given word on the board. Alignment: 0 = horizontal 1 =
+     * vertical.
+     *
+     * @param word
+     * @param x
+     * @param y
+     * @param alignment
+     */
+    public void drawWord(String word, int x, int y, int alignment) {
+        for (int i = 0; i < word.length(); i++) {
+            if (alignment == 0) {
+                this.boardOfWords[y][i + x] = word.charAt(i);
+            } else {
+                this.boardOfWords[i + y][x] = word.charAt(i);                
+            }
+        }
+    }
 }

@@ -3,8 +3,8 @@ package krypto;
 import java.util.ArrayList;
 
 /**
- * Generates a search tree for words Words can be added to the tree as a list or
- * one by one
+ * Generates a search tree for words. Words can be added to the tree as a list
+ * or one by one.
  *
  * @author Vanamo Piirainen
  *
@@ -19,13 +19,13 @@ public class SearchTree {
         this.root = new Node(rootChar);
     }
 
-    public void addListToSearchTree(ArrayList<String> wordList) {
+    public void addListOfWords(ArrayList<String> wordList) {
         for (String word : wordList) {
-            addWordToTree(word);
+            addWord(word);
         }
     }
 
-    public void addWordToTree(String word) {
+    public void addWord(String word) {
         Node parentNode = this.root;
         for (int i = 0; i < word.length(); i++) {
             Node node = new Node(word.charAt(i));
@@ -41,7 +41,8 @@ public class SearchTree {
     }
 
     /**
-     * Checks if parent node already has the letter as a child
+     * Checks if the parent node already has the letter as a child node and 
+     * returns the node if it exists. Otherwise returns null. 
      *
      * @param parent
      * @param node
