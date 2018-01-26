@@ -20,27 +20,27 @@ class Node {
 
     public Node(char key) {
         this.key = key;
-        this.next = this;
         this.last = true;
+        this.child = null;
+        this.next = null;
+        this.word = null;
     }
 
     public void setChild(Node newChild) {
         if (this.child == null) {
             this.child = newChild;
-            this.child.next = this;
         } else {
-            setNext(this.child, newChild);
+            setNext(newChild);
         }
     }
 
-    private void setNext(Node child, Node newChild) {
-        Node lastChild = child;
-        while (!lastChild.last) {
-            lastChild = lastChild.next;
+    private void setNext(Node newChild) {
+        Node prevChild = this.child;
+        while (!prevChild.last) {
+            prevChild = prevChild.next;
         }
-        lastChild.next = newChild;
-        newChild.next = this;
-        lastChild.last = false;
+        prevChild.next = newChild;
+        prevChild.last = false;
     }
     
     public void addWord(String word) {
@@ -61,5 +61,9 @@ class Node {
 
     public Node getNext() {
         return next;
+    }
+
+    public char getKey() {
+        return key;
     }
 }
