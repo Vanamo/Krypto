@@ -94,5 +94,8 @@ public class UserInterface {
         return boardOfWords;
     }
     
+    public ArrayList<String> getWordList() {
+        return this.wordList;
+    }
     
 }

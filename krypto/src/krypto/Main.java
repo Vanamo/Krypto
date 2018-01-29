@@ -18,20 +18,9 @@ public class Main {
 
         //List all five-letter words
         fiveLetterWords = lexicon.xLetterWords(wordList, 5);
-
-//        for (String word : fiveLetterWords) {
-//            System.out.println(word);
-//        }
-//        System.out.println(fiveLetterWords.size() + " words");
-
-//        SearchTree tree = new SearchTree();
-//        tree.addWord("alku");
-//        tree.addWord("aika");
-//        tree.addWord("kukka");        
-//        tree.printTree();
-        
-//        Krypto krypto = new Krypto(fiveLetterWords);
-//        krypto.printBoard();
+    
+        UserInterface krypto = new UserInterface(fiveLetterWords);
+        krypto.printBoard();
 
     }
 
