@@ -33,6 +33,10 @@ class Node {
             setNext(newChild);
         }
     }
+    
+    public void setChildForTesting(Node newChild) {
+        this.child = newChild;
+    }
 
     private void setNext(Node newChild) {
         Node prevChild = this.child;
@@ -42,8 +46,12 @@ class Node {
         prevChild.next = newChild;
         prevChild.last = false;
     }
+
+    public void setNextForTesting(Node newNext) {
+        this.next = newNext;
+    }
     
-    public void addWord(String word) {
+    public void setWord(String word) {
         this.word = word;
     }
     
@@ -53,6 +61,10 @@ class Node {
 
     public boolean isLast() {
         return last;
+    }
+    
+    public void setIsLastForTesting(boolean value) {
+        this.last = value;
     }
 
     public Node getChild() {

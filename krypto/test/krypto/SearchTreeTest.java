@@ -6,6 +6,7 @@
 package krypto;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,7 +19,7 @@ import static org.junit.Assert.*;
  * @author vseppane
  */
 public class SearchTreeTest {
-    
+
     public SearchTreeTest() {
     }
 
@@ -28,11 +29,32 @@ public class SearchTreeTest {
     @Test
     public void testAddListOfWords() {
         System.out.println("addListOfWords");
-        ArrayList<String> wordList = null;
+        String[] words = {"", "a", "alku", "aika"};
+        ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
         SearchTree instance = new SearchTree();
         instance.addListOfWords(wordList);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        Node expRoot = new Node(' ');
+        Node a = new Node('a');
+        Node l = new Node('l');
+        Node k = new Node('k');
+        Node u = new Node('u');
+        Node i = new Node('i');
+        Node k2 = new Node('k');
+        Node a2 = new Node('a');
+        expRoot.setChildForTesting(a);
+        a.setWord("a");
+        a.setChildForTesting(l);
+        l.setChildForTesting(k);
+        k.setChildForTesting(u);
+        u.setWord("alku");
+        l.setIsLastForTesting(false);
+        l.setNextForTesting(i);
+        i.setChildForTesting(k2);
+        k2.setChildForTesting(a2);
+        a2.setWord("aika");  
+        
+        compareNodesRecursively(instance.getRootForTesting(), expRoot);
     }
 
     /**
@@ -41,12 +63,32 @@ public class SearchTreeTest {
     @Test
     public void testAddWord() {
         System.out.println("addWord");
-        String word = "";
+        String word = "tes";
         SearchTree instance = new SearchTree();
         instance.addWord(word);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        Node expRoot = new Node(' ');
+        Node t = new Node('t');
+        Node e = new Node('e');
+        Node s = new Node('s');
+        expRoot.setChildForTesting(t);
+        t.setChildForTesting(e);
+        e.setChildForTesting(s);
+        s.setWord(word);
+
+        compareNodesRecursively(instance.getRootForTesting(), expRoot);
     }
 
-    
+    private void compareNodesRecursively(Node result, Node expResult) {
+        assertEquals(expResult.getKey(), result.getKey());
+        assertEquals(expResult.isLast(), result.isLast());
+        assertEquals(expResult.getWord(), result.getWord());
+        Node childNode = result.getChild();
+        Node expChildNode = expResult.getChild();
+        while (childNode != null || expChildNode != null) {
+            compareNodesRecursively(childNode, expChildNode);
+            childNode = childNode.getNext();
+            expChildNode = expChildNode.getNext();
+        }
+    }
 }

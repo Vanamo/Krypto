@@ -26,6 +26,7 @@ public class SearchTree {
     }
 
     public void addWord(String word) {
+        if (word.isEmpty()) return;
         Node parentNode = this.root;
         for (int i = 0; i < word.length(); i++) {
             Node node = new Node(word.charAt(i));
@@ -37,7 +38,7 @@ public class SearchTree {
                 parentNode = inTreeNode;
             }
         }
-        parentNode.addWord(word);
+        parentNode.setWord(word);
     }
 
     /**
@@ -75,5 +76,9 @@ public class SearchTree {
             preorderTreeWalk(childNode);
             childNode = childNode.getNext();
         }
+    }
+    
+    public Node getRootForTesting() {
+        return this.root;
     }
 }

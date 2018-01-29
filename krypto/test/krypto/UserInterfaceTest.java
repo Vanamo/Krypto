@@ -19,9 +19,9 @@ import static org.junit.Assert.*;
  *
  * @author vseppane
  */
-public class KryptoTest {
+public class UserInterfaceTest {
 
-    public KryptoTest() {
+    public UserInterfaceTest() {
     }
 
     /**
@@ -36,7 +36,7 @@ public class KryptoTest {
         int alignment = 0;
         String[] words = {"a", "au", "alkaa", "aika", "ammatti", "ammua", "kaikki"};
         ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
-        Krypto instance = new Krypto(wordList, 5, 5, "a");
+        UserInterface instance = new UserInterface(wordList, 5, 5, "a");
         instance.drawWord(word, x, y, alignment);
         char[][] expResult = new char[5][5];
         for (int i = 0; i < 5; i++) {
@@ -59,7 +59,7 @@ public class KryptoTest {
         int alignment = 1;
         String[] words = {"a", "au", "alkaa", "aika", "ammatti", "ammua", "kaikki"};
         ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
-        Krypto instance = new Krypto(wordList, 5, 5, "a");
+        UserInterface instance = new UserInterface(wordList, 5, 5, "a");
         instance.drawWord(word, x, y, alignment);
         char[][] expResult = new char[5][5];
         for (int i = 0; i < 5; i++) {
