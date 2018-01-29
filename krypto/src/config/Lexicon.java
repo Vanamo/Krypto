@@ -8,11 +8,20 @@ import org.jdom2.input.SAXBuilder;
 
 public class Lexicon {
 
+    /**
+     *
+     */
     public Lexicon() {
     }
 
+    /**
+     * Import lexicon from xml file using DOM.
+     *
+     * @return
+     * @throws JDOMException
+     */
     public ArrayList<String> getLexicon() throws JDOMException {
-        //Import lexicon using DOM
+
 
         List<Element> elementList = null;
         ArrayList<String> wordList = new ArrayList<>();
@@ -40,7 +49,15 @@ public class Lexicon {
         return wordList;
     }
 
+    /**
+     * Generate a list of words of defined length.
+     *
+     * @param wordList
+     * @param wordLength
+     * @return
+     */
     public ArrayList<String> xLetterWords(ArrayList<String> wordList, int wordLength) {
+
         ArrayList<String> xLetterWords= new ArrayList<>();
         for (String word : wordList) {
             if (word.length() == wordLength) {
@@ -49,4 +66,5 @@ public class Lexicon {
         }  
         return xLetterWords;
     }
+
 }
