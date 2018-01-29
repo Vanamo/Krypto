@@ -11,13 +11,32 @@ public class WordFinder {
 
     private char[][] boardOfWords;
     private SearchTree wordTree;
+    private UserInterface ui;
 
-    public WordFinder(UserInterface krypto) {
-        this.boardOfWords = krypto.getBoardOfWords();
+    public WordFinder(UserInterface ui) {
+        this.ui = ui;
+        this.boardOfWords = ui.getBoardOfWords();
         this.wordTree = new SearchTree();
-        this.wordTree.addListOfWords(krypto.getWordList());
+        this.wordTree.addListOfWords(ui.getWordList());
     }
 
+    /**
+     * Finds words for all positions given as an ArrayList.
+     */
+    public void findWordsForAllPositions(ArrayList<WordPosition> positions) {
+        for (WordPosition position : positions) {
+            
+        }
+    }
+    
+    private void layWord(ArrayList<WordPosition> positions, int positionIndex, 
+            ArrayList<String> words, int wordIndex) {
+        if (words.isEmpty()) return;
+        if (positionIndex == positions.size()) {
+            this.ui.printBoard();
+        }
+    } 
+    
     /**
      * Find all words that fit to the given position. 
      * 

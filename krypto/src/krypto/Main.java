@@ -25,8 +25,8 @@ public class Main {
         krypto.printBoard();
 
         WordFinder finder = new WordFinder(krypto);
-        WordPosition word = new WordPosition(0, 0, 1, 5);
-        ArrayList<String> words = finder.findWords(word);
+        WordPosition position = new WordPosition(0, 0, 1, 5);
+        ArrayList<String> words = finder.findWords(position);
         for (String w : words) {
             System.out.println(w);
         }
