@@ -25,6 +25,24 @@ public class UserInterfaceTest {
     }
 
     /**
+     * Test of building a user defined krypto board in the constructor
+     */
+    @Test
+    public void testUserInterface() {
+        System.out.println("UserInterface");
+        String[] words = {"a", "au", "alkaa", "aika", "ammatti", "ammua", "kaikki"};
+        ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
+        UserInterface instance = new UserInterface(wordList, 2, 1, "aa");
+        char[][] result = instance.getBoardOfWords();
+        
+        char[][] expResult = new char[1][2];
+        expResult[0][0] = 'a';
+        expResult[0][1] = 'a';
+        
+        assertArrayEquals(expResult, result);
+    }
+
+    /**
      * Test of drawWord method, of class Krypto.
      */
     @Test
@@ -38,6 +56,8 @@ public class UserInterfaceTest {
         ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
         UserInterface instance = new UserInterface(wordList, 5, 5, "a");
         instance.drawWord(word, x, y, alignment);
+        char[][] result = instance.getBoardOfWords();
+
         char[][] expResult = new char[5][5];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -47,9 +67,9 @@ public class UserInterfaceTest {
         expResult[0][0] = 'a';
         expResult[3][3] = 'a';
         expResult[3][4] = 'i';
-        assertArrayEquals(expResult, instance.getBoardOfWords());
+        assertArrayEquals(expResult, result);
     }
-    
+
     @Test
     public void testDrawWordVertical() {
         System.out.println("drawWordVertical");
@@ -61,6 +81,8 @@ public class UserInterfaceTest {
         ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
         UserInterface instance = new UserInterface(wordList, 5, 5, "a");
         instance.drawWord(word, x, y, alignment);
+        char[][] result = instance.getBoardOfWords();
+
         char[][] expResult = new char[5][5];
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -70,6 +92,6 @@ public class UserInterfaceTest {
         expResult[0][0] = 'a';
         expResult[3][3] = 'a';
         expResult[4][3] = 'i';
-        assertArrayEquals(expResult, instance.getBoardOfWords());
+        assertArrayEquals(expResult, result);
     }
 }

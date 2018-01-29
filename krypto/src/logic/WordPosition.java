@@ -8,14 +8,14 @@ package logic;
  * 
  * @author Vanamo Piirainen
  */
-class Word {
+public class WordPosition {
     
     private int x;
     private int y;
     private int alignment;
     private int wordLength;
 
-    public Word(int x, int y, int alignment, int wordLength) {
+    public WordPosition(int x, int y, int alignment, int wordLength) {
         this.x = x;
         this.y = y;
         this.alignment = alignment;

@@ -36,7 +36,7 @@ public class UserInterface {
         this.width = width;
         this.hight = hight;
         this.firstWord = firstWord;
-        boardOfWords = new char[this.width][this.hight];
+        boardOfWords = new char[this.hight][this.width];
         createBoard();
     }
 

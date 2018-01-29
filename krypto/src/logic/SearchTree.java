@@ -78,7 +78,7 @@ public class SearchTree {
         }
     }
     
-    public Node getRootForTesting() {
+    public Node getRoot() {
         return this.root;
     }
 }

@@ -54,7 +54,7 @@ public class SearchTreeTest {
         k2.setChildForTesting(a2);
         a2.setWord("aika");  
         
-        compareNodesRecursively(instance.getRootForTesting(), expRoot);
+        compareNodesRecursively(instance.getRoot(), expRoot);
     }
 
     /**
@@ -76,7 +76,7 @@ public class SearchTreeTest {
         e.setChildForTesting(s);
         s.setWord(word);
 
-        compareNodesRecursively(instance.getRootForTesting(), expRoot);
+        compareNodesRecursively(instance.getRoot(), expRoot);
     }
 
     private void compareNodesRecursively(Node result, Node expResult) {

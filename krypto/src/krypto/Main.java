@@ -5,6 +5,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import logic.WordFinder;
+import logic.WordPosition;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 
@@ -22,6 +24,12 @@ public class Main {
         UserInterface krypto = new UserInterface(fiveLetterWords);
         krypto.printBoard();
 
+        WordFinder finder = new WordFinder(krypto);
+        WordPosition word = new WordPosition(0, 0, 1, 5);
+        ArrayList<String> words = finder.findWords(word);
+        for (String w : words) {
+            System.out.println(w);
+        }
     }
 
 }
