@@ -48,9 +48,9 @@ public class UserInterface {
         return this.wordList.get(i);
     }
 
-    public void findWords() {
+    public BoardOfWords fillBoard(ArrayList<WordPosition> positions) {
         WordFinder wordFinder = new WordFinder(this);
-        //Jatka
+        return wordFinder.findWordsForAllPositions(positions);
     }
 
     public BoardOfWords getBoardOfWords() {

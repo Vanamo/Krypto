@@ -20,65 +20,77 @@ public class WordFinder {
 
     /**
      * Finds words for all positions given as an ArrayList.
+     * @param positions
      */
-    public void findWordsForAllPositions(ArrayList<WordPosition> positions) {
-        for (WordPosition position : positions) {
-            
-        }
+    public BoardOfWords findWordsForAllPositions(ArrayList<WordPosition> positions) {
+        return this.layWords(positions, 0);
     }
-    
-    private void layWord(int lastPositionIndex, int positionIndex, 
-            WordPosition position, ArrayList<String> words) {
-        if (words.isEmpty()) return;
-        if (positionIndex == lastPositionIndex) {
-            this.boardOfWords.printBoard();
-            return;
-        }
-        
-        for (String word : words) {
-            BoardOfWords boardOfWords2 = this.boardOfWords.makeCopy();
-            boardOfWords2.drawWord(word, position);
-        }
-    } 
-    
+
     /**
-     * Find all words that fit to the given position. 
+     * Uses recursion to find a possible word combination to fit the given 
+     * positions on the board.
      * 
+     * @param positions
+     * @param positionIndex 
+     */
+    private BoardOfWords layWords(ArrayList<WordPosition> positions, int positionIndex) {
+        if (positionIndex == positions.size()) {
+            return this.boardOfWords;
+        }
+        WordPosition position = positions.get(positionIndex);
+        ArrayList<String> fittingWords = this.findWords(position);
+
+        if (fittingWords.isEmpty()) {
+            return null;
+        }
+
+        for (String fittingWord : fittingWords) {
+            BoardOfWords copy = this.boardOfWords.makeCopy();
+            copy.drawWord(fittingWord, positions.get(positionIndex));
+            BoardOfWords solution = this.layWords(positions, positionIndex + 1);
+            if (solution != null) return solution;
+        }
+        return null;
+    }
+
+    /**
+     * Find all words that fit to the given position.
+     *
      * @param newPosition
-     * @return 
+     * @return
      */
     public ArrayList<String> findWords(WordPosition newPosition) {
         String mask = makeMask(newPosition);
         SearchTreeNode root = this.wordTree.getRoot();
-        ArrayList<String> words = new ArrayList<>();
-        return searchWordTree(mask, root, 0, words);
+        ArrayList<String> fittingWords = new ArrayList<>();
+        return this.searchWordTree(mask, root, 0, fittingWords);
     }
 
     /**
      * A helper merhod for the findWords method using recursion.
-     * 
+     *
      * @param mask
      * @param node
      * @param level
-     * @param words
-     * @return 
+     * @param fittingWords
+     * @return
      */
     private ArrayList<String> searchWordTree(String mask, SearchTreeNode node, int level,
-            ArrayList<String> words) {
+            ArrayList<String> fittingWords) {
         if (mask.charAt(level) == ' ' || mask.charAt(level) == node.getKey()) {
             if (level + 1 == mask.length()) {
                 if (node.getWord() != null) {
-                    words.add(node.getWord());
+                    fittingWords.add(node.getWord());
                 }
-                return words;
+                return fittingWords;
             }
             SearchTreeNode childNode = node.getChild();
             while (childNode != null) {
-                words = searchWordTree(mask, childNode, level + 1, words);
+                fittingWords = this.searchWordTree(mask, childNode, level + 1, fittingWords);
                 childNode = childNode.getNext();
             }
         }
-        return words;
+        return fittingWords;
     }
 
     /**
@@ -92,9 +104,9 @@ public class WordFinder {
         String mask = " "; //To match the root of the wordTree 
         for (int i = 0; i < newPosition.getWordLength(); i++) {
             if (newPosition.getAlignment() == 0) {
-                mask = createString(mask, newPosition.getY(), i + newPosition.getX());
+                mask = this.createString(mask, newPosition.getY(), i + newPosition.getX());
             } else {
-                mask = createString(mask, i + newPosition.getY(), newPosition.getX());
+                mask = this.createString(mask, i + newPosition.getY(), newPosition.getX());
             }
         }
         return mask;
