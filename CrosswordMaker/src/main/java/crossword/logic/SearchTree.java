@@ -1,4 +1,4 @@
-package logic;
+package crossword.logic;
 
 import java.util.ArrayList;
 
@@ -11,12 +11,12 @@ import java.util.ArrayList;
  */
 public class SearchTree {
 
-    private Node root;
+    private SearchTreeNode root;
     private char rootChar;
 
     public SearchTree() {
         this.rootChar = ' ';
-        this.root = new Node(rootChar);
+        this.root = new SearchTreeNode(rootChar);
     }
 
     public void addListOfWords(ArrayList<String> wordList) {
@@ -27,10 +27,10 @@ public class SearchTree {
 
     public void addWord(String word) {
         if (word.isEmpty()) return;
-        Node parentNode = this.root;
+        SearchTreeNode parentNode = this.root;
         for (int i = 0; i < word.length(); i++) {
-            Node node = new Node(word.charAt(i));
-            Node inTreeNode = inTree(parentNode, node);
+            SearchTreeNode node = new SearchTreeNode(word.charAt(i));
+            SearchTreeNode inTreeNode = inTree(parentNode, node);
             if (inTreeNode == null) {
                 parentNode.setChild(node);
                 parentNode = node;
@@ -49,8 +49,8 @@ public class SearchTree {
      * @param node
      * @return
      */
-    private Node inTree(Node parent, Node node) {
-        Node child = parent.getChild();
+    private SearchTreeNode inTree(SearchTreeNode parent, SearchTreeNode node) {
+        SearchTreeNode child = parent.getChild();
         if (child != null) {
             while (true) {
                 if (child.getKey() == node.getKey()) {
@@ -69,16 +69,16 @@ public class SearchTree {
         preorderTreeWalk(this.root);
     }
 
-    private void preorderTreeWalk(Node node) {
+    private void preorderTreeWalk(SearchTreeNode node) {
         System.out.println(node.getKey() + " (" + node.getWord() + ") ");
-        Node childNode = node.getChild();
+        SearchTreeNode childNode = node.getChild();
         while (childNode != null) {
             preorderTreeWalk(childNode);
             childNode = childNode.getNext();
         }
     }
     
-    public Node getRoot() {
+    public SearchTreeNode getRoot() {
         return this.root;
     }
 }

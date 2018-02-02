@@ -3,22 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logic;
+package crossword.logic;
 
 /**
  * Nodes of the search tree
  *
  * @author vseppane
  */
-class Node {
+class SearchTreeNode {
 
     private char key;
     private boolean last;
-    private Node child;
-    private Node next;
+    private SearchTreeNode child;
+    private SearchTreeNode next;
     private String word;
 
-    public Node(char key) {
+    public SearchTreeNode(char key) {
         this.key = key;
         this.last = true;
         this.child = null;
@@ -26,7 +26,7 @@ class Node {
         this.word = null;
     }
 
-    public void setChild(Node newChild) {
+    public void setChild(SearchTreeNode newChild) {
         if (this.child == null) {
             this.child = newChild;
         } else {
@@ -34,12 +34,12 @@ class Node {
         }
     }
     
-    public void setChildForTesting(Node newChild) {
+    public void setChildForTesting(SearchTreeNode newChild) {
         this.child = newChild;
     }
 
-    private void setNext(Node newChild) {
-        Node prevChild = this.child;
+    private void setNext(SearchTreeNode newChild) {
+        SearchTreeNode prevChild = this.child;
         while (!prevChild.last) {
             prevChild = prevChild.next;
         }
@@ -47,7 +47,7 @@ class Node {
         prevChild.last = false;
     }
 
-    public void setNextForTesting(Node newNext) {
+    public void setNextForTesting(SearchTreeNode newNext) {
         this.next = newNext;
     }
     
@@ -67,11 +67,11 @@ class Node {
         this.last = value;
     }
 
-    public Node getChild() {
+    public SearchTreeNode getChild() {
         return child;
     }
 
-    public Node getNext() {
+    public SearchTreeNode getNext() {
         return next;
     }
 

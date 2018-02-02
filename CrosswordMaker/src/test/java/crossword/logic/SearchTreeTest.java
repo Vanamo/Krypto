@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package logic;
+package crossword.logic;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,14 +34,14 @@ public class SearchTreeTest {
         SearchTree instance = new SearchTree();
         instance.addListOfWords(wordList);
 
-        Node expRoot = new Node(' ');
-        Node a = new Node('a');
-        Node l = new Node('l');
-        Node k = new Node('k');
-        Node u = new Node('u');
-        Node i = new Node('i');
-        Node k2 = new Node('k');
-        Node a2 = new Node('a');
+        SearchTreeNode expRoot = new SearchTreeNode(' ');
+        SearchTreeNode a = new SearchTreeNode('a');
+        SearchTreeNode l = new SearchTreeNode('l');
+        SearchTreeNode k = new SearchTreeNode('k');
+        SearchTreeNode u = new SearchTreeNode('u');
+        SearchTreeNode i = new SearchTreeNode('i');
+        SearchTreeNode k2 = new SearchTreeNode('k');
+        SearchTreeNode a2 = new SearchTreeNode('a');
         expRoot.setChildForTesting(a);
         a.setWord("a");
         a.setChildForTesting(l);
@@ -67,10 +67,10 @@ public class SearchTreeTest {
         SearchTree instance = new SearchTree();
         instance.addWord(word);
 
-        Node expRoot = new Node(' ');
-        Node t = new Node('t');
-        Node e = new Node('e');
-        Node s = new Node('s');
+        SearchTreeNode expRoot = new SearchTreeNode(' ');
+        SearchTreeNode t = new SearchTreeNode('t');
+        SearchTreeNode e = new SearchTreeNode('e');
+        SearchTreeNode s = new SearchTreeNode('s');
         expRoot.setChildForTesting(t);
         t.setChildForTesting(e);
         e.setChildForTesting(s);
@@ -79,12 +79,12 @@ public class SearchTreeTest {
         compareNodesRecursively(instance.getRoot(), expRoot);
     }
 
-    private void compareNodesRecursively(Node result, Node expResult) {
+    private void compareNodesRecursively(SearchTreeNode result, SearchTreeNode expResult) {
         assertEquals(expResult.getKey(), result.getKey());
         assertEquals(expResult.isLast(), result.isLast());
         assertEquals(expResult.getWord(), result.getWord());
-        Node childNode = result.getChild();
-        Node expChildNode = expResult.getChild();
+        SearchTreeNode childNode = result.getChild();
+        SearchTreeNode expChildNode = expResult.getChild();
         while (childNode != null || expChildNode != null) {
             compareNodesRecursively(childNode, expChildNode);
             childNode = childNode.getNext();

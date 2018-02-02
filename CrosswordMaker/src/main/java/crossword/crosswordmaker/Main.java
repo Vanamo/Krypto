@@ -1,12 +1,12 @@
-package krypto;
+package crossword.crosswordmaker;
 
-import config.Lexicon;
+import crossword.lexicon.Lexicon;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import logic.WordFinder;
-import logic.WordPosition;
+import crossword.logic.WordFinder;
+import crossword.logic.WordPosition;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 

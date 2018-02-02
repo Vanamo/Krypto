@@ -1,4 +1,4 @@
-package logic;
+package crossword.logic;
 
 /**
  * Defines the position of a new word on the board:

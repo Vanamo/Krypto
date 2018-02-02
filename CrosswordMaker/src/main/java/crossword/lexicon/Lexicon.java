@@ -1,4 +1,4 @@
-package config;
+package crossword.lexicon;
 
 import java.io.*;
 import java.util.ArrayList;

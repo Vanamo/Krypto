@@ -1,4 +1,4 @@
-package krypto;
+package crossword.crosswordmaker;
 
 import java.util.ArrayList;
 import java.util.Random;

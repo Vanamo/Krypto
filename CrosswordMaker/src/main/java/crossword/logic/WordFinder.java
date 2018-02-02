@@ -1,7 +1,7 @@
-package logic;
+package crossword.logic;
 
 import java.util.ArrayList;
-import krypto.UserInterface;
+import crossword.crosswordmaker.UserInterface;
 
 /**
  *
@@ -45,7 +45,7 @@ public class WordFinder {
      */
     public ArrayList<String> findWords(WordPosition newPosition) {
         String mask = makeMask(newPosition);
-        Node root = this.wordTree.getRoot();
+        SearchTreeNode root = this.wordTree.getRoot();
         ArrayList<String> words = new ArrayList<>();
         return searchWordTree(mask, root, 0, words);
     }
@@ -59,7 +59,7 @@ public class WordFinder {
      * @param words
      * @return 
      */
-    private ArrayList<String> searchWordTree(String mask, Node node, int level,
+    private ArrayList<String> searchWordTree(String mask, SearchTreeNode node, int level,
             ArrayList<String> words) {
         if (mask.charAt(level) == ' ' || mask.charAt(level) == node.getKey()) {
             if (level + 1 == mask.length()) {
@@ -68,7 +68,7 @@ public class WordFinder {
                 }
                 return words;
             }
-            Node childNode = node.getChild();
+            SearchTreeNode childNode = node.getChild();
             while (childNode != null) {
                 words = searchWordTree(mask, childNode, level + 1, words);
                 childNode = childNode.getNext();

@@ -1,5 +1,6 @@
-package config;
+package crossword.config;
 
+import crossword.lexicon.Lexicon;
 import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.After;
