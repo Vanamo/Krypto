@@ -1,7 +1,6 @@
 package crossword.logic;
 
 import java.util.ArrayList;
-import crossword.crosswordmaker.UserInterface;
 
 /**
  *

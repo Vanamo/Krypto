@@ -2,10 +2,6 @@ package crossword.crosswordmaker;
 
 import crossword.logic.BoardOfWords;
 import crossword.logic.CrosswordMaker;
-import crossword.logic.WordFinder;
-import crossword.logic.WordPosition;
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 
 /**

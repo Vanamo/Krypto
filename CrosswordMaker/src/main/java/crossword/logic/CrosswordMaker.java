@@ -3,8 +3,6 @@ package crossword.logic;
 import crossword.lexicon.Lexicon;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jdom2.JDOMException;
 
 /**
@@ -57,14 +55,14 @@ public class CrosswordMaker {
         WordPosition p2 = new WordPosition(2, 0, 1, 5);
         WordPosition p3 = new WordPosition(4, 0, 1, 5);
         WordPosition p4 = new WordPosition(0, 2, 0, 5);
-        WordPosition p5 = new WordPosition(0, 4, 0, 5);
+        WordPosition p5 = new WordPosition(0, 4, 0, 5);     
         ArrayList<WordPosition> positions = new ArrayList<>();
         positions.add(p1);
         positions.add(p2);
         positions.add(p3);
         positions.add(p4);
         positions.add(p5);
-
+        
         WordFinder wordFinder = new WordFinder(this);
         return wordFinder.findWordsForAllPositions(positions);
     }

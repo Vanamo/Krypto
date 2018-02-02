@@ -1,11 +1,8 @@
 package crossword.logic;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 /**
  *
- * @Vanamo Piirainen
+ * @author Vanamo Piirainen
  */
 public class BoardOfWords {
 
@@ -25,6 +22,8 @@ public class BoardOfWords {
 
     /**
      * Constructor with user set parameters and starting word.
+     * @param width
+     * @param hight
      */
     public BoardOfWords(int width, int hight) {
         this.width = width;
@@ -59,9 +58,7 @@ public class BoardOfWords {
      * vertical.
      *
      * @param word
-     * @param x
-     * @param y
-     * @param alignment
+     * @param p
      */
     public void drawWord(String word, WordPosition p) {
         for (int i = 0; i < word.length(); i++) {
