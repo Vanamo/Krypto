@@ -22,7 +22,7 @@ public class SearchTreeTest {
 
     public SearchTreeTest() {
     }
-
+    
     /**
      * Test of addListOfWords method, of class SearchTree.
      */

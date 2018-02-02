@@ -1,10 +1,12 @@
 package crossword.crosswordmaker;
 
 import crossword.logic.BoardOfWords;
+import crossword.logic.CrosswordMaker;
 import crossword.logic.WordFinder;
 import crossword.logic.WordPosition;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  *
@@ -12,53 +14,35 @@ import java.util.Random;
  */
 public class UserInterface {
 
-    private BoardOfWords boardOfWords;
-    private ArrayList<String> wordList;
-
-    /**
-     * Constructor with default parameters and random starting word.
-     * @param wordList
-     */
-    public UserInterface(ArrayList<String> wordList) {
-        this.wordList = wordList;
-        this.boardOfWords = new BoardOfWords(5, 5);
-        String firstWord = getRandomWord();
-        WordPosition firstPosition = new WordPosition(0, 0, 0, firstWord.length());
-        this.boardOfWords.drawWord(firstWord, firstPosition);
+    public UserInterface() {
     }
 
-    /**
-     * Constructor with user set parameters and starting word.
-     * @param wordList
-     * @param width
-     * @param hight
-     * @param firstWord
-     */
-    public UserInterface(ArrayList<String> wordList,
-            int width, int hight, String firstWord) {
-        this.wordList = wordList;
-        this.boardOfWords = new BoardOfWords(width, hight);
-        WordPosition firstPosition = new WordPosition(0, 0, 0, firstWord.length());
-        this.boardOfWords.drawWord(firstWord, firstPosition);
-    }
+    public void makeCrossword() {
+        Scanner scanner = new Scanner(System.in);
+        int width = 5;
+        int hight = 5;
+        String firstWord = "";
 
-    private String getRandomWord() {
-        Random rand = new Random();
-        int i = rand.nextInt(this.wordList.size());
-        return this.wordList.get(i);
-    }
+//        System.out.println("Anna krypton leveys:");
+//        width = scanner.nextInt();
+//        System.out.println("Anna krypton korkeus:");
+//        hight = scanner.nextInt();
+//        System.out.println("Anna aloitussana:");
+//        firstWord = scanner.next();
+//        while (firstWord.length() > width) {
+//            System.out.println("Aloitussanan tulee mahtua kryptoon leveyssuunnassa.");
+//            System.out.println("Anna aloitussana:");
+//            firstWord = scanner.nextLine();
+//        }
 
-    public BoardOfWords fillBoard(ArrayList<WordPosition> positions) {
-        WordFinder wordFinder = new WordFinder(this);
-        return wordFinder.findWordsForAllPositions(positions);
+        System.out.println("");
+        
+        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight, firstWord);
+        BoardOfWords solution = crosswordMaker.fillBoard();
+        if (solution == null) {
+            System.out.println("no solution");
+        } else {
+            solution.printBoard();
+        }
     }
-
-    public BoardOfWords getBoardOfWords() {
-        return this.boardOfWords;
-    }
-
-    public ArrayList<String> getWordList() {
-        return this.wordList;
-    }
-
 }

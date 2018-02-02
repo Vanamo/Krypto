@@ -12,10 +12,10 @@ public class WordFinder {
     private SearchTree wordTree;
     private BoardOfWords boardOfWords;
 
-    public WordFinder(UserInterface ui) {
-        this.boardOfWords = ui.getBoardOfWords();
+    public WordFinder(CrosswordMaker cm) {
+        this.boardOfWords = cm.getBoardOfWords();
         this.wordTree = new SearchTree();
-        this.wordTree.addListOfWords(ui.getWordList());
+        this.wordTree.addListOfWords(cm.getWordList());
     }
 
     /**

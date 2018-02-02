@@ -77,7 +77,7 @@ public class BoardOfWords {
         return this.boardOfWords[y][x];
     }
     
-    public char[][] getBoardOfWords() {
+    public char[][] getBoard() {
         return boardOfWords;
     }
     
