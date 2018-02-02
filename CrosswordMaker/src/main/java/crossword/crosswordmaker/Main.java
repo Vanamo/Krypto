@@ -22,7 +22,7 @@ public class Main {
         fiveLetterWords = lexicon.xLetterWords(wordList, 5);
     
         UserInterface krypto = new UserInterface(fiveLetterWords);
-        krypto.printBoard();
+        krypto.getBoardOfWords().printBoard();
 
         WordFinder finder = new WordFinder(krypto);
         WordPosition position = new WordPosition(0, 0, 1, 5);

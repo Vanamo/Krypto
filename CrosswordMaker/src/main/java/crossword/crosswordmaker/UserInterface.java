@@ -1,5 +1,8 @@
 package crossword.crosswordmaker;
 
+import crossword.logic.BoardOfWords;
+import crossword.logic.WordFinder;
+import crossword.logic.WordPosition;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,35 +12,34 @@ import java.util.Random;
  */
 public class UserInterface {
 
-    private char[][] boardOfWords;
-    private int width;
-    private int hight;
-    private String firstWord;
+    private BoardOfWords boardOfWords;
     private ArrayList<String> wordList;
 
     /**
      * Constructor with default parameters and random starting word.
+     * @param wordList
      */
     public UserInterface(ArrayList<String> wordList) {
         this.wordList = wordList;
-        this.width = 5;
-        this.hight = 5;
-        this.firstWord = getRandomWord();
-        this.boardOfWords = new char[5][5];
-        createBoard();
+        this.boardOfWords = new BoardOfWords(5, 5);
+        String firstWord = getRandomWord();
+        WordPosition firstPosition = new WordPosition(0, 0, 0, firstWord.length());
+        this.boardOfWords.drawWord(firstWord, firstPosition);
     }
 
     /**
      * Constructor with user set parameters and starting word.
+     * @param wordList
+     * @param width
+     * @param hight
+     * @param firstWord
      */
     public UserInterface(ArrayList<String> wordList,
             int width, int hight, String firstWord) {
         this.wordList = wordList;
-        this.width = width;
-        this.hight = hight;
-        this.firstWord = firstWord;
-        boardOfWords = new char[this.hight][this.width];
-        createBoard();
+        this.boardOfWords = new BoardOfWords(width, hight);
+        WordPosition firstPosition = new WordPosition(0, 0, 0, firstWord.length());
+        this.boardOfWords.drawWord(firstWord, firstPosition);
     }
 
     private String getRandomWord() {
@@ -46,56 +48,17 @@ public class UserInterface {
         return this.wordList.get(i);
     }
 
-    /**
-     * Creates an empty board (x stands for an empty square) and adds the
-     * starting word in the upper left corner of the board.
-     */
-    private void createBoard() {
-        for (int y = 0; y < this.hight; y++) {
-            for (int x = 0; x < this.width; x++) {
-                this.boardOfWords[y][x] = 'X';
-            }
-        }
-        int x = 0;
-        int y = 0;
-        int direction = 0;
-        drawWord(this.firstWord, x, y, direction);
+    public void findWords() {
+        WordFinder wordFinder = new WordFinder(this);
+        //Jatka
     }
 
-    public void printBoard() {
-        for (int y = 0; y < this.hight; y++) {
-            for (int x = 0; x < this.width; x++) {
-                System.out.print(this.boardOfWords[y][x] + "\t");
-            }
-            System.out.println("\n");
-        }
+    public BoardOfWords getBoardOfWords() {
+        return this.boardOfWords;
     }
 
-    /**
-     * Draws the given word on the board. Alignment: 0 = horizontal 1 =
-     * vertical.
-     *
-     * @param word
-     * @param x
-     * @param y
-     * @param alignment
-     */
-    public void drawWord(String word, int x, int y, int alignment) {
-        for (int i = 0; i < word.length(); i++) {
-            if (alignment == 0) {
-                this.boardOfWords[y][i + x] = word.charAt(i);
-            } else {
-                this.boardOfWords[i + y][x] = word.charAt(i);                
-            }
-        }
-    }
-
-    public char[][] getBoardOfWords() {
-        return boardOfWords;
-    }
-    
     public ArrayList<String> getWordList() {
         return this.wordList;
     }
-    
+
 }

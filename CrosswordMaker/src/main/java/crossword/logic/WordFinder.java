@@ -9,12 +9,10 @@ import crossword.crosswordmaker.UserInterface;
  */
 public class WordFinder {
 
-    private char[][] boardOfWords;
     private SearchTree wordTree;
-    private UserInterface ui;
+    private BoardOfWords boardOfWords;
 
     public WordFinder(UserInterface ui) {
-        this.ui = ui;
         this.boardOfWords = ui.getBoardOfWords();
         this.wordTree = new SearchTree();
         this.wordTree.addListOfWords(ui.getWordList());
@@ -29,11 +27,17 @@ public class WordFinder {
         }
     }
     
-    private void layWord(ArrayList<WordPosition> positions, int positionIndex, 
-            ArrayList<String> words, int wordIndex) {
+    private void layWord(int lastPositionIndex, int positionIndex, 
+            WordPosition position, ArrayList<String> words) {
         if (words.isEmpty()) return;
-        if (positionIndex == positions.size()) {
-            this.ui.printBoard();
+        if (positionIndex == lastPositionIndex) {
+            this.boardOfWords.printBoard();
+            return;
+        }
+        
+        for (String word : words) {
+            BoardOfWords boardOfWords2 = this.boardOfWords.makeCopy();
+            boardOfWords2.drawWord(word, position);
         }
     } 
     
@@ -105,7 +109,7 @@ public class WordFinder {
      * @return
      */
     private String createString(String mask, int y, int x) {
-        char newChar = this.boardOfWords[y][x];
+        char newChar = this.boardOfWords.getLetter(x, y);
         if (newChar == 'X') {
             mask = mask.concat(" ");
         } else {
