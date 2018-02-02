@@ -21,6 +21,7 @@ public class WordFinder {
     /**
      * Finds words for all positions given as an ArrayList.
      * @param positions
+     * @return 
      */
     public BoardOfWords findWordsForAllPositions(ArrayList<WordPosition> positions) {
         return this.layWords(positions, 0);

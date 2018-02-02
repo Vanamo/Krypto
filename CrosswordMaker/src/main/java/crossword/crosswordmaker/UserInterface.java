@@ -40,7 +40,7 @@ public class UserInterface {
         CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight, firstWord);
         BoardOfWords solution = crosswordMaker.fillBoard();
         if (solution == null) {
-            System.out.println("no solution");
+            System.out.println("Ratkaisua ei löytynyt. Yritä uudestaan eri aloitussanalla.");
         } else {
             solution.printBoard();
         }

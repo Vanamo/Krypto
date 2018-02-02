@@ -9,13 +9,19 @@ import org.jdom2.JDOMException;
 
 /**
  *
- * @Vanamo Piirainen
+ * @author Vanamo Piirainen
  */
 public class CrosswordMaker {
 
     private BoardOfWords boardOfWords;
     private ArrayList<String> wordList;
 
+    /**
+     *
+     * @param width
+     * @param hight
+     * @param firstWord
+     */
     public CrosswordMaker(int width, int hight, String firstWord) {
         Lexicon lexicon = new Lexicon();
         try {
@@ -42,6 +48,10 @@ public class CrosswordMaker {
         this.wordList = wordList;
     }
 
+    /**
+     * 
+     * @return
+     */
     public BoardOfWords fillBoard() {
         WordPosition p1 = new WordPosition(0, 0, 1, 5);
         WordPosition p2 = new WordPosition(2, 0, 1, 5);
