@@ -28,6 +28,9 @@ public class CrosswordMaker {
             System.out.println("Sanalistan haku ei onnistunut");
             System.out.println(ex);
         }
+//        for (String word : wordList) {
+//            System.out.println(word);
+//        }
         this.createBoard(width, hight, firstWord);
 
     }
@@ -47,7 +50,7 @@ public class CrosswordMaker {
     }
 
     /**
-     * 
+     *
      * @return
      */
     public BoardOfWords fillBoard() {
@@ -55,14 +58,14 @@ public class CrosswordMaker {
         WordPosition p2 = new WordPosition(2, 0, 1, 5);
         WordPosition p3 = new WordPosition(4, 0, 1, 5);
         WordPosition p4 = new WordPosition(0, 2, 0, 5);
-        WordPosition p5 = new WordPosition(0, 4, 0, 5);     
+        WordPosition p5 = new WordPosition(0, 4, 0, 5);
         ArrayList<WordPosition> positions = new ArrayList<>();
         positions.add(p1);
         positions.add(p2);
         positions.add(p3);
         positions.add(p4);
         positions.add(p5);
-        
+
         WordFinder wordFinder = new WordFinder(this);
         return wordFinder.findWordsForAllPositions(positions);
     }
