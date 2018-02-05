@@ -30,7 +30,7 @@ public class BoardOfWordsTest {
         int y = 3;
         int alignment = 0;
         WordPosition position = new WordPosition(x, y, alignment, word.length());
-        BoardOfWords instance = new BoardOfWords();
+        BoardOfWords instance = new BoardOfWords(5, 5);
         instance.drawWord(word, position);
         char[][] result = instance.getBoard();
 
@@ -53,7 +53,7 @@ public class BoardOfWordsTest {
         int y = 3;
         int alignment = 1;
         WordPosition position = new WordPosition(x, y, alignment, word.length());
-        BoardOfWords instance = new BoardOfWords();
+        BoardOfWords instance = new BoardOfWords(5, 5);
         instance.drawWord(word, position);
         char[][] result = instance.getBoard();
 
@@ -79,7 +79,7 @@ public class BoardOfWordsTest {
         int y = 0;
         int alignment = 1;
         WordPosition position = new WordPosition(x, y, alignment, word.length());
-        BoardOfWords instance = new BoardOfWords();
+        BoardOfWords instance = new BoardOfWords(5, 5);
         instance.drawWord(word, position);
         char result = instance.getLetter(x, y);
 

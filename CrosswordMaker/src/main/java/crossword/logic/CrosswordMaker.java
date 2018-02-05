@@ -2,7 +2,9 @@ package crossword.logic;
 
 import crossword.lexicon.Lexicon;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
+import java.util.TreeSet;
 import org.jdom2.JDOMException;
 
 /**
@@ -31,7 +33,11 @@ public class CrosswordMaker {
 //        for (String word : wordList) {
 //            System.out.println(word);
 //        }
-        this.createBoard(width, hight, firstWord);
+        if (firstWord.isEmpty()) {
+            firstWord = this.getRandomWord(width);
+        }
+        this.boardOfWords = new BoardOfWords(width, hight);
+        this.boardOfWords.addFirstWord(firstWord);
 
     }
 
@@ -45,8 +51,9 @@ public class CrosswordMaker {
      */
     public CrosswordMaker(int width, int hight, String firstWord,
             ArrayList<String> wordList) {
-        this.createBoard(width, hight, firstWord);
         this.wordList = wordList;
+        this.boardOfWords = new BoardOfWords(width, hight);
+        this.boardOfWords.addFirstWord(firstWord);
     }
 
     /**
@@ -54,31 +61,10 @@ public class CrosswordMaker {
      * @return
      */
     public BoardOfWords fillBoard() {
-        WordPosition p1 = new WordPosition(0, 0, 1, 5);
-        WordPosition p2 = new WordPosition(2, 0, 1, 5);
-        WordPosition p3 = new WordPosition(4, 0, 1, 5);
-        WordPosition p4 = new WordPosition(0, 2, 0, 5);
-        WordPosition p5 = new WordPosition(0, 4, 0, 5);
-        ArrayList<WordPosition> positions = new ArrayList<>();
-        positions.add(p1);
-        positions.add(p2);
-        positions.add(p3);
-        positions.add(p4);
-        positions.add(p5);
-
         WordFinder wordFinder = new WordFinder(this);
-        return wordFinder.findWordsForAllPositions(positions);
+        return wordFinder.findWordsForAllPositions(this.boardOfWords.findPositions());
     }
-
-    private void createBoard(int width, int hight, String firstWord) {
-        this.boardOfWords = new BoardOfWords(width, hight);
-        if (firstWord.isEmpty()) {
-            firstWord = getRandomWord(width);
-        }
-        WordPosition firstPosition = new WordPosition(0, 0, 0, firstWord.length());
-        this.boardOfWords.drawWord(firstWord, firstPosition);
-    }
-
+    
     private String getRandomWord(int length) {
         Random rand = new Random();
         String word = "";
@@ -87,6 +73,18 @@ public class CrosswordMaker {
             word = this.wordList.get(i);
         }
         return word;
+    }
+    
+    public void makeWordLengthStatistics() {
+        HashMap<Integer, Integer> statistics = new HashMap<>();
+        for (String word : this.wordList) {
+            if (!statistics.containsKey(word.length())) {
+                statistics.put(word.length(), 1);
+            } else {
+                statistics.replace(word.length(), statistics.get(word.length()) + 1);
+            }
+        }
+        System.out.println("statistics: \n" + statistics.toString());
     }
 
     public BoardOfWords getBoardOfWords() {

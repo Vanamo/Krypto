@@ -1,5 +1,8 @@
 package crossword.logic;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  *
  * @author Vanamo Piirainen
@@ -9,19 +12,9 @@ public class BoardOfWords {
     private char[][] boardOfWords;
     private int width;
     private int hight;
+    private WordPosition firstPosition;
 
     /**
-     * Constructor with default parameters and random starting word.
-     */
-    public BoardOfWords() {
-        this.width = 5;
-        this.hight = 5;
-        this.boardOfWords = new char[5][5];
-        createBoard();
-    }
-
-    /**
-     * Constructor with user set parameters and starting word.
      * @param width
      * @param hight
      */
@@ -41,6 +34,12 @@ public class BoardOfWords {
                 this.boardOfWords[y][x] = 'X';
             }
         }
+    }
+
+    public void addFirstWord(String firstWord) {
+        //alignment of the first word is horizontal
+        this.firstPosition = new WordPosition(0, 0, 0, firstWord.length());
+        this.drawWord(firstWord, firstPosition);
     }
 
     public void printBoard() {
@@ -70,18 +69,85 @@ public class BoardOfWords {
         }
     }
 
+    public ArrayList<WordPosition> findPositions() {
+        ArrayList<WordPosition> positions = new ArrayList<>();
+
+//        //Horizontal blocks
+//        int blockWidth = Math.min(this.firstPosition.getWordLength(), 8);
+//        ArrayList<Integer> blocksH = new ArrayList<>();
+//        blocksH = calculateBlocks(blocksH, this.width, blockWidth);
+//
+//        //Vertical blocks
+//        int blockHight = Math.min(this.hight, 6);
+//        ArrayList<Integer> blocksV = new ArrayList<>();
+//        blocksV = this.calculateBlocks(blocksV, this.hight, blockHight);
+//
+//        //Horizontal positions
+//        for (int i = 0; i < blocksH.size(); i += 2) {
+//            int x = 0;
+//            for (int j = 0; j <= i; j++) {
+//                x += blocksH.get(j);
+//            }
+//            int wordLength = blocksH.get(i);
+//            for (int y = 0; y <= blocksV.get(i); y += 2) {
+//                WordPosition p = new WordPosition(x, y, 0, wordLength);
+//                positions.add(p);
+//            }
+//        }
+//        //Vertical positions
+//        for (int i = 0; i < blocksV.size(); i += 2) {
+//            int y = 0;
+//            for (int j = 0; j <= i; j++) {
+//                y += blocksV.get(j);
+//            }
+//            int wordLength = blocksV.get(i);
+//            for (int x = 0; x <= blocksH.get(i); x += 2) {
+//                WordPosition p = new WordPosition(x, 1, 1, wordLength);
+//                positions.add(p);
+//            }
+//        }
+        WordPosition p1 = new WordPosition(0, 0, 1, 5);
+        WordPosition p2 = new WordPosition(2, 0, 1, 5);
+        WordPosition p3 = new WordPosition(4, 0, 1, 5);
+        WordPosition p4 = new WordPosition(0, 2, 0, 5);
+        WordPosition p5 = new WordPosition(0, 4, 0, 5);
+        positions.add(p1);
+        positions.add(p2);
+        positions.add(p3);
+        positions.add(p4);
+        positions.add(p5);
+        
+        return positions;
+    }
+
+    private ArrayList<Integer> calculateBlocks(ArrayList<Integer> blocks,
+            int spaceLeft, int length) {
+
+        Random rand = new Random();
+        while (spaceLeft >= 11) {
+            blocks.add(length);
+            spaceLeft -= (length - 1);
+            length = rand.nextInt(3) + 4;
+            if (length % 2 == 0) {
+                length++;
+            }
+        }
+        blocks.add(spaceLeft);
+        return blocks;
+    }
+
     public char getLetter(int x, int y) {
         return this.boardOfWords[y][x];
     }
-    
+
     public char[][] getBoard() {
         return boardOfWords;
     }
-    
+
     private void setBoard(char[][] boardOfWords) {
         this.boardOfWords = boardOfWords;
     }
-    
+
     public BoardOfWords makeCopy() {
         BoardOfWords newBoardOfWords = new BoardOfWords(this.width, this.hight);
         newBoardOfWords.setBoard(boardOfWords.clone());

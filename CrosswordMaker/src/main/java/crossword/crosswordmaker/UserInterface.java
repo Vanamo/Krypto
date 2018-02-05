@@ -23,18 +23,22 @@ public class UserInterface {
 //        width = scanner.nextInt();
 //        System.out.println("Anna krypton korkeus:");
 //        hight = scanner.nextInt();
-//        System.out.println("Anna aloitussana:");
+//        System.out.println("Anna aloitussana tai paina r ja enter:");
 //        firstWord = scanner.next();
 //        while (firstWord.length() > width) {
 //            System.out.println("Aloitussanan tulee mahtua kryptoon leveyssuunnassa.");
-//            System.out.println("Anna aloitussana:");
-//            firstWord = scanner.nextLine();
+//            System.out.println("Anna aloitussana tai paina r ja enter:");
+//            firstWord = scanner.next();
 //        }
-
-        System.out.println("");
+//        if (firstWord.equals("r")) {
+//            firstWord = "";
+//        }
+        
+        System.out.println("Generoidaan kryptoa... \n");
         
         CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight, firstWord);
         BoardOfWords solution = crosswordMaker.fillBoard();
+        //crosswordMaker.makeWordLengthStatistics();
         if (solution == null) {
             System.out.println("Ratkaisua ei löytynyt. Yritä uudestaan eri aloitussanalla.");
         } else {
