@@ -2,6 +2,7 @@ package crossword.lexicon;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -78,64 +79,24 @@ public class Lexicon {
     }
 
     /**
-     * Creates plurals for some nouns according to the conjucation rules of Kotus 
-     * and adds them to the wordlist.
+     * Creates plurals for some nouns according to the conjucation rules of
+     * Kotus and adds them to the wordlist.
+     *
      * @param wordList
      * @param word
-     * @param c 
+     * @param c
      */
-    
     private void addPlural(ArrayList<String> wordList, String word, int c) {
 
-        Set<Integer> simple = new HashSet<>();
-        simple.add(1);
-        simple.add(2);
-        simple.add(3);
-        simple.add(5);
-        simple.add(6);
-        simple.add(8);
-        simple.add(9);
-        simple.add(10);
-        simple.add(11);
-        simple.add(12);
-        simple.add(13);
-        simple.add(15);
-        simple.add(17);
-        simple.add(18);
-        simple.add(19);
-        simple.add(20);
-        simple.add(21);
+        Integer[] initSimple = {1, 2, 3, 5, 6, 8, 9, 10, 11, 12, 13, 15, 17, 18,
+            19, 20, 21};
+        Integer[] initEt = {23, 24, 25, 26, 29, 30};
+        Character[] initC = {'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm',
+            'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z'};
 
-        Set<Integer> et = new HashSet<>();
-        et.add(23);
-        et.add(24);
-        et.add(25);
-        et.add(26);
-        et.add(29);
-        et.add(30);
-
-        Set<Character> consonants = new HashSet<>();
-        consonants.add('b');
-        consonants.add('c');
-        consonants.add('d');
-        consonants.add('f');
-        consonants.add('g');
-        consonants.add('h');
-        consonants.add('j');
-        consonants.add('k');
-        consonants.add('l');
-        consonants.add('m');
-        consonants.add('n');
-        consonants.add('p');
-        consonants.add('q');
-        consonants.add('r');
-        consonants.add('s');
-        consonants.add('t');
-        consonants.add('v');
-        consonants.add('w');
-        consonants.add('x');
-        consonants.add('z');
-        
+        ArrayList<Integer> simple = new ArrayList<>(Arrays.asList(initSimple));
+        ArrayList<Integer> et = new ArrayList<>(Arrays.asList(initEt));
+        ArrayList<Character> consonants = new ArrayList<>(Arrays.asList(initC));
 
         if (simple.contains(c)) {
             if (consonants.contains(word.charAt(word.length() - 1))) {
