@@ -19,9 +19,9 @@ public class UserInterface {
         int hight = 5;
         String firstWord = "";
 
-        System.out.println("Anna krypton leveys:");
+        System.out.println("Anna krypton leveys (< 7):");
         width = scanner.nextInt();
-        System.out.println("Anna krypton korkeus:");
+        System.out.println("Anna krypton korkeus (< 7):");
         hight = scanner.nextInt();
         System.out.println("Anna aloitussana tai paina r ja enter:");
         firstWord = scanner.next();
@@ -38,7 +38,6 @@ public class UserInterface {
         
         CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight, firstWord);
         BoardOfWords solution = crosswordMaker.fillBoard();
-        //crosswordMaker.makeWordLengthStatistics();
         if (solution == null) {
             System.out.println("Ratkaisua ei löytynyt. Yritä uudestaan eri aloitussanalla.");
         } else {

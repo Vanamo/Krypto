@@ -112,7 +112,40 @@ public class BoardOfWordsTest {
         
         assertArrayEquals(expResult, result);
     }
+    
+    /**
+     * Test of drawFirstWord method, of class BoardOfWords.
+     */
+    @Test
+    public void testDrawFirstWord() {
+        System.out.println("drawFirstWord");
+        String word = "ai";
+        int boardWidth = 5;
+        int boardHight = 5;
+        BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
+        instance.createBoard(word);
+        instance.drawFirstWord(word);
+        char[][] result = instance.getBoard();
 
+        char[][] expResult = new char[boardHight][boardWidth];
+        for (int i = 0; i < expResult.length; i++) {
+            for (int j = 0; j < expResult[0].length; j++) {
+                expResult[i][j] = 'O';
+            }
+        } 
+        expResult[0][2] = 'X';
+        expResult[0][3] = 'X';
+        expResult[0][4] = 'X';
+        expResult[1][1] = 'X';
+        expResult[1][3] = 'X';
+        expResult[3][1] = 'X';
+        expResult[3][3] = 'X';
+        
+        expResult[0][0] = 'a';
+        expResult[0][1] = 'i';
+        
+        assertArrayEquals(expResult, result);
+    }
     /**
      * Test of getLetter method, of class BoardOfWords.
      */

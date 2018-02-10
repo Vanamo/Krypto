@@ -16,6 +16,7 @@ public class CrosswordMaker {
     private BoardOfWords boardOfWords;
     private ArrayList<String> wordList;
     private String firstWord;
+    private HashMap<Integer, ArrayList<String>> wordsByLength;
 
     /**
      *
@@ -35,7 +36,8 @@ public class CrosswordMaker {
 //            System.out.println(word);
 //        }
         if (firstWord.isEmpty()) {
-            firstWord = this.getRandomWord(width);
+            int length = Math.min(width, 7);
+            firstWord = this.getRandomWord(length);
         }
         this.firstWord = firstWord;
         this.boardOfWords = new BoardOfWords(width, hight);
@@ -64,7 +66,7 @@ public class CrosswordMaker {
      */
     public BoardOfWords fillBoard() {
         WordFinder wordFinder = new WordFinder(this.boardOfWords, this.wordList);
-        WordPositionFinder positionFinder = new WordPositionFinder(this.boardOfWords);
+        WordPositionFinder positionFinder = new WordPositionFinder(this.boardOfWords.getBoard());
         ArrayList<WordPosition> positions = positionFinder.findPositions();
 
         //Draw first word after the positions are found, otherwise the letters 
@@ -73,26 +75,33 @@ public class CrosswordMaker {
         return wordFinder.findWordsForAllPositions(positions);
     }
 
-    private String getRandomWord(int length) {
-        Random rand = new Random();
-        String word = "";
-        while (word.length() != length) {
-            int i = rand.nextInt(this.wordList.size());
-            word = this.wordList.get(i);
+    public String getRandomWord(int length) {
+        this.makeWordListsAccordingToLength();
+        while (!this.wordsByLength.containsKey(length)) {
+            length--;
+            if (length == 0) {
+                return "a";
+            }
         }
+        ArrayList<String> words = this.wordsByLength.get(length);
+        Random rand = new Random();
+        int i = rand.nextInt(words.size());
+        String word = words.get(i);
+
         return word;
     }
 
-    public void makeWordLengthStatistics() {
-        HashMap<Integer, Integer> statistics = new HashMap<>();
+    public void makeWordListsAccordingToLength() {
+        this.wordsByLength = new HashMap<>();
         for (String word : this.wordList) {
-            if (!statistics.containsKey(word.length())) {
-                statistics.put(word.length(), 1);
+            if (!wordsByLength.containsKey(word.length())) {
+                ArrayList<String> words = new ArrayList<>();
+                words.add(word);
+                wordsByLength.put(word.length(), words);
             } else {
-                statistics.replace(word.length(), statistics.get(word.length()) + 1);
+                wordsByLength.get(word.length()).add(word);
             }
         }
-        System.out.println("statistics: \n" + statistics.toString());
     }
 
     public BoardOfWords getBoardOfWords() {
@@ -102,4 +111,9 @@ public class CrosswordMaker {
     public ArrayList<String> getWordList() {
         return this.wordList;
     }
+
+    public HashMap<Integer, ArrayList<String>> getWordsByLength() {
+        return wordsByLength;
+    }
+
 }

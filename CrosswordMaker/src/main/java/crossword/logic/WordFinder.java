@@ -23,7 +23,8 @@ public class WordFinder {
      * @return 
      */
     public BoardOfWords findWordsForAllPositions(ArrayList<WordPosition> positions) {
-        return this.layWords(positions, 0);
+        ArrayList<String> usedWords = new ArrayList<>();
+        return this.layWords(positions, 0, usedWords);
     }
 
     /**
@@ -33,7 +34,8 @@ public class WordFinder {
      * @param positions
      * @param positionIndex 
      */
-    private BoardOfWords layWords(ArrayList<WordPosition> positions, int positionIndex) {
+    private BoardOfWords layWords(ArrayList<WordPosition> positions, int positionIndex,
+            ArrayList<String> usedWords) {
         if (positionIndex == positions.size()) {
             return this.boardOfWords;
         }
@@ -45,9 +47,15 @@ public class WordFinder {
         }
 
         for (String fittingWord : fittingWords) {
+            if (usedWords.contains(fittingWord)) {
+                continue;
+            }
             BoardOfWords copy = this.boardOfWords.makeCopy();
+            ArrayList<String> copyOfUsedWords = new ArrayList<>(usedWords);
+            copyOfUsedWords.add(fittingWord);
             copy.drawWord(fittingWord, positions.get(positionIndex));
-            BoardOfWords solution = this.layWords(positions, positionIndex + 1);
+            BoardOfWords solution = this.layWords(positions, positionIndex + 1, 
+                    copyOfUsedWords);
             if (solution != null) return solution;
         }
         return null;

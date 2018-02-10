@@ -16,10 +16,10 @@ public class WordPositionFinder {
     private int startY;
     private ArrayList<WordPosition> positions;
 
-    public WordPositionFinder(BoardOfWords boardOfWords) {
-        this.boardOfWords = boardOfWords.getBoard();
-        this.hight = boardOfWords.getHight();
-        this.width = boardOfWords.getWidth();
+    public WordPositionFinder(char[][] boardOfWords) {
+        this.boardOfWords = boardOfWords;
+        this.hight = boardOfWords.length;
+        this.width = boardOfWords[0].length;
     }
 
     /**
