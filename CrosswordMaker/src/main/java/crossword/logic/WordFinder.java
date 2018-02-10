@@ -10,6 +10,8 @@ public class WordFinder {
 
     private SearchTree wordTree;
     private BoardOfWords boardOfWords;
+    private ArrayList<String> usedWords;
+    private ArrayList<WordPosition> positions;
 
     public WordFinder(BoardOfWords boardOfWords, ArrayList<String> wordList) {
         this.boardOfWords = boardOfWords;
@@ -23,8 +25,9 @@ public class WordFinder {
      * @return 
      */
     public BoardOfWords findWordsForAllPositions(ArrayList<WordPosition> positions) {
-        ArrayList<String> usedWords = new ArrayList<>();
-        return this.layWords(positions, 0, usedWords);
+        this.usedWords = new ArrayList<>();
+        this.positions = positions;
+        return this.layWords(0);
     }
 
     /**
@@ -34,12 +37,11 @@ public class WordFinder {
      * @param positions
      * @param positionIndex 
      */
-    private BoardOfWords layWords(ArrayList<WordPosition> positions, int positionIndex,
-            ArrayList<String> usedWords) {
+    private BoardOfWords layWords(int positionIndex) {
         if (positionIndex == positions.size()) {
             return this.boardOfWords;
         }
-        WordPosition position = positions.get(positionIndex);
+        WordPosition position = this.positions.get(positionIndex);
         ArrayList<String> fittingWords = this.findWords(position);
 
         if (fittingWords.isEmpty()) {
@@ -47,15 +49,12 @@ public class WordFinder {
         }
 
         for (String fittingWord : fittingWords) {
-            if (usedWords.contains(fittingWord)) {
+            if (this.usedWords.contains(fittingWord)) {
                 continue;
             }
-            BoardOfWords copy = this.boardOfWords.makeCopy();
-            ArrayList<String> copyOfUsedWords = new ArrayList<>(usedWords);
-            copyOfUsedWords.add(fittingWord);
-            copy.drawWord(fittingWord, positions.get(positionIndex));
-            BoardOfWords solution = this.layWords(positions, positionIndex + 1, 
-                    copyOfUsedWords);
+            this.usedWords.add(fittingWord);
+            this.boardOfWords.drawWord(fittingWord, this.positions.get(positionIndex));
+            BoardOfWords solution = this.layWords(positionIndex + 1);
             if (solution != null) return solution;
         }
         return null;

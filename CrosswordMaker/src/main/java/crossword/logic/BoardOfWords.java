@@ -119,15 +119,4 @@ public class BoardOfWords {
     public int getHight() {
         return hight;
     }
-
-    private void setBoard(char[][] boardOfWords) {
-        this.boardOfWords = boardOfWords;
-    }
-
-    public BoardOfWords makeCopy() {
-        BoardOfWords newBoardOfWords = new BoardOfWords(this.width, this.hight);
-        newBoardOfWords.setBoard(boardOfWords.clone());
-        return newBoardOfWords;
-    }
-
 }
