@@ -15,6 +15,7 @@ public class CrosswordMaker {
 
     private BoardOfWords boardOfWords;
     private ArrayList<String> wordList;
+    private String firstWord;
 
     /**
      *
@@ -36,13 +37,14 @@ public class CrosswordMaker {
         if (firstWord.isEmpty()) {
             firstWord = this.getRandomWord(width);
         }
+        this.firstWord = firstWord;
         this.boardOfWords = new BoardOfWords(width, hight);
-        this.boardOfWords.addFirstWord(firstWord);
+        this.boardOfWords.createBoard(firstWord);
 
     }
 
     /**
-     * Contructor for testing.
+     * Constructor for testing.
      *
      * @param width
      * @param hight
@@ -53,7 +55,7 @@ public class CrosswordMaker {
             ArrayList<String> wordList) {
         this.wordList = wordList;
         this.boardOfWords = new BoardOfWords(width, hight);
-        this.boardOfWords.addFirstWord(firstWord);
+        this.boardOfWords.createBoard(firstWord);
     }
 
     /**
@@ -61,10 +63,16 @@ public class CrosswordMaker {
      * @return
      */
     public BoardOfWords fillBoard() {
-        WordFinder wordFinder = new WordFinder(this);
-        return wordFinder.findWordsForAllPositions(this.boardOfWords.findPositions());
+        WordFinder wordFinder = new WordFinder(this.boardOfWords, this.wordList);
+        WordPositionFinder positionFinder = new WordPositionFinder(this.boardOfWords);
+        ArrayList<WordPosition> positions = positionFinder.findPositions();
+
+        //Draw first word after the positions are found, otherwise the letters 
+        //of the first word will interfere finding of word positions.
+        this.boardOfWords.drawFirstWord(firstWord);
+        return wordFinder.findWordsForAllPositions(positions);
     }
-    
+
     private String getRandomWord(int length) {
         Random rand = new Random();
         String word = "";
@@ -74,7 +82,7 @@ public class CrosswordMaker {
         }
         return word;
     }
-    
+
     public void makeWordLengthStatistics() {
         HashMap<Integer, Integer> statistics = new HashMap<>();
         for (String word : this.wordList) {

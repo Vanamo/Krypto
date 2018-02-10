@@ -11,10 +11,10 @@ public class WordFinder {
     private SearchTree wordTree;
     private BoardOfWords boardOfWords;
 
-    public WordFinder(CrosswordMaker cm) {
-        this.boardOfWords = cm.getBoardOfWords();
+    public WordFinder(BoardOfWords boardOfWords, ArrayList<String> wordList) {
+        this.boardOfWords = boardOfWords;
         this.wordTree = new SearchTree();
-        this.wordTree.addListOfWords(cm.getWordList());
+        this.wordTree.addListOfWords(wordList);
     }
 
     /**
@@ -122,7 +122,7 @@ public class WordFinder {
      */
     private String createString(String mask, int y, int x) {
         char newChar = this.boardOfWords.getLetter(x, y);
-        if (newChar == 'X') {
+        if (newChar == 'O') {
             mask = mask.concat(" ");
         } else {
             mask = mask.concat(String.valueOf(newChar));

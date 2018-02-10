@@ -1,8 +1,5 @@
 package crossword.logic;
 
-import crossword.crosswordmaker.UserInterface;
-import java.util.ArrayList;
-import java.util.Arrays;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,6 +17,36 @@ public class BoardOfWordsTest {
     }
 
     /**
+     * Test of createBoard method, of class BoardOfWords.
+     */
+    @Test
+    public void testCreateSmallBoard() {
+        System.out.println("createSmallBoard");
+        String firstWord = "testi";
+        int boardWidth = 6;
+        int boardHight = 4;
+        BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
+        instance.createBoard(firstWord);
+        char[][] result = instance.getBoard();
+        
+        char[][] expResult = new char[boardHight][boardWidth];
+        for (int i = 0; i < expResult.length; i++) {
+            for (int j = 0; j < expResult[0].length; j++) {
+                expResult[i][j] = 'O';
+            }
+        }   
+        expResult[0][5] = 'X';
+        expResult[1][1] = 'X';
+        expResult[1][3] = 'X';
+        expResult[1][5] = 'X';
+        expResult[3][1] = 'X';
+        expResult[3][3] = 'X';
+        expResult[3][5] = 'X';
+        
+        assertArrayEquals(expResult, result);
+    }
+    
+    /**
      * Test of drawWord method, of class BoardOfWords.
      */
     @Test
@@ -29,19 +56,28 @@ public class BoardOfWordsTest {
         int x = 3;
         int y = 3;
         int alignment = 0;
+        int boardWidth = 5;
+        int boardHight = 5;
         WordPosition position = new WordPosition(x, y, alignment, word.length());
-        BoardOfWords instance = new BoardOfWords(5, 5);
+        BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
+        instance.createBoard("testi");
         instance.drawWord(word, position);
         char[][] result = instance.getBoard();
 
-        char[][] expResult = new char[5][5];
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                expResult[i][j] = 'X';
+        
+        char[][] expResult = new char[boardHight][boardWidth];
+        for (int i = 0; i < expResult.length; i++) {
+            for (int j = 0; j < expResult[0].length; j++) {
+                expResult[i][j] = 'O';
             }
-        }
+        }   
+        expResult[1][1] = 'X';
+        expResult[1][3] = 'X';
+        expResult[3][1] = 'X';
+        
         expResult[3][3] = 'a';
         expResult[3][4] = 'i';
+        
         assertArrayEquals(expResult, result);
     }
 
@@ -52,19 +88,28 @@ public class BoardOfWordsTest {
         int x = 3;
         int y = 3;
         int alignment = 1;
+        int boardWidth = 5;
+        int boardHight = 5;
         WordPosition position = new WordPosition(x, y, alignment, word.length());
-        BoardOfWords instance = new BoardOfWords(5, 5);
+        BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
+        instance.createBoard("testi");
         instance.drawWord(word, position);
         char[][] result = instance.getBoard();
 
-        char[][] expResult = new char[5][5];
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                expResult[i][j] = 'X';
+        
+        char[][] expResult = new char[boardHight][boardWidth];
+        for (int i = 0; i < expResult.length; i++) {
+            for (int j = 0; j < expResult[0].length; j++) {
+                expResult[i][j] = 'O';
             }
-        }
+        }   
+        expResult[1][1] = 'X';
+        expResult[1][3] = 'X';
+        expResult[3][1] = 'X';
+        
         expResult[3][3] = 'a';
         expResult[4][3] = 'i';
+        
         assertArrayEquals(expResult, result);
     }
 
@@ -80,6 +125,7 @@ public class BoardOfWordsTest {
         int alignment = 1;
         WordPosition position = new WordPosition(x, y, alignment, word.length());
         BoardOfWords instance = new BoardOfWords(5, 5);
+        instance.createBoard("testi");
         instance.drawWord(word, position);
         char result = instance.getLetter(x, y);
 
@@ -87,4 +133,5 @@ public class BoardOfWordsTest {
         assertEquals(expResult, result);
 
     } 
+
 }

@@ -19,20 +19,20 @@ public class UserInterface {
         int hight = 5;
         String firstWord = "";
 
-//        System.out.println("Anna krypton leveys:");
-//        width = scanner.nextInt();
-//        System.out.println("Anna krypton korkeus:");
-//        hight = scanner.nextInt();
-//        System.out.println("Anna aloitussana tai paina r ja enter:");
-//        firstWord = scanner.next();
-//        while (firstWord.length() > width) {
-//            System.out.println("Aloitussanan tulee mahtua kryptoon leveyssuunnassa.");
-//            System.out.println("Anna aloitussana tai paina r ja enter:");
-//            firstWord = scanner.next();
-//        }
-//        if (firstWord.equals("r")) {
-//            firstWord = "";
-//        }
+        System.out.println("Anna krypton leveys:");
+        width = scanner.nextInt();
+        System.out.println("Anna krypton korkeus:");
+        hight = scanner.nextInt();
+        System.out.println("Anna aloitussana tai paina r ja enter:");
+        firstWord = scanner.next();
+        while (firstWord.length() > width) {
+            System.out.println("Aloitussanan tulee mahtua kryptoon leveyssuunnassa.");
+            System.out.println("Anna aloitussana tai paina r ja enter:");
+            firstWord = scanner.next();
+        }
+        if (firstWord.equals("r")) {
+            firstWord = "";
+        }
         
         System.out.println("Generoidaan kryptoa... \n");
         

@@ -37,4 +37,11 @@ public class WordPosition {
     public int getWordLength() {
         return wordLength;
     }
+
+    @Override
+    public String toString() {
+        return "WordPosition{" + "x=" + x + ", y=" + y + ", alignment=" + alignment + ", wordLength=" + wordLength + '}';
+    }
+    
+    
 }
