@@ -32,12 +32,11 @@ public class CrosswordMaker {
             System.out.println("Sanalistan haku ei onnistunut");
             System.out.println(ex);
         }
-//        for (String word : wordList) {
-//            System.out.println(word);
-//        }
-        if (firstWord.isEmpty()) {
-            int length = Math.min(width, 7);
+
+        if (firstWord.equals("r")) {
+            int length = Math.min(width, 5);
             firstWord = this.getRandomWord(length);
+            System.out.println("Aloitussanaksi arvottiin " + firstWord);
         }
         this.firstWord = firstWord;
         this.boardOfWords = new BoardOfWords(width, hight);

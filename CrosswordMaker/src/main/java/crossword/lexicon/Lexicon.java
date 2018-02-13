@@ -48,7 +48,9 @@ public class Lexicon {
                         addPlural(wordList, word, c);
                     }
                 }
-                wordList.add(word);
+                if (word.indexOf('-') < 0) {
+                    wordList.add(word.toLowerCase());
+                }
             }
 
         } catch (JDOMException e) {

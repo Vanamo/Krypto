@@ -1,6 +1,7 @@
 package crossword.logic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -61,7 +62,8 @@ public class WordPositionFinder {
             this.wordLength = 0;
         }
 
-        return positions;
+        Collections.sort(this.positions);
+        return this.positions;
     }
 
     private void addPosition(char prev, int x, int y, int alignment, char current) {

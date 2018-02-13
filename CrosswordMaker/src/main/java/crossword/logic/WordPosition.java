@@ -1,5 +1,7 @@
 package crossword.logic;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 /**
  * Defines the position of a new word on the board:
  * x, y cordinates of the starting position
@@ -8,7 +10,7 @@ package crossword.logic;
  * 
  * @author Vanamo Piirainen
  */
-public class WordPosition {
+public class WordPosition implements Comparable<WordPosition> {
     
     private int x;
     private int y;
@@ -38,6 +40,7 @@ public class WordPosition {
         return wordLength;
     }
 
+    
     @Override
     public String toString() {
         return "WordPosition{" + "x=" + x + ", y=" + y + ", alignment=" + alignment + ", wordLength=" + wordLength + '}';
@@ -68,6 +71,16 @@ public class WordPosition {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public int compareTo(WordPosition o) {
+        if (this.x + this.y < o.x + o.y) {
+            return -1;
+        } else if (this.x + this.y > o.x + o.y) {
+            return 1;
+        }
+        return 0;
     }
     
     

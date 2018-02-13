@@ -42,19 +42,11 @@ public class BoardOfWords {
             }
         }
 
-        if (this.hight < 7 && this.width < 7) {
-            letterPositionsForSmallBoard();
+        if (this.hight < 10 && this.width < 10) {
+            this.letterPositionsForSmallBoard();
+        } else {
+            this.letterPositionsForLargeBoard();
         }
-    }
-
-    public void printBoard() {
-        for (int y = 0; y < this.hight; y++) {
-            for (int x = 0; x < this.width; x++) {
-                System.out.print(this.boardOfWords[y][x] + "\t");
-            }
-            System.out.println("\n");
-        }
-        System.out.println("\n");
     }
 
     private void letterPositionsForSmallBoard() {
@@ -76,6 +68,54 @@ public class BoardOfWords {
         }
     }
 
+    private void letterPositionsForLargeBoard() {
+        ArrayList<char[]> charsForBoard = new ArrayList<>();
+        charsForBoard.add("OOOOOXOXOOOOOOX".toCharArray());
+        charsForBoard.add("OXOXOOOOOOXOXOO".toCharArray());
+        charsForBoard.add("OOOOOXOXOOOOOOX".toCharArray());
+        charsForBoard.add("OXOXOOOOOOXOXOO".toCharArray());
+        charsForBoard.add("OOOOOXOXOOOOOOX".toCharArray());
+        charsForBoard.add("XOXOXOOOOXOXOOO".toCharArray());
+        charsForBoard.add("OOOOOOXOOOOOOXO".toCharArray());
+        charsForBoard.add("XOXOXOOOXXOXOOO".toCharArray());
+        charsForBoard.add("OOOOOXOOOOOOOXO".toCharArray());
+        charsForBoard.add("XOXOXOOOOXOXOOO".toCharArray());
+        charsForBoard.add("OOOOOXOXOOOOXOX".toCharArray());
+        charsForBoard.add("OXOXOOOOOOXOXOO".toCharArray());
+        charsForBoard.add("OOOOOXOXOOOOOOX".toCharArray());
+        charsForBoard.add("OXOXOOOOXOXOXOO".toCharArray());
+
+        for (int y = 0; y < this.hight; y++) {
+            for (int x = 0; x < this.width; x++) {
+                //First row with the first word
+                if (y == 0) {
+                    if (x < this.firstPosition.getWordLength()) {
+                        this.boardOfWords[y][x] = 'O';
+                    } else if (x == this.firstPosition.getWordLength()) {
+                        this.boardOfWords[y][x] = 'X';
+                    }
+                }
+                int x2 = this.checkLength(x, charsForBoard.get(0).length);
+                int y2 = this.checkLength(y, charsForBoard.size());
+                this.boardOfWords[y][x] = charsForBoard.get(y2)[x2];
+            }
+        }
+    }
+
+    /**
+     * Helper method for the method letterPositionsForLargeBoard
+     *
+     * @param i
+     * @param length
+     * @return
+     */
+    private int checkLength(int i, int length) {
+        if (i >= length) {
+            i -= length;
+        }
+        return i;
+    }
+
     /**
      * Draws the given word on the board. Alignment: 0 = horizontal 1 =
      * vertical.
@@ -92,7 +132,7 @@ public class BoardOfWords {
             }
         }
     }
-    
+
     public void drawFirstWord(String word) {
         WordPosition p = this.firstPosition;
         for (int i = 0; i < word.length(); i++) {
@@ -118,5 +158,34 @@ public class BoardOfWords {
 
     public int getHight() {
         return hight;
+    }
+
+    private void setBoardOfWords(char[][] boardOfWords) {
+        this.boardOfWords = boardOfWords;
+    }
+    
+    public BoardOfWords makeCopy() {
+        BoardOfWords copy = new BoardOfWords(this.width, this.hight);
+        char[][] copyOfBoard = new char[this.width][this.hight];
+        for (int y = 0; y < this.hight; y++) {
+            for (int x = 0; x < this.width; x++) {
+                copyOfBoard[y][x] = this.boardOfWords[y][x];
+            }
+        }
+        copy.setBoardOfWords(copyOfBoard);
+        return copy;
+    }
+
+    @Override
+    public String toString() {
+        String board = "";
+        for (int y = 0; y < this.hight; y++) {
+            for (int x = 0; x < this.width; x++) {
+                board = board.concat(this.boardOfWords[y][x] + "\t");
+            }
+            board = board.concat("\n\n");
+        }
+        board = board.concat("\n");
+        return board;
     }
 }

@@ -41,7 +41,7 @@ public class CrosswordMakerTest {
      */
     @Test
     public void testGetRandomWordWithNoResults() {
-        System.out.println("getRandomWord");
+        System.out.println("getRandomWordWithNoResults");
         String[] words = {"alkaa", "ammatti", "ammua", "kaikki"};
         ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
         int length = 4;
@@ -56,7 +56,7 @@ public class CrosswordMakerTest {
      */
     @Test
     public void testGetRandomWordWithOnePossibleResult() {
-        System.out.println("getRandomWord");
+        System.out.println("getRandomWordWithOnePossibleResult");
         String[] words = {"almanakka", "ammatti", "aivastaa", "kuka"};
         ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
         int length = 5;

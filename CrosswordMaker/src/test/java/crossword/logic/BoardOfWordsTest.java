@@ -47,6 +47,124 @@ public class BoardOfWordsTest {
     }
     
     /**
+     * Test of createBoard method, of class BoardOfWords.
+     */
+    @Test
+    public void testCreateLargeBoard() {
+        System.out.println("createLargeBoard");
+        String firstWord = "testataan";
+        int boardWidth = 8;
+        int boardHight = 6;
+        BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
+        instance.createBoard(firstWord);
+        char[][] result = instance.getBoard();
+        
+        char[][] expResult = new char[boardHight][boardWidth];
+        for (int i = 0; i < expResult.length; i++) {
+            for (int j = 0; j < expResult[0].length; j++) {
+                expResult[i][j] = 'O';
+            }
+        }   
+        expResult[0][5] = 'X';
+        expResult[0][7] = 'X';
+        expResult[1][1] = 'X';
+        expResult[1][3] = 'X';
+        expResult[2][5] = 'X';
+        expResult[2][7] = 'X';
+        expResult[3][1] = 'X';
+        expResult[3][3] = 'X';
+        expResult[4][5] = 'X';
+        expResult[4][7] = 'X';
+        expResult[5][0] = 'X';
+        expResult[5][2] = 'X';
+        expResult[5][4] = 'X';
+        
+        assertArrayEquals(expResult, result);
+    }    
+    
+    /**
+     * Test of createBoard method, of class BoardOfWords.
+     */
+    @Test
+    public void testCreateVeryLargeBoard() {
+        System.out.println("createVeryLargeBoard");
+        String firstWord = "testi";
+        int boardWidth = 16;
+        int boardHight = 15;
+        BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
+        instance.createBoard(firstWord);
+        char[][] result = instance.getBoard();
+        
+        char[][] expResult = new char[boardHight][boardWidth];
+        for (int i = 0; i < expResult.length; i++) {
+            for (int j = 0; j < expResult[0].length; j++) {
+                expResult[i][j] = 'O';
+            }
+        }   
+        expResult[0][5] = 'X';
+        expResult[0][7] = 'X';
+        expResult[0][14] = 'X';
+        expResult[1][1] = 'X';
+        expResult[1][3] = 'X';
+        expResult[1][10] = 'X';
+        expResult[1][12] = 'X';
+        expResult[2][5] = 'X';
+        expResult[2][7] = 'X';
+        expResult[2][14] = 'X';
+        expResult[3][1] = 'X';
+        expResult[3][3] = 'X';
+        expResult[3][10] = 'X';
+        expResult[3][12] = 'X';
+        expResult[4][5] = 'X';
+        expResult[4][7] = 'X';
+        expResult[4][14] = 'X';
+        expResult[5][0] = 'X';
+        expResult[5][2] = 'X';
+        expResult[5][4] = 'X';
+        expResult[5][9] = 'X';
+        expResult[5][11] = 'X';
+        expResult[5][15] = 'X';
+        expResult[6][6] = 'X';
+        expResult[6][13] = 'X';
+        expResult[7][0] = 'X';
+        expResult[7][2] = 'X';
+        expResult[7][4] = 'X';
+        expResult[7][8] = 'X';
+        expResult[7][9] = 'X';
+        expResult[7][11] = 'X';
+        expResult[7][15] = 'X';
+        expResult[8][5] = 'X';
+        expResult[8][13] = 'X';
+        expResult[9][0] = 'X';
+        expResult[9][2] = 'X';
+        expResult[9][4] = 'X';
+        expResult[9][9] = 'X';
+        expResult[9][11] = 'X';
+        expResult[9][15] = 'X';
+        expResult[10][5] = 'X';
+        expResult[10][7] = 'X';
+        expResult[10][12] = 'X';
+        expResult[10][14] = 'X';
+        expResult[11][1] = 'X';
+        expResult[11][3] = 'X';
+        expResult[11][10] = 'X';
+        expResult[11][12] = 'X';
+        expResult[12][5] = 'X';
+        expResult[12][7] = 'X';
+        expResult[12][14] = 'X';
+        expResult[13][1] = 'X';
+        expResult[13][3] = 'X';
+        expResult[13][8] = 'X';
+        expResult[13][10] = 'X';
+        expResult[13][12] = 'X';
+        expResult[14][5] = 'X';
+        expResult[14][7] = 'X';
+        expResult[14][14] = 'X';
+        
+        assertArrayEquals(expResult, result);
+    } 
+    
+    /**
      * Test of drawWord method, of class BoardOfWords.
      */
     @Test
