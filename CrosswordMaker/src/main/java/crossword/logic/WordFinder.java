@@ -37,20 +37,25 @@ public class WordFinder {
      * @param positions
      * @param positionIndex
      */
-    private BoardOfWords layWords(int positionIndex, BoardOfWords board, 
+    private BoardOfWords layWords(int positionIndex, BoardOfWords board,
             ArrayList<String> usedWords) {
         if (positionIndex == positions.size()) {
             return board;
         }
         WordPosition position = this.positions.get(positionIndex);
         this.boardOfWords = board.makeCopy();
+
         ArrayList<String> fittingWords = this.findWords(position);
 
         for (String word : usedWords) {
             fittingWords.remove(word);
         }
-        
+
         if (fittingWords.isEmpty()) {
+            return null;
+        }
+        
+        if (!wordsCanBeFoundForCrossingPositions(positionIndex)) {
             return null;
         }
 
@@ -145,4 +150,12 @@ public class WordFinder {
         return mask;
     }
 
+    private boolean wordsCanBeFoundForCrossingPositions(int positionIndex) {
+        ArrayList<WordPosition> remaindingPositions = 
+                new ArrayList<>(this.positions.subList(positionIndex, this.positions.size()));
+        for (WordPosition position : remaindingPositions) {
+            if (findWords(position).isEmpty()) return false;
+        }
+        return true;
+    }
 }

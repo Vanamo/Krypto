@@ -2,6 +2,7 @@ package crossword.logic;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 /**
  *
@@ -16,6 +17,7 @@ public class WordPositionFinder {
     private int startX;
     private int startY;
     private ArrayList<WordPosition> positions;
+    private HashMap<LetterPosition, ArrayList<WordPosition>> wordsAt;
 
     public WordPositionFinder(char[][] boardOfWords) {
         this.boardOfWords = boardOfWords;
@@ -82,11 +84,41 @@ public class WordPositionFinder {
             this.wordLength = 0;
         }
     }
-    
-    public void findCrossingPositions(ArrayList<WordPosition> positions) {
-        
-        for (WordPosition position : positions) {
-            
+
+    public void findCrossingPositions() {
+        //Find all word positions intersecting a certain position on the board
+        this.wordsAt = new HashMap<>();
+        for (WordPosition position : this.positions) {
+            LetterPosition[] letterPositions = position.getLetterPositions();
+            for (LetterPosition lp : letterPositions) {
+                addToWordsAt(lp, position);
+            }
+        }
+        //For a certain word position find word positions that intersect
+        for (WordPosition position : this.positions) {
+            LetterPosition[] letterPositions = position.getLetterPositions();
+            ArrayList<WordPosition> crossingWords = new ArrayList<>();
+            for (LetterPosition lp : letterPositions) {
+                crossingWords.addAll(this.wordsAt.get(lp));
+            }  
+            position.setCrossingWords(crossingWords);
+        }
+    }
+
+    /**
+     * Helper method for findCrossingPositions
+     * @param lp
+     * @param position 
+     */
+    private void addToWordsAt(LetterPosition lp, WordPosition position) {
+        if (this.wordsAt.containsKey(lp)) {
+            ArrayList<WordPosition> p = this.wordsAt.get(lp);
+            p.add(position);
+            this.wordsAt.replace(lp, p);
+        } else {
+            ArrayList<WordPosition> p = new ArrayList<>();
+            p.add(position);
+            this.wordsAt.put(lp, p);
         }
     }
 }

@@ -1,5 +1,7 @@
 package crossword.logic;
 
+import java.util.ArrayList;
+
 /**
  * Defines the position of a new word on the board: x, y coordinates of the
  * starting position alignment (0 = for horizontal, 1 = for vertical alignment)
@@ -13,6 +15,7 @@ public class WordPosition implements Comparable<WordPosition> {
     private int y;
     private int alignment;
     private int wordLength;
+    private ArrayList<WordPosition> crossingWords = null;
 
     public WordPosition(int x, int y, int alignment, int wordLength) {
         this.x = x;
@@ -52,6 +55,14 @@ public class WordPosition implements Comparable<WordPosition> {
             }            
         }
         return letterPositions;
+    }
+
+    public void setCrossingWords(ArrayList<WordPosition> crossingWords) {
+        this.crossingWords = crossingWords;
+    }
+
+    public ArrayList<WordPosition> getCrossingWords() {
+        return this.crossingWords;
     }
 
     @Override
