@@ -68,7 +68,7 @@ public class BoardOfWords {
         }
     }
 
-    private void letterPositionsForLargeBoard() {
+    public void letterPositionsForLargeBoard() {
         ArrayList<char[]> charsForBoard = new ArrayList<>();
         charsForBoard.add("OOOOOXOXOOOOOOX".toCharArray());
         charsForBoard.add("OXOXOOOOOOXOXOO".toCharArray());

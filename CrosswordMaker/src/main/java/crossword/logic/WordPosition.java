@@ -1,17 +1,14 @@
 package crossword.logic;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 /**
- * Defines the position of a new word on the board:
- * x, y cordinates of the starting position
- * alignment (0 = for horizontal, 1 = for vertical alignment)
+ * Defines the position of a new word on the board: x, y coordinates of the
+ * starting position alignment (0 = for horizontal, 1 = for vertical alignment)
  * and length of the word.
- * 
+ *
  * @author Vanamo Piirainen
  */
 public class WordPosition implements Comparable<WordPosition> {
-    
+
     private int x;
     private int y;
     private int alignment;
@@ -40,7 +37,23 @@ public class WordPosition implements Comparable<WordPosition> {
         return wordLength;
     }
 
-    
+    public LetterPosition[] getLetterPositions() {
+        LetterPosition[] letterPositions = new LetterPosition[this.wordLength - 1];
+        int index = 0;
+        if (this.alignment == 0) {
+            for (int i = this.x; i < this.wordLength; i++) {
+                letterPositions[index] = new LetterPosition(i, this.y);
+                index++;
+            }
+        } else {
+            for (int i = this.y; i < this.wordLength; i++) {
+                letterPositions[index] = new LetterPosition(this.x, i);
+                index++;
+            }            
+        }
+        return letterPositions;
+    }
+
     @Override
     public String toString() {
         return "WordPosition{" + "x=" + x + ", y=" + y + ", alignment=" + alignment + ", wordLength=" + wordLength + '}';
@@ -82,6 +95,5 @@ public class WordPosition implements Comparable<WordPosition> {
         }
         return 0;
     }
-    
-    
+
 }

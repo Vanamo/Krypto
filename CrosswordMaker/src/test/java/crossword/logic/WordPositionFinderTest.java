@@ -1,6 +1,7 @@
 package crossword.logic;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -43,6 +44,7 @@ public class WordPositionFinderTest {
         expResult.add(new WordPosition(0, 1, 1, 2));
         expResult.add(new WordPosition(2, 0, 1, 2));
                 
+        Collections.sort(expResult);
         assertArrayEquals(expResult.toArray(), result.toArray());
     }
 

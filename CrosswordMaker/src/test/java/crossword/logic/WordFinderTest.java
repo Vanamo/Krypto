@@ -89,7 +89,8 @@ public class WordFinderTest {
         positions.add(p4);
         positions.add(p5);
 
-        String[] words = {"ahava", "alati", "saada", "laaja", "ohari"};
+        String[] words = {"aaloe", "apila", "saada", "lelli", "ahava", "alati", 
+            "laaja", "ohari"};
         ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
         String firstWord = "sello";
         BoardOfWords board = new BoardOfWords(5, 5);

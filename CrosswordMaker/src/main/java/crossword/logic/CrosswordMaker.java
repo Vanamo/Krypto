@@ -67,6 +67,7 @@ public class CrosswordMaker {
         WordFinder wordFinder = new WordFinder(this.boardOfWords, this.wordList);
         WordPositionFinder positionFinder = new WordPositionFinder(this.boardOfWords.getBoard());
         ArrayList<WordPosition> positions = positionFinder.findPositions();
+        System.out.println("Kryptoon tulee " + positions.size() + " sanaa");
 
         //Draw first word after the positions are found, otherwise the letters 
         //of the first word will interfere finding of word positions.

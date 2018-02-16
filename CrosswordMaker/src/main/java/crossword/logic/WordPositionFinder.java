@@ -82,4 +82,11 @@ public class WordPositionFinder {
             this.wordLength = 0;
         }
     }
+    
+    public void findCrossingPositions(ArrayList<WordPosition> positions) {
+        
+        for (WordPosition position : positions) {
+            
+        }
+    }
 }

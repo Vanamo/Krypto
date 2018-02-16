@@ -52,11 +52,12 @@ public class BoardOfWordsTest {
     @Test
     public void testCreateLargeBoard() {
         System.out.println("createLargeBoard");
-        String firstWord = "testataan";
+        String firstWord = "12345678";
         int boardWidth = 8;
         int boardHight = 6;
         BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
         instance.createBoard(firstWord);
+        instance.letterPositionsForLargeBoard();
         char[][] result = instance.getBoard();
         
         char[][] expResult = new char[boardHight][boardWidth];
