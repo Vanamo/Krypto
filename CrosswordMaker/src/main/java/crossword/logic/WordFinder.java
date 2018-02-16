@@ -54,10 +54,10 @@ public class WordFinder {
         if (fittingWords.isEmpty()) {
             return null;
         }
-        
-        if (!wordsCanBeFoundForCrossingPositions(positionIndex)) {
-            return null;
-        }
+
+//        if (!wordsCanBeFoundForCrossingPositions(positionIndex)) {
+//            return null;
+//        }
 
         for (String fittingWord : fittingWords) {
             BoardOfWords copyOfBoard = board.makeCopy();
@@ -151,10 +151,17 @@ public class WordFinder {
     }
 
     private boolean wordsCanBeFoundForCrossingPositions(int positionIndex) {
-        ArrayList<WordPosition> remaindingPositions = 
-                new ArrayList<>(this.positions.subList(positionIndex, this.positions.size()));
-        for (WordPosition position : remaindingPositions) {
-            if (findWords(position).isEmpty()) return false;
+        ArrayList<WordPosition> remainingPositions
+                = new ArrayList<>(this.positions.subList(positionIndex, this.positions.size()));
+        ArrayList<WordPosition> crossingPositions
+                = this.positions.get(positionIndex).getCrossingPositions();
+
+        for (WordPosition crossingPosition : crossingPositions) {
+            if (remainingPositions.contains(crossingPosition)) {
+                if (findWords(crossingPosition).isEmpty()) {
+                    return false;
+                }
+            }
         }
         return true;
     }

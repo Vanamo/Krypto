@@ -73,7 +73,12 @@ public class CrosswordMaker {
         //Draw first word after the positions are found, otherwise the letters 
         //of the first word will interfere finding of word positions.
         this.boardOfWords.drawFirstWord(firstWord);
-        return wordFinder.findWordsForAllPositions(positions);
+        long startTime = System.currentTimeMillis();
+        BoardOfWords result = wordFinder.findWordsForAllPositions(positions);
+        long endTime = System.currentTimeMillis();
+        System.out.println("Krypton generointiin kului aikaa " + 
+                (endTime - startTime) + "ms");
+        return result;
     }
 
     public String getRandomWord(int length) {

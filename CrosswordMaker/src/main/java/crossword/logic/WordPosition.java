@@ -15,7 +15,7 @@ public class WordPosition implements Comparable<WordPosition> {
     private int y;
     private int alignment;
     private int wordLength;
-    private ArrayList<WordPosition> crossingWords = null;
+    private ArrayList<WordPosition> crossingPositions = null;
 
     public WordPosition(int x, int y, int alignment, int wordLength) {
         this.x = x;
@@ -41,7 +41,7 @@ public class WordPosition implements Comparable<WordPosition> {
     }
 
     public LetterPosition[] getLetterPositions() {
-        LetterPosition[] letterPositions = new LetterPosition[this.wordLength - 1];
+        LetterPosition[] letterPositions = new LetterPosition[this.wordLength];
         int index = 0;
         if (this.alignment == 0) {
             for (int i = this.x; i < this.wordLength; i++) {
@@ -52,17 +52,20 @@ public class WordPosition implements Comparable<WordPosition> {
             for (int i = this.y; i < this.wordLength; i++) {
                 letterPositions[index] = new LetterPosition(this.x, i);
                 index++;
-            }            
+            }
         }
         return letterPositions;
     }
 
-    public void setCrossingWords(ArrayList<WordPosition> crossingWords) {
-        this.crossingWords = crossingWords;
+    public void setCrossingPositions(ArrayList<WordPosition> crossingPositions) {
+        this.crossingPositions = crossingPositions;
+        while (this.crossingPositions.contains(this)) {
+            this.crossingPositions.remove(this);
+        }
     }
 
-    public ArrayList<WordPosition> getCrossingWords() {
-        return this.crossingWords;
+    public ArrayList<WordPosition> getCrossingPositions() {
+        return this.crossingPositions;
     }
 
     @Override

@@ -94,14 +94,15 @@ public class WordPositionFinder {
                 addToWordsAt(lp, position);
             }
         }
+
         //For a certain word position find word positions that intersect
         for (WordPosition position : this.positions) {
             LetterPosition[] letterPositions = position.getLetterPositions();
-            ArrayList<WordPosition> crossingWords = new ArrayList<>();
-            for (LetterPosition lp : letterPositions) {
-                crossingWords.addAll(this.wordsAt.get(lp));
+            ArrayList<WordPosition> crossingPositions = new ArrayList<>();
+            for (LetterPosition lp : letterPositions) {                
+                crossingPositions.addAll(this.wordsAt.get(lp));
             }  
-            position.setCrossingWords(crossingWords);
+            position.setCrossingPositions(crossingPositions);
         }
     }
 
