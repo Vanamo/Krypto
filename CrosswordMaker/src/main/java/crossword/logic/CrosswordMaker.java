@@ -1,5 +1,6 @@
 package crossword.logic;
 
+import crossword.datastructures.CustomArrayList;
 import crossword.lexicon.Lexicon;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,8 +67,7 @@ public class CrosswordMaker {
     public BoardOfWords fillBoard() {
         WordFinder wordFinder = new WordFinder(this.boardOfWords, this.wordList);
         WordPositionFinder positionFinder = new WordPositionFinder(this.boardOfWords.getBoard());
-        ArrayList<WordPosition> positions = positionFinder.findPositions();
-        positionFinder.findCrossingPositions();
+        CustomArrayList positions = positionFinder.findPositions();
         System.out.println("Kryptoon tulee " + positions.size() + " sanaa");
 
         //Draw first word after the positions are found, otherwise the letters 

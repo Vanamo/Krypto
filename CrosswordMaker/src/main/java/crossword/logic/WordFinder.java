@@ -1,5 +1,6 @@
 package crossword.logic;
 
+import crossword.datastructures.CustomArrayList;
 import crossword.datastructures.SearchTree;
 import crossword.datastructures.SearchTreeNode;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class WordFinder {
 
     private SearchTree wordTree;
     private BoardOfWords boardOfWords;
-    private ArrayList<WordPosition> positions;
+    private CustomArrayList positions;
 
     public WordFinder(BoardOfWords boardOfWords, ArrayList<String> wordList) {
         this.boardOfWords = boardOfWords;
@@ -26,7 +27,7 @@ public class WordFinder {
      * @param positions
      * @return
      */
-    public BoardOfWords findWordsForAllPositions(ArrayList<WordPosition> positions) {
+    public BoardOfWords findWordsForAllPositions(CustomArrayList positions) {
         ArrayList<String> usedWords = new ArrayList<>();
         this.positions = positions;
         return this.layWords(0, this.boardOfWords, usedWords);
@@ -44,7 +45,7 @@ public class WordFinder {
         if (positionIndex == positions.size()) {
             return board;
         }
-        WordPosition position = this.positions.get(positionIndex);
+        WordPosition position = (WordPosition) this.positions.get(positionIndex);
         this.boardOfWords = board.makeCopy();
 
         ArrayList<String> fittingWords = this.findWords(position);
@@ -63,7 +64,8 @@ public class WordFinder {
 
         for (String fittingWord : fittingWords) {
             BoardOfWords copyOfBoard = board.makeCopy();
-            copyOfBoard.drawWord(fittingWord, this.positions.get(positionIndex));
+            WordPosition p = (WordPosition) this.positions.get(positionIndex);
+            copyOfBoard.drawWord(fittingWord, p);
             ArrayList<String> copyOfUsedWords = new ArrayList<>(usedWords);
             copyOfUsedWords.add(fittingWord);
             BoardOfWords solution = this.layWords(positionIndex + 1, copyOfBoard,
@@ -150,21 +152,5 @@ public class WordFinder {
             mask = mask.concat(String.valueOf(newChar));
         }
         return mask;
-    }
-
-    private boolean wordsCanBeFoundForCrossingPositions(int positionIndex) {
-        ArrayList<WordPosition> remainingPositions
-                = new ArrayList<>(this.positions.subList(positionIndex, this.positions.size()));
-        ArrayList<WordPosition> crossingPositions
-                = this.positions.get(positionIndex).getCrossingPositions();
-
-        for (WordPosition crossingPosition : crossingPositions) {
-            if (remainingPositions.contains(crossingPosition)) {
-                if (findWords(crossingPosition).isEmpty()) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }

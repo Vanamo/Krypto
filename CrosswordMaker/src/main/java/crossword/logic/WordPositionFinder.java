@@ -1,8 +1,6 @@
 package crossword.logic;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import crossword.datastructures.CustomArrayList;
 
 /**
  *
@@ -16,8 +14,7 @@ public class WordPositionFinder {
     private int wordLength;
     private int startX;
     private int startY;
-    private ArrayList<WordPosition> positions;
-    private HashMap<LetterPosition, ArrayList<WordPosition>> wordsAt;
+    private CustomArrayList positions;
 
     public WordPositionFinder(char[][] boardOfWords) {
         this.boardOfWords = boardOfWords;
@@ -31,8 +28,8 @@ public class WordPositionFinder {
      *
      * @return
      */
-    public ArrayList<WordPosition> findPositions() {
-        positions = new ArrayList<>();
+    public CustomArrayList findPositions() {
+        positions = new CustomArrayList();
 
         char prev = 'X';
         this.wordLength = 0;
@@ -64,8 +61,76 @@ public class WordPositionFinder {
             this.wordLength = 0;
         }
 
-        Collections.sort(this.positions);
+        if (this.positions.size() > 1) {
+            this.sort();
+        }
         return this.positions;
+    }
+
+    /**
+     * Uses quick sort to sort the contents of the custom arraylist. Code
+     * from http://www.java2novice.com/java-sorting-algorithms/quick-sort/
+     */
+    public void sort() {
+        this.quicksort(0, positions.size() - 1);
+    }
+
+    private void quicksort(int left, int right) {
+        int[] partition = this.makePartition(left, right);
+        int i = partition[0];
+        int j = partition[1];
+        if (left < j) {
+            quicksort(left, j);
+        }
+        if (i < right) {
+            quicksort(i, right);
+        }
+
+    }
+
+    /**
+     * Helper method for quicksort
+     *
+     * @param left
+     * @param right
+     * @return
+     */
+    private int[] makePartition(int left, int right) {
+        WordPosition partitionElement = (WordPosition) positions.get(left);
+        int i = left;
+        int j = right;
+        while (i <= j) {
+            System.out.println("i " + i + " j " + j);
+            WordPosition positionI = (WordPosition) positions.get(i);
+            while (positionI.compareTo(partitionElement) == -1) {
+                i++;
+                positionI = (WordPosition) positions.get(i);
+            }
+            WordPosition positionJ = (WordPosition) positions.get(j);
+            while (positionJ.compareTo(partitionElement) == 1) {
+                j--;
+                positionJ = (WordPosition) positions.get(j);
+            }
+            if (i <= j) {
+                this.switchPlaces(i, j);
+                i++;
+                j--;
+            }
+        }
+        int[] ij = {i, j};
+        return ij;
+    }
+
+    /**
+     * Helper method for quicksort
+     *
+     * @param i
+     * @param j
+     */
+    private void switchPlaces(int i, int j) {
+        Object temp = positions.get(i);
+        positions.replace(i, positions.get(j));
+        positions.replace(j, temp);
     }
 
     private void addPosition(char prev, int x, int y, int alignment, char current) {
@@ -82,44 +147,6 @@ public class WordPositionFinder {
                 this.positions.add(p);
             }
             this.wordLength = 0;
-        }
-    }
-
-    public void findCrossingPositions() {
-        //Find all word positions intersecting a certain position on the board
-        this.wordsAt = new HashMap<>();
-        for (WordPosition position : this.positions) {
-            LetterPosition[] letterPositions = position.getLetterPositions();
-            for (LetterPosition lp : letterPositions) {
-                addToWordsAt(lp, position);
-            }
-        }
-
-        //For a certain word position find word positions that intersect
-        for (WordPosition position : this.positions) {
-            LetterPosition[] letterPositions = position.getLetterPositions();
-            ArrayList<WordPosition> crossingPositions = new ArrayList<>();
-            for (LetterPosition lp : letterPositions) {                
-                crossingPositions.addAll(this.wordsAt.get(lp));
-            }  
-            position.setCrossingPositions(crossingPositions);
-        }
-    }
-
-    /**
-     * Helper method for findCrossingPositions
-     * @param lp
-     * @param position 
-     */
-    private void addToWordsAt(LetterPosition lp, WordPosition position) {
-        if (this.wordsAt.containsKey(lp)) {
-            ArrayList<WordPosition> p = this.wordsAt.get(lp);
-            p.add(position);
-            this.wordsAt.replace(lp, p);
-        } else {
-            ArrayList<WordPosition> p = new ArrayList<>();
-            p.add(position);
-            this.wordsAt.put(lp, p);
         }
     }
 }

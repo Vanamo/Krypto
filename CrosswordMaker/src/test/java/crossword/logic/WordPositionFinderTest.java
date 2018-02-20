@@ -1,5 +1,6 @@
 package crossword.logic;
 
+import crossword.datastructures.CustomArrayList;
 import java.util.ArrayList;
 import java.util.Collections;
 import org.junit.After;
@@ -33,19 +34,28 @@ public class WordPositionFinderTest {
         }
         board[0][0] = 'X';
         board[1][1] = 'X';
-        board[2][2] = 'X';      
-        
+        board[2][2] = 'X';
+
         WordPositionFinder instance = new WordPositionFinder(board);
         ArrayList<WordPosition> expResult = new ArrayList<>();
-        ArrayList<WordPosition> result = instance.findPositions();
-        
+        CustomArrayList result = instance.findPositions();
+
         expResult.add(new WordPosition(1, 0, 0, 2));
         expResult.add(new WordPosition(0, 2, 0, 2));
         expResult.add(new WordPosition(0, 1, 1, 2));
         expResult.add(new WordPosition(2, 0, 1, 2));
-                
+
         Collections.sort(expResult);
         assertArrayEquals(expResult.toArray(), result.toArray());
+    }
+
+    /**
+     * Test of sort method, of class WordPositionFinder.
+     */
+    @Test
+    public void testSort() {
+        System.out.println("sort");
+
     }
 
 }

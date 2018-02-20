@@ -157,4 +157,18 @@ public class CustomArrayListTest {
         boolean result = arrayWithManyIntegers.remove(0);
         assertEquals(expResult, result);
     }    
+
+    /**
+     * Test of replace method, of class CustomArrayList.
+     */
+    @Test
+    public void testReplace() {
+        System.out.println("replace");
+        int index = 0;
+        arrayWithOneInteger.replace(index, 2);
+        Object result = arrayWithOneInteger.get(index);
+        Object expResult = 2;
+        
+        assertEquals(expResult, result);
+    }
 }
