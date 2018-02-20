@@ -1,4 +1,4 @@
-package crossword.logic;
+package crossword.datastructures;
 
 import java.util.ArrayList;
 

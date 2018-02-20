@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package crossword.logic;
+package crossword.datastructures;
 
 /**
  * Nodes of the search tree
  *
  * @author vseppane
  */
-class SearchTreeNode {
+public class SearchTreeNode {
 
     private char key;
     private boolean last;

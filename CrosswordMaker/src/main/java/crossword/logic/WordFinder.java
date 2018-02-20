@@ -1,5 +1,7 @@
 package crossword.logic;
 
+import crossword.datastructures.SearchTree;
+import crossword.datastructures.SearchTreeNode;
 import java.util.ArrayList;
 
 /**
