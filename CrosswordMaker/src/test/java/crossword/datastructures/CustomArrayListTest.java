@@ -1,9 +1,6 @@
 package crossword.datastructures;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -12,16 +9,26 @@ import static org.junit.Assert.*;
  * @author Vanamo Piirainen
  */
 public class CustomArrayListTest {
-    
-    private CustomArrayList emptyArray = new CustomArrayList();
-    private CustomArrayList arrayWithOneInteger = new CustomArrayList();
-    private CustomArrayList arrayWithManyIntegers = new CustomArrayList();
+
+    private TestCustomArrayList<Integer> emptyArray;
+    private TestCustomArrayList<Integer> arrayWithOneInteger;
+    private TestCustomArrayList<Integer> arrayWithManyIntegers;
+
+    private static class TestCustomArrayList<E> extends CustomArrayList<E> {
+
+        public Object[] getCustomArrayForTesting() {
+            return customArray;
+        }
+    }
 
     @Before
     public void setUp() {
+        emptyArray = new TestCustomArrayList<>();
+        arrayWithOneInteger = new TestCustomArrayList<>();
+        arrayWithManyIntegers = new TestCustomArrayList<>();
         arrayWithOneInteger.add(1);
-        
-        Integer[] integers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11}; 
+
+        Integer[] integers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
         arrayWithManyIntegers.addArray(integers);
     }
 
@@ -33,9 +40,9 @@ public class CustomArrayListTest {
         System.out.println("add");
 
         Object[] result = arrayWithOneInteger.getCustomArrayForTesting();
-        Object[] expResult = new Integer[10];
+        Integer[] expResult = new Integer[10];
         expResult[0] = 1;
-        
+
         assertArrayEquals(expResult, result);
     }
 
@@ -47,13 +54,13 @@ public class CustomArrayListTest {
         System.out.println("addArray");
 
         Object[] result = arrayWithManyIntegers.getCustomArrayForTesting();
-        Object[] expResult = new Integer[20];
+        Integer[] expResult = new Integer[20];
         int toAdd = 1;
         for (int i = 0; i < 11; i++) {
             expResult[i] = toAdd;
             toAdd++;
         }
-        
+
         assertArrayEquals(expResult, result);
     }
 
@@ -64,11 +71,11 @@ public class CustomArrayListTest {
     public void testGet() {
         System.out.println("get");
         int index = 0;
-        Object expResult = 1;
-        Object result = arrayWithOneInteger.get(index);
+        Integer expResult = 1;
+        Integer result = arrayWithOneInteger.get(index);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of get method with non-existent index.
      */
@@ -76,8 +83,9 @@ public class CustomArrayListTest {
     public void testGetWithWrongIndex() {
         System.out.println("getWithWrongIndex");
         int index = 0;
-        Object result = emptyArray.get(index);
+        emptyArray.get(index);
     }
+
     /**
      * Test of size method, of class CustomArrayList.
      */
@@ -121,7 +129,7 @@ public class CustomArrayListTest {
         boolean result = arrayWithOneInteger.contains(0);
         assertEquals(expResult, result);
     }
-    
+
     /**
      * Test of indexOf method, of class CustomArrayList.
      */
@@ -139,8 +147,8 @@ public class CustomArrayListTest {
     @Test
     public void testRemove() {
         System.out.println("remove");
-        Object[] expResult = new Object[10];
-        
+        Integer[] expResult = new Integer[10];
+
         arrayWithOneInteger.remove(1);
         Object[] result = arrayWithOneInteger.getCustomArrayForTesting();
         assertArrayEquals(expResult, result);
@@ -153,10 +161,10 @@ public class CustomArrayListTest {
     public void testRemoveIsFalse() {
         System.out.println("removeIsFalse");
         boolean expResult = false;
-        
+
         boolean result = arrayWithManyIntegers.remove(0);
         assertEquals(expResult, result);
-    }    
+    }
 
     /**
      * Test of replace method, of class CustomArrayList.
@@ -166,9 +174,8 @@ public class CustomArrayListTest {
         System.out.println("replace");
         int index = 0;
         arrayWithOneInteger.replace(index, 2);
-        Object result = arrayWithOneInteger.get(index);
-        Object expResult = 2;
-        
+        Integer result = arrayWithOneInteger.get(index);
+        Integer expResult = 2;
         assertEquals(expResult, result);
     }
 }

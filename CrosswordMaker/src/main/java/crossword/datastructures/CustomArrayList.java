@@ -1,7 +1,5 @@
 package crossword.datastructures;
 
-import java.util.Arrays;
-
 /**
  * My own implementation of ArrayList. I took inspiration from these sites:
  * http://www.docjar.com/html/api/java/util/ArrayList.java.html
@@ -11,9 +9,9 @@ import java.util.Arrays;
  * 
  * @author Vanamo Piirainen
  */
-public class CustomArrayList {
+public class CustomArrayList<E> {
 
-    private Object[] customArray;
+    protected Object[] customArray;
     private int size;
 
     /**
@@ -37,7 +35,7 @@ public class CustomArrayList {
      *
      * @param o
      */
-    public void add(Object o) {
+    public void add(E o) {
         if (this.size >= this.customArray.length) {
             this.increaseCapacity();
         }
@@ -50,7 +48,7 @@ public class CustomArrayList {
      * @param index
      * @param o 
      */
-    public void replace(int index, Object o) {
+    public void replace(int index, E o) {
         this.rangeCheck(index);
         this.customArray[index] = o;
     }
@@ -59,7 +57,7 @@ public class CustomArrayList {
      * Adds the contents of an object array to the custom ArrayList
      * @param array
      */
-    public void addArray(Object[] array) {
+    public void addArray(E[] array) {
         for (int i = 0; i < array.length; i++) {
             this.add(array[i]);
         }
@@ -70,9 +68,9 @@ public class CustomArrayList {
      * @param index
      * @return
      */
-    public Object get(int index) {
+    public E get(int index) {
         this.rangeCheck(index);
-        return this.customArray[index];
+        return (E) this.customArray[index];
     }
 
     /**
@@ -96,7 +94,7 @@ public class CustomArrayList {
      * @param o
      * @return
      */
-    public boolean contains(Object o) {
+    public boolean contains(E o) {
         return this.indexOf(o) >= 0;
     }
 
@@ -105,7 +103,7 @@ public class CustomArrayList {
      * @param o
      * @return
      */
-    public int indexOf(Object o) {
+    public int indexOf(E o) {
         if (o == null) {
             for (int i = 0; i < this.size; i++) {
                 if (this.customArray[i] == null) {
@@ -127,7 +125,7 @@ public class CustomArrayList {
      * @param o
      * @return
      */
-    public boolean remove(Object o) {
+    public boolean remove(E o) {
         if (o == null) {
             for (int i = 0; i < this.size; i++) {
                 if (this.customArray[i] == null) {
@@ -147,8 +145,7 @@ public class CustomArrayList {
     }
 
     private void removeByIndex(int i) {
-        int size = this.size;
-        for (int ind = i; ind < size; ind++) {
+        for (int ind = i; ind < this.size; ind++) {
             this.customArray[ind] = this.customArray[ind + 1];
         }
         this.size--;
@@ -160,11 +157,4 @@ public class CustomArrayList {
         }
     }
 
-    /**
-     *
-     * @return
-     */
-    public Object[] getCustomArrayForTesting() {
-        return customArray;
-    }
 }
