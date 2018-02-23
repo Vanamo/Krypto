@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Zz
+ * @author Vanamo Piirainen
  */
 public class WordFinderTest {
 
@@ -25,12 +25,15 @@ public class WordFinderTest {
         WordPosition newPosition = new WordPosition(0, 0, 1, 5);
 
         String firstWord = "asti";
-        BoardOfWords board = new BoardOfWords(4, 5);
-        board.createBoard(firstWord);
-        board.drawFirstWord(firstWord);
+        int width = 4;
+        int hight = 5;
 
-        WordFinder instance = new WordFinder(board, wordList);
-        CustomArrayList<String> result = instance.findWords(newPosition);
+        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
+                firstWord, wordList);
+        BoardOfWords board = crosswordMaker.getBoardOfWords();
+        board.drawFirstWord(firstWord);
+        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength(), 50);
+        CustomArrayList<String> result = wordFinder.findWords(newPosition);
 
         String[] expWords = {"alkaa", "ammua"};
         CustomArrayList<String> expResult = new CustomArrayList<>();
@@ -50,16 +53,20 @@ public class WordFinderTest {
         wordList.addArray(words);
 
         String firstWord = "astia";
-        BoardOfWords board = new BoardOfWords(5, 5);
+        int width = 5;
+        int hight = 5;
+        BoardOfWords board = new BoardOfWords(width, hight);
         board.createBoard(firstWord);
         board.drawFirstWord(firstWord);
 
         WordPosition secondWordp = new WordPosition(0, 4, 0, 5);
         board.drawWord("istua", secondWordp);
-        
-        WordFinder instance = new WordFinder(board, wordList);
+
+        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
+                firstWord, wordList);
+        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength(), 50);
         WordPosition position = new WordPosition(0, 0, 1, 5);
-        CustomArrayList<String> result = instance.findWords(position);
+        CustomArrayList<String> result = wordFinder.findWords(position);
 
         String[] expWords = {"alati", "arkki"};
         CustomArrayList<String> expResult = new CustomArrayList<>();
@@ -92,11 +99,15 @@ public class WordFinderTest {
         CustomArrayList<String> wordList = new CustomArrayList<>();
         wordList.addArray(words);
         String firstWord = "sello";
-        BoardOfWords board = new BoardOfWords(5, 5);
+        int width = 5;
+        int hight = 5;
+        BoardOfWords board = new BoardOfWords(width, hight);
         board.createBoard(firstWord);
         board.drawFirstWord(firstWord);
 
-        WordFinder wordFinder = new WordFinder(board, wordList);
+        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
+                firstWord, wordList);
+        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength(),50);
         BoardOfWords instance = wordFinder.findWordsForAllPositions(positions);
         char[][] result = instance.getBoard();
 
@@ -134,11 +145,15 @@ public class WordFinderTest {
         CustomArrayList<String> wordList = new CustomArrayList<>();
         wordList.addArray(words);
         String firstWord = "sello";
-        BoardOfWords board = new BoardOfWords(5, 5);
+        int width = 5;
+        int hight = 5;
+        BoardOfWords board = new BoardOfWords(width, hight);
         board.createBoard(firstWord);
         board.drawFirstWord(firstWord);
 
-        WordFinder wordFinder = new WordFinder(board, wordList);
+        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
+                firstWord, wordList);
+        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength(),50);
         BoardOfWords instance = wordFinder.findWordsForAllPositions(positions);
         char[][] result = instance.getBoard();
 

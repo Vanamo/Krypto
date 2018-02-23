@@ -88,16 +88,17 @@ public class BoardOfWords {
         for (int y = 0; y < this.hight; y++) {
             for (int x = 0; x < this.width; x++) {
                 //First row with the first word
-                if (y == 0) {
+                if (y == 0 && x <= this.firstPosition.getWordLength()) {
                     if (x < this.firstPosition.getWordLength()) {
                         this.boardOfWords[y][x] = 'O';
                     } else if (x == this.firstPosition.getWordLength()) {
                         this.boardOfWords[y][x] = 'X';
                     }
+                } else {
+                    int x2 = this.checkLength(x, charsForBoard.get(0).length);
+                    int y2 = this.checkLength(y, charsForBoard.size());
+                    this.boardOfWords[y][x] = charsForBoard.get(y2)[x2];
                 }
-                int x2 = this.checkLength(x, charsForBoard.get(0).length);
-                int y2 = this.checkLength(y, charsForBoard.size());
-                this.boardOfWords[y][x] = charsForBoard.get(y2)[x2];
             }
         }
     }
@@ -163,7 +164,7 @@ public class BoardOfWords {
     private void setBoardOfWords(char[][] boardOfWords) {
         this.boardOfWords = boardOfWords;
     }
-    
+
     public BoardOfWords makeCopy() {
         BoardOfWords copy = new BoardOfWords(this.width, this.hight);
         char[][] copyOfBoard = new char[this.width][this.hight];

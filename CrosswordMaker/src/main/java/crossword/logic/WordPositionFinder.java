@@ -64,6 +64,7 @@ public class WordPositionFinder {
         if (this.positions.size() > 1) {
             this.sort();
         }
+        
         return this.positions;
     }
 

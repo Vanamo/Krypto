@@ -24,6 +24,14 @@ public class CustomArrayList<E> {
     }
 
     /**
+     * Constructs a CustomArrayList of predefined length.
+     */
+    public CustomArrayList(int length) {
+        this.customArray = new Object[length];
+        this.size = 0;
+    }
+
+    /**
      * Constructs a copy of the CustomArrayList given as a parameter
      *
      * @param c
@@ -55,6 +63,21 @@ public class CustomArrayList<E> {
         }
         this.customArray[this.size] = o;
         this.size++;
+    }
+
+    /**
+     * Inserts an object to the specified index. Unlike in Java implementation,
+     * does not shift the objects. If the position is already occupied by on
+     * object, replaces the object with a new one.
+     *
+     * @param o
+     */
+    public void add(int index, E o) {
+        this.rangeCheckForAdd(index);
+        this.customArray[index] = o;
+        if (this.size <= index) {
+            this.size = index + 1;
+        }
     }
 
     /**
@@ -161,7 +184,7 @@ public class CustomArrayList<E> {
     }
 
     private void removeByIndex(int i) {
-        for (int ind = i; ind < this.size; ind++) {
+        for (int ind = i; ind < this.size - 1; ind++) {
             this.customArray[ind] = this.customArray[ind + 1];
         }
         this.size--;
@@ -169,6 +192,12 @@ public class CustomArrayList<E> {
 
     private void rangeCheck(int index) {
         if (index >= this.size || index < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private void rangeCheckForAdd(int index) {
+        if (index > this.customArray.length || index < 0) {
             throw new IndexOutOfBoundsException();
         }
     }

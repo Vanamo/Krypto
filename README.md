@@ -10,4 +10,4 @@ Dokumentointi:
 * [Viikkoraportti 3](https://github.com/Vanamo/Krypto/blob/master/Dokumentaatio/Viikkoraportti%203.pdf)
 * [Viikkoraportti 4](https://github.com/Vanamo/Krypto/blob/master/Dokumentaatio/Viikkoraportti%204.pdf)
 * [Viikkoraportti 5](https://github.com/Vanamo/Krypto/blob/master/Dokumentaatio/Viikkoraportti%205.pdf)
-
+* [Viikkoraportti 6](https://github.com/Vanamo/Krypto/blob/master/Dokumentaatio/Viikkoraportti%206.pdf)

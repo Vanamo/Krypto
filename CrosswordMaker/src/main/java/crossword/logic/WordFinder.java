@@ -10,14 +10,19 @@ import crossword.datastructures.SearchTreeNode;
  */
 public class WordFinder {
 
-    private SearchTree wordTree;
+    private CustomArrayList<SearchTree> wordTreesByWordLength;
     private BoardOfWords boardOfWords;
     private CustomArrayList<WordPosition> positions;
 
-    public WordFinder(BoardOfWords boardOfWords, CustomArrayList<String> wordList) {
+    public WordFinder(BoardOfWords boardOfWords,
+            CustomArrayList<CustomArrayList<String>> wordsByLength, int maxWordLength) {
         this.boardOfWords = boardOfWords;
-        this.wordTree = new SearchTree();
-        this.wordTree.addListOfWords(wordList);
+        this.wordTreesByWordLength = new CustomArrayList<>(maxWordLength);
+        for (int i = 1; i < maxWordLength; i++) {
+            SearchTree searchTree = new SearchTree();
+            searchTree.addListOfWords(wordsByLength.get(i));
+            this.wordTreesByWordLength.add(i, searchTree);
+        }
     }
 
     /**
@@ -44,7 +49,7 @@ public class WordFinder {
         if (positionIndex == positions.size()) {
             return board;
         }
-        WordPosition position = (WordPosition) this.positions.get(positionIndex);
+        WordPosition position = this.positions.get(positionIndex);
         this.boardOfWords = board.makeCopy();
 
         CustomArrayList<String> fittingWords = this.findWords(position);
@@ -80,7 +85,8 @@ public class WordFinder {
      */
     public CustomArrayList<String> findWords(WordPosition newPosition) {
         String mask = makeMask(newPosition);
-        SearchTreeNode root = this.wordTree.getRoot();
+        SearchTree wordsOfMaskLength = this.wordTreesByWordLength.get(mask.length() - 1);
+        SearchTreeNode root = wordsOfMaskLength.getRoot();
         CustomArrayList<String> fittingWords = new CustomArrayList<>();
         return this.searchWordTree(mask, root, 0, fittingWords);
     }
