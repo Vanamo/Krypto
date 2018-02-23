@@ -1,12 +1,6 @@
 package crossword.lexicon;
 
-import crossword.lexicon.Lexicon;
-import java.util.ArrayList;
-import java.util.Arrays;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import crossword.datastructures.CustomArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -34,26 +28,32 @@ public class LexiconTest {
     public void test0LetterWords() {
         System.out.println("0LetterWords");
         String[] words = {"", "a", "au", "alkaa", "aika", "ammatti", "ammua", "kaikki"};
-        ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
+        CustomArrayList<String> wordList = new CustomArrayList<>();
+        wordList.addArray(words);
         int wordLength = 0;
         Lexicon instance = new Lexicon();
-        ArrayList<String> expResult = new ArrayList<>();
+        
+        CustomArrayList<String> expResult = new CustomArrayList<>();
         expResult.add("");
-        ArrayList<String> result = instance.xLetterWords(wordList, wordLength);
-        assertEquals(expResult, result);
+        
+        CustomArrayList<String> result = instance.xLetterWords(wordList, wordLength);
+        assertArrayEquals(expResult.toArray(), result.toArray());
     }
 
     @Test
     public void test5LetterWords() {
         System.out.println("5LetterWords");
         String[] words = {"", "a", "au", "alkaa", "aika", "ammatti", "ammua", "kaikki"};
-        ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
+        CustomArrayList<String> wordList = new CustomArrayList<>();
+        wordList.addArray(words);
         int wordLength = 5;
         Lexicon instance = new Lexicon();
-        ArrayList<String> expResult = new ArrayList<>();
+        
+        CustomArrayList<String> expResult = new CustomArrayList<>();
         expResult.add("alkaa");
         expResult.add("ammua");
-        ArrayList<String> result = instance.xLetterWords(wordList, wordLength);
-        assertEquals(expResult, result);
+        
+        CustomArrayList<String> result = instance.xLetterWords(wordList, wordLength);
+        assertArrayEquals(expResult.toArray(), result.toArray());
     }
 }

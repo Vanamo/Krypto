@@ -3,7 +3,6 @@ package crossword.logic;
 import crossword.datastructures.CustomArrayList;
 import crossword.datastructures.SearchTree;
 import crossword.datastructures.SearchTreeNode;
-import java.util.ArrayList;
 
 /**
  *
@@ -13,9 +12,9 @@ public class WordFinder {
 
     private SearchTree wordTree;
     private BoardOfWords boardOfWords;
-    private CustomArrayList positions;
+    private CustomArrayList<WordPosition> positions;
 
-    public WordFinder(BoardOfWords boardOfWords, ArrayList<String> wordList) {
+    public WordFinder(BoardOfWords boardOfWords, CustomArrayList<String> wordList) {
         this.boardOfWords = boardOfWords;
         this.wordTree = new SearchTree();
         this.wordTree.addListOfWords(wordList);
@@ -27,8 +26,8 @@ public class WordFinder {
      * @param positions
      * @return
      */
-    public BoardOfWords findWordsForAllPositions(CustomArrayList positions) {
-        ArrayList<String> usedWords = new ArrayList<>();
+    public BoardOfWords findWordsForAllPositions(CustomArrayList<WordPosition> positions) {
+        CustomArrayList<String> usedWords = new CustomArrayList<>();
         this.positions = positions;
         return this.layWords(0, this.boardOfWords, usedWords);
     }
@@ -41,33 +40,29 @@ public class WordFinder {
      * @param positionIndex
      */
     private BoardOfWords layWords(int positionIndex, BoardOfWords board,
-            ArrayList<String> usedWords) {
+            CustomArrayList<String> usedWords) {
         if (positionIndex == positions.size()) {
             return board;
         }
         WordPosition position = (WordPosition) this.positions.get(positionIndex);
         this.boardOfWords = board.makeCopy();
 
-        ArrayList<String> fittingWords = this.findWords(position);
+        CustomArrayList<String> fittingWords = this.findWords(position);
 
-        for (String word : usedWords) {
-            fittingWords.remove(word);
+        for (int i = 0; i < usedWords.size(); i++) {
+            fittingWords.remove(usedWords.get(i));
         }
 
         if (fittingWords.isEmpty()) {
             return null;
         }
 
-//        if (!wordsCanBeFoundForCrossingPositions(positionIndex)) {
-//            return null;
-//        }
-
-        for (String fittingWord : fittingWords) {
+        for (int i = 0; i < fittingWords.size(); i++) {
             BoardOfWords copyOfBoard = board.makeCopy();
-            WordPosition p = (WordPosition) this.positions.get(positionIndex);
-            copyOfBoard.drawWord(fittingWord, p);
-            ArrayList<String> copyOfUsedWords = new ArrayList<>(usedWords);
-            copyOfUsedWords.add(fittingWord);
+            WordPosition p = this.positions.get(positionIndex);
+            copyOfBoard.drawWord(fittingWords.get(i), p);
+            CustomArrayList<String> copyOfUsedWords = new CustomArrayList<>(usedWords);
+            copyOfUsedWords.add(fittingWords.get(i));
             BoardOfWords solution = this.layWords(positionIndex + 1, copyOfBoard,
                     copyOfUsedWords);
             if (solution != null) {
@@ -83,10 +78,10 @@ public class WordFinder {
      * @param newPosition
      * @return
      */
-    public ArrayList<String> findWords(WordPosition newPosition) {
+    public CustomArrayList<String> findWords(WordPosition newPosition) {
         String mask = makeMask(newPosition);
         SearchTreeNode root = this.wordTree.getRoot();
-        ArrayList<String> fittingWords = new ArrayList<>();
+        CustomArrayList<String> fittingWords = new CustomArrayList<>();
         return this.searchWordTree(mask, root, 0, fittingWords);
     }
 
@@ -99,8 +94,8 @@ public class WordFinder {
      * @param fittingWords
      * @return
      */
-    private ArrayList<String> searchWordTree(String mask, SearchTreeNode node, int level,
-            ArrayList<String> fittingWords) {
+    private CustomArrayList<String> searchWordTree(String mask, SearchTreeNode node, 
+            int level, CustomArrayList<String> fittingWords) {
         if (mask.charAt(level) == ' ' || mask.charAt(level) == node.getKey()) {
             if (level + 1 == mask.length()) {
                 if (node.getWord() != null) {

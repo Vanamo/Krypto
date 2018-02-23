@@ -1,11 +1,8 @@
 package crossword.lexicon;
 
+import crossword.datastructures.CustomArrayList;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
 
@@ -23,10 +20,10 @@ public class Lexicon {
      * @return
      * @throws JDOMException
      */
-    public ArrayList<String> getLexicon() throws JDOMException {
+    public CustomArrayList<String> getLexicon() throws JDOMException {
 
         List<Element> elementList = null;
-        ArrayList<String> wordList = new ArrayList<>();
+        CustomArrayList<String> wordList = new CustomArrayList<>();
 
         try {
             File inputFile = new File("./kotus-sanalista_v1/kotus-sanalista_v1.xml");
@@ -69,10 +66,12 @@ public class Lexicon {
      * @param wordLength
      * @return
      */
-    public ArrayList<String> xLetterWords(ArrayList<String> wordList, int wordLength) {
+    public CustomArrayList<String> xLetterWords(CustomArrayList<String> wordList,
+            int wordLength) {
 
-        ArrayList<String> xLetterWords = new ArrayList<>();
-        for (String word : wordList) {
+        CustomArrayList<String> xLetterWords = new CustomArrayList<>();
+        for (int i = 0; i < wordList.size(); i++) {
+            String word = wordList.get(i);
             if (word.length() == wordLength) {
                 xLetterWords.add(word);
             }
@@ -88,7 +87,7 @@ public class Lexicon {
      * @param word
      * @param c
      */
-    private void addPlural(ArrayList<String> wordList, String word, int c) {
+    private void addPlural(CustomArrayList<String> wordList, String word, int c) {
 
         Integer[] initSimple = {1, 2, 3, 5, 6, 8, 9, 10, 11, 12, 13, 15, 17, 18,
             19, 20, 21};
@@ -96,9 +95,12 @@ public class Lexicon {
         Character[] initC = {'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm',
             'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'z'};
 
-        ArrayList<Integer> simple = new ArrayList<>(Arrays.asList(initSimple));
-        ArrayList<Integer> et = new ArrayList<>(Arrays.asList(initEt));
-        ArrayList<Character> consonants = new ArrayList<>(Arrays.asList(initC));
+        CustomArrayList<Integer> simple = new CustomArrayList<>();
+        simple.addArray(initSimple);
+        CustomArrayList<Integer> et = new CustomArrayList<>();
+        et.addArray(initEt);
+        CustomArrayList<Character> consonants = new CustomArrayList<>();
+        consonants.addArray(initC);
 
         if (simple.contains(c)) {
             if (consonants.contains(word.charAt(word.length() - 1))) {

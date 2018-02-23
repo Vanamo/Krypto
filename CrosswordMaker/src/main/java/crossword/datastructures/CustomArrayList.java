@@ -4,10 +4,11 @@ package crossword.datastructures;
  * My own implementation of ArrayList. I took inspiration from these sites:
  * http://www.docjar.com/html/api/java/util/ArrayList.java.html
  * https://coderanch.com/t/607340/java/Implementing-ArrayList-class-manually
- * This class also implements the method addArray and replace which don't 
- * exist in the Java implementation of ArrayList.
- * 
+ * This class also implements the method addArray and replace which don't exist
+ * in the Java implementation of ArrayList.
+ *
  * @author Vanamo Piirainen
+ * @param <E>
  */
 public class CustomArrayList<E> {
 
@@ -20,6 +21,19 @@ public class CustomArrayList<E> {
     public CustomArrayList() {
         this.customArray = new Object[10];
         this.size = 0;
+    }
+
+    /**
+     * Constructs a copy of the CustomArrayList given as a parameter
+     *
+     * @param c
+     */
+    public CustomArrayList(CustomArrayList<E> c) {
+        this.size = c.size();
+        this.customArray = new Object[this.size + 1];
+        for (int i = 0; i < this.size; i++) {
+            this.customArray[i] = c.get(i);
+        }
     }
 
     private void increaseCapacity() {
@@ -45,16 +59,18 @@ public class CustomArrayList<E> {
 
     /**
      * Replaces an object at the specified index with another object.
+     *
      * @param index
-     * @param o 
+     * @param o
      */
     public void replace(int index, E o) {
         this.rangeCheck(index);
         this.customArray[index] = o;
     }
-    
+
     /**
      * Adds the contents of an object array to the custom ArrayList
+     *
      * @param array
      */
     public void addArray(E[] array) {
@@ -157,4 +173,11 @@ public class CustomArrayList<E> {
         }
     }
 
+    public Object[] toArray() {
+        Object[] array = new Object[this.size];
+        for (int i = 0; i < this.size; i++) {
+            array[i] = this.customArray[i];
+        }
+        return array;
+    }
 }

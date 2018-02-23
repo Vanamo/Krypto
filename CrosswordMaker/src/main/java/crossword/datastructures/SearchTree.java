@@ -1,6 +1,5 @@
 package crossword.datastructures;
 
-import java.util.ArrayList;
 
 /**
  * Generates a search tree for strings. Strings can be added to the tree as a list
@@ -19,9 +18,9 @@ public class SearchTree {
         this.root = new SearchTreeNode(rootChar);
     }
 
-    public void addListOfWords(ArrayList<String> wordList) {
-        for (String word : wordList) {
-            addWord(word);
+    public void addListOfWords(CustomArrayList<String> wordList) {
+        for (int i = 0; i < wordList.size(); i++) {
+            addWord(wordList.get(i));
         }
     }
 

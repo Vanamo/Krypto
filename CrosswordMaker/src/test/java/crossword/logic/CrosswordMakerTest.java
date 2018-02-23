@@ -1,11 +1,6 @@
 package crossword.logic;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import crossword.datastructures.CustomArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -25,13 +20,16 @@ public class CrosswordMakerTest {
     public void testMakeWordListsAccordingToLength() {
         System.out.println("makeWordListsAccordingToLength");
         String[] words = {"a", "au", "alkaa", "aika", "ammatti", "ammua", "kaikki"};
-        ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
+        CustomArrayList<String> wordList = new CustomArrayList<>();
+        wordList.addArray(words);
+        
         CrosswordMaker instance = new CrosswordMaker(5, 5, "testi", wordList);
         instance.makeWordListsAccordingToLength();
-        ArrayList<String> result = instance.getWordsByLength().get(5);
+        CustomArrayList<String> result = instance.getWordsByLength().get(5);
 
         String[] fiveLetterWords = {"alkaa", "ammua"};
-        ArrayList<String> expResult = new ArrayList<>(Arrays.asList(fiveLetterWords));
+        CustomArrayList<String> expResult = new CustomArrayList<>();
+        expResult.addArray(fiveLetterWords);
 
         assertArrayEquals(expResult.toArray(), result.toArray());
     }
@@ -43,8 +41,10 @@ public class CrosswordMakerTest {
     public void testGetRandomWordWithNoResults() {
         System.out.println("getRandomWordWithNoResults");
         String[] words = {"alkaa", "ammatti", "ammua", "kaikki"};
-        ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
+        CustomArrayList<String> wordList = new CustomArrayList<>();
+        wordList.addArray(words);
         int length = 4;
+        
         CrosswordMaker instance = new CrosswordMaker(5, 5, "sana", wordList);
         String expResult = "a";
         String result = instance.getRandomWord(length);
@@ -58,8 +58,10 @@ public class CrosswordMakerTest {
     public void testGetRandomWordWithOnePossibleResult() {
         System.out.println("getRandomWordWithOnePossibleResult");
         String[] words = {"almanakka", "ammatti", "aivastaa", "kuka"};
-        ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
+        CustomArrayList<String> wordList = new CustomArrayList<>();
+        wordList.addArray(words);
         int length = 5;
+        
         CrosswordMaker instance = new CrosswordMaker(5, 5, "sana", wordList);
         String expResult = "kuka";
         String result = instance.getRandomWord(length);

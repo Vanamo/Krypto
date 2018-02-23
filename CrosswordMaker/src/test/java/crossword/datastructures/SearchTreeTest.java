@@ -1,13 +1,5 @@
 package crossword.datastructures;
 
-import crossword.datastructures.SearchTreeNode;
-import crossword.datastructures.SearchTree;
-import java.util.ArrayList;
-import java.util.Arrays;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -27,7 +19,8 @@ public class SearchTreeTest {
     public void testAddListOfWords() {
         System.out.println("addListOfWords");
         String[] words = {"", "a", "alku", "aika"};
-        ArrayList<String> wordList = new ArrayList<>(Arrays.asList(words));
+        CustomArrayList<String> wordList = new CustomArrayList<>();
+        wordList.addArray(words);
         SearchTree instance = new SearchTree();
         instance.addListOfWords(wordList);
 

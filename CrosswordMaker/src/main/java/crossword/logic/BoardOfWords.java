@@ -1,6 +1,6 @@
 package crossword.logic;
 
-import java.util.ArrayList;
+import crossword.datastructures.CustomArrayList;
 import java.util.Random;
 
 /**
@@ -69,7 +69,7 @@ public class BoardOfWords {
     }
 
     public void letterPositionsForLargeBoard() {
-        ArrayList<char[]> charsForBoard = new ArrayList<>();
+        CustomArrayList<char[]> charsForBoard = new CustomArrayList<>();
         charsForBoard.add("OOOOOXOXOOOOOOX".toCharArray());
         charsForBoard.add("OXOXOOOOOOXOXOO".toCharArray());
         charsForBoard.add("OOOOOXOXOOOOOOX".toCharArray());

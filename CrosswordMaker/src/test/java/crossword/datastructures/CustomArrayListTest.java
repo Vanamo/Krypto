@@ -33,6 +33,22 @@ public class CustomArrayListTest {
     }
 
     /**
+     * Test of constructor with CustomArrayList as a parameter.
+     */
+    @Test
+    public void testCustomArrayList() {
+        System.out.println("constructor");
+
+        CustomArrayList<Integer> result = new CustomArrayList<>(arrayWithManyIntegers);
+        result.add(3);
+        
+        CustomArrayList<Integer> expResult = arrayWithManyIntegers;
+        expResult.add(3);
+
+        assertArrayEquals(expResult.toArray(), result.toArray());
+    }    
+    
+    /**
      * Test of add method, of class CustomArrayList.
      */
     @Test
@@ -147,13 +163,34 @@ public class CustomArrayListTest {
     @Test
     public void testRemove() {
         System.out.println("remove");
-        Integer[] expResult = new Integer[10];
-
+        TestCustomArrayList<Integer> expResult = new TestCustomArrayList<>();
+        TestCustomArrayList<Integer> result = arrayWithOneInteger; 
         arrayWithOneInteger.remove(1);
-        Object[] result = arrayWithOneInteger.getCustomArrayForTesting();
-        assertArrayEquals(expResult, result);
+        assertArrayEquals(expResult.toArray(), result.toArray());
     }
 
+    /**
+     * Test of remove method, of class CustomArrayList.
+     */
+    @Test
+    public void testRemoveFromCopiedArray() {
+        System.out.println("remove from copied array");
+        
+        Integer[] testIntegers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        CustomArrayList<Integer> testArray = new CustomArrayList<>();
+        testArray.addArray(testIntegers);    
+        
+        CustomArrayList<Integer> result = 
+                new CustomArrayList<>(testArray);
+        result.remove(10);
+        
+        CustomArrayList<Integer> expResult = new CustomArrayList<>();
+        Integer[] expIntegers = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        expResult.addArray(expIntegers);
+        
+        assertArrayEquals(expResult.toArray(), result.toArray());
+    }
+    
     /**
      * Test of remove method, of class CustomArrayList.
      */

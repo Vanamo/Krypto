@@ -2,10 +2,8 @@ package crossword.logic;
 
 import crossword.datastructures.CustomArrayList;
 import crossword.lexicon.Lexicon;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.TreeSet;
 import org.jdom2.JDOMException;
 
 /**
@@ -15,9 +13,9 @@ import org.jdom2.JDOMException;
 public class CrosswordMaker {
 
     private BoardOfWords boardOfWords;
-    private ArrayList<String> wordList;
+    private CustomArrayList<String> wordList;
     private String firstWord;
-    private HashMap<Integer, ArrayList<String>> wordsByLength;
+    private HashMap<Integer, CustomArrayList<String>> wordsByLength;
 
     /**
      *
@@ -54,7 +52,7 @@ public class CrosswordMaker {
      * @param wordList
      */
     public CrosswordMaker(int width, int hight, String firstWord,
-            ArrayList<String> wordList) {
+            CustomArrayList<String> wordList) {
         this.wordList = wordList;
         this.boardOfWords = new BoardOfWords(width, hight);
         this.boardOfWords.createBoard(firstWord);
@@ -89,7 +87,7 @@ public class CrosswordMaker {
                 return "a";
             }
         }
-        ArrayList<String> words = this.wordsByLength.get(length);
+        CustomArrayList<String> words = this.wordsByLength.get(length);
         Random rand = new Random();
         int i = rand.nextInt(words.size());
         String word = words.get(i);
@@ -99,9 +97,10 @@ public class CrosswordMaker {
 
     public void makeWordListsAccordingToLength() {
         this.wordsByLength = new HashMap<>();
-        for (String word : this.wordList) {
+        for (int i = 0; i < wordList.size(); i++) {
+            String word = wordList.get(i);
             if (!wordsByLength.containsKey(word.length())) {
-                ArrayList<String> words = new ArrayList<>();
+                CustomArrayList<String> words = new CustomArrayList<>();
                 words.add(word);
                 wordsByLength.put(word.length(), words);
             } else {
@@ -114,11 +113,11 @@ public class CrosswordMaker {
         return this.boardOfWords;
     }
 
-    public ArrayList<String> getWordList() {
+    public CustomArrayList<String> getWordList() {
         return this.wordList;
     }
 
-    public HashMap<Integer, ArrayList<String>> getWordsByLength() {
+    public HashMap<Integer, CustomArrayList<String>> getWordsByLength() {
         return wordsByLength;
     }
 

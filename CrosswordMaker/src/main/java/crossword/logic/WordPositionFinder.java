@@ -14,7 +14,7 @@ public class WordPositionFinder {
     private int wordLength;
     private int startX;
     private int startY;
-    private CustomArrayList positions;
+    private CustomArrayList<WordPosition> positions;
 
     public WordPositionFinder(char[][] boardOfWords) {
         this.boardOfWords = boardOfWords;
@@ -29,7 +29,7 @@ public class WordPositionFinder {
      * @return
      */
     public CustomArrayList findPositions() {
-        positions = new CustomArrayList();
+        positions = new CustomArrayList<>();
 
         char prev = 'X';
         this.wordLength = 0;
@@ -96,20 +96,15 @@ public class WordPositionFinder {
      * @return
      */
     private int[] makePartition(int left, int right) {
-        WordPosition partitionElement = (WordPosition) positions.get(left);
+        WordPosition partitionElement = positions.get(left);
         int i = left;
         int j = right;
         while (i <= j) {
-            System.out.println("i " + i + " j " + j);
-            WordPosition positionI = (WordPosition) positions.get(i);
-            while (positionI.compareTo(partitionElement) == -1) {
+            while (positions.get(i).compareTo(partitionElement) == -1) {
                 i++;
-                positionI = (WordPosition) positions.get(i);
             }
-            WordPosition positionJ = (WordPosition) positions.get(j);
-            while (positionJ.compareTo(partitionElement) == 1) {
+            while (positions.get(j).compareTo(partitionElement) == 1) {
                 j--;
-                positionJ = (WordPosition) positions.get(j);
             }
             if (i <= j) {
                 this.switchPlaces(i, j);
@@ -128,7 +123,7 @@ public class WordPositionFinder {
      * @param j
      */
     private void switchPlaces(int i, int j) {
-        Object temp = positions.get(i);
+        WordPosition temp = positions.get(i);
         positions.replace(i, positions.get(j));
         positions.replace(j, temp);
     }
