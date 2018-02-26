@@ -11,10 +11,10 @@ public class WordPosition implements Comparable<WordPosition> {
 
     private int x;
     private int y;
-    private int alignment;
+    private Alignment alignment;
     private int wordLength;
 
-    public WordPosition(int x, int y, int alignment, int wordLength) {
+    public WordPosition(int x, int y, Alignment alignment, int wordLength) {
         this.x = x;
         this.y = y;
         this.alignment = alignment;
@@ -29,7 +29,7 @@ public class WordPosition implements Comparable<WordPosition> {
         return y;
     }
 
-    public int getAlignment() {
+    public Alignment getAlignment() {
         return alignment;
     }
 
@@ -71,9 +71,16 @@ public class WordPosition implements Comparable<WordPosition> {
 
     @Override
     public int compareTo(WordPosition o) {
+        //Compare positions
         if (this.x + this.y < o.x + o.y) {
             return -1;
         } else if (this.x + this.y > o.x + o.y) {
+            return 1;
+        }
+        //Horizontal positions first
+        if (this.alignment == Alignment.HORIZONTAL && o.alignment == Alignment.VERTICAL) {
+            return -1;
+        } else if (this.alignment == Alignment.VERTICAL && o.alignment == Alignment.HORIZONTAL) {
             return 1;
         }
         return 0;

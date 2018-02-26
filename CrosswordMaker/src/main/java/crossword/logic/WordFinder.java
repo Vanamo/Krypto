@@ -46,7 +46,7 @@ public class WordFinder {
      */
     private BoardOfWords layWords(int positionIndex, BoardOfWords board,
             CustomArrayList<String> usedWords) {
-        if (positionIndex == positions.size()) {
+        if (positionIndex >= positions.size()) {
             return board;
         }
         WordPosition position = this.positions.get(positionIndex);
@@ -128,7 +128,7 @@ public class WordFinder {
     private String makeMask(WordPosition newPosition) {
         String mask = " "; //To match the root of the wordTree 
         for (int i = 0; i < newPosition.getWordLength(); i++) {
-            if (newPosition.getAlignment() == 0) {
+            if (newPosition.getAlignment() == Alignment.HORIZONTAL) {
                 mask = this.createString(mask, newPosition.getY(), i + newPosition.getX());
             } else {
                 mask = this.createString(mask, i + newPosition.getY(), newPosition.getX());

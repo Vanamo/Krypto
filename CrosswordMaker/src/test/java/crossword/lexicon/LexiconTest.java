@@ -56,4 +56,76 @@ public class LexiconTest {
         CustomArrayList<String> result = instance.xLetterWords(wordList, wordLength);
         assertArrayEquals(expResult.toArray(), result.toArray());
     }
+
+
+    /**
+     * Test of addPlural method, of class Lexicon.
+     */
+    @Test
+    public void testAddPluralSimple() {
+        System.out.println("addPluralSimple");
+        CustomArrayList<String> result = new CustomArrayList<>();
+        String word = "kissa";
+        int c = 21;
+        Lexicon instance = new Lexicon();
+        instance.addPlural(result, word, c);
+
+        CustomArrayList<String> expResult = new CustomArrayList<>();
+        expResult.add("kissat");
+        
+        assertArrayEquals(expResult.toArray(), result.toArray());
+    }
+
+    /**
+     * Test of addPlural method, of class Lexicon.
+     */
+    @Test
+    public void testAddPluralSimpleC() {
+        System.out.println("addPluralSimpleC");
+        CustomArrayList<String> result = new CustomArrayList<>();
+        String word = "taik";
+        int c = 1;
+        Lexicon instance = new Lexicon();
+        instance.addPlural(result, word, c);
+
+        CustomArrayList<String> expResult = new CustomArrayList<>();
+        expResult.add("taikit");
+        
+        assertArrayEquals(expResult.toArray(), result.toArray());
+    }
+    
+    /**
+     * Test of addPlural method, of class Lexicon.
+     */
+    @Test
+    public void testAddPluralEt() {
+        System.out.println("addPluralEt");
+        CustomArrayList<String> result = new CustomArrayList<>();
+        String word = "koski";
+        int c = 23;
+        Lexicon instance = new Lexicon();
+        instance.addPlural(result, word, c);
+
+        CustomArrayList<String> expResult = new CustomArrayList<>();
+        expResult.add("kosket");
+        
+        assertArrayEquals(expResult.toArray(), result.toArray());
+    }
+    
+        /**
+     * Test of addPlural method, of class Lexicon.
+     */
+    @Test
+    public void testDoNotAddPlural() {
+        System.out.println("doNotAddPlural");
+        CustomArrayList<String> result = new CustomArrayList<>();
+        String word = "koski";
+        int c = 4;
+        Lexicon instance = new Lexicon();
+        instance.addPlural(result, word, c);
+
+        CustomArrayList<String> expResult = new CustomArrayList<>();
+        
+        assertArrayEquals(expResult.toArray(), result.toArray());
+    }
 }

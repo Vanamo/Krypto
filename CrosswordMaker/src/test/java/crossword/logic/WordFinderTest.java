@@ -22,7 +22,7 @@ public class WordFinderTest {
         String[] words = {"a", "au", "alkaa", "aika", "ammatti", "ammua", "kaikki"};
         CustomArrayList<String> wordList = new CustomArrayList<>();
         wordList.addArray(words);
-        WordPosition newPosition = new WordPosition(0, 0, 1, 5);
+        WordPosition newPosition = new WordPosition(0, 0, Alignment.VERTICAL, 5);
 
         String firstWord = "asti";
         int width = 4;
@@ -59,13 +59,13 @@ public class WordFinderTest {
         board.createBoard(firstWord);
         board.drawFirstWord(firstWord);
 
-        WordPosition secondWordp = new WordPosition(0, 4, 0, 5);
+        WordPosition secondWordp = new WordPosition(0, 4, Alignment.HORIZONTAL, 5);
         board.drawWord("istua", secondWordp);
 
         CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
                 firstWord, wordList);
         WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength(), 50);
-        WordPosition position = new WordPosition(0, 0, 1, 5);
+        WordPosition position = new WordPosition(0, 0, Alignment.VERTICAL, 5);
         CustomArrayList<String> result = wordFinder.findWords(position);
 
         String[] expWords = {"alati", "arkki"};
@@ -82,17 +82,14 @@ public class WordFinderTest {
     public void testFindWordsForAllPositions() {
         System.out.println("findWordsForAllPositions");
 
-        WordPosition p1 = new WordPosition(0, 0, 1, 5);
-        WordPosition p2 = new WordPosition(2, 0, 1, 5);
-        WordPosition p3 = new WordPosition(4, 0, 1, 5);
-        WordPosition p4 = new WordPosition(0, 2, 0, 5);
-        WordPosition p5 = new WordPosition(0, 4, 0, 5);
+        WordPosition p1 = new WordPosition(0, 0, Alignment.VERTICAL, 5);
+        WordPosition p2 = new WordPosition(2, 0, Alignment.VERTICAL, 5);
+        WordPosition p3 = new WordPosition(4, 0, Alignment.VERTICAL, 5);
+        WordPosition p4 = new WordPosition(0, 2, Alignment.HORIZONTAL, 5);
+        WordPosition p5 = new WordPosition(0, 4, Alignment.HORIZONTAL, 5);
+        WordPosition[] posArray = {p1, p2, p3, p4, p5};
         CustomArrayList<WordPosition> positions = new CustomArrayList<>();
-        positions.add(p1);
-        positions.add(p2);
-        positions.add(p3);
-        positions.add(p4);
-        positions.add(p5);
+        positions.addArray(posArray);
 
         String[] words = {"aaloe", "apila", "saada", "lelli", "ahava", "alati", 
             "laaja", "ohari"};
@@ -129,17 +126,14 @@ public class WordFinderTest {
     public void testFindWordsForAllPositionsWithoutUsingTheSameWordTwice() {
         System.out.println("findWordsForAllPositionsWithoutUsingTheSameWordTwice");
 
-        WordPosition p1 = new WordPosition(0, 0, 1, 5);
-        WordPosition p2 = new WordPosition(2, 0, 1, 5);
-        WordPosition p3 = new WordPosition(4, 0, 1, 5);
-        WordPosition p4 = new WordPosition(0, 2, 0, 5);
-        WordPosition p5 = new WordPosition(0, 4, 0, 5);
+        WordPosition p1 = new WordPosition(0, 0, Alignment.VERTICAL, 5);
+        WordPosition p2 = new WordPosition(2, 0, Alignment.VERTICAL, 5);
+        WordPosition p3 = new WordPosition(4, 0, Alignment.VERTICAL, 5);
+        WordPosition p4 = new WordPosition(0, 2, Alignment.HORIZONTAL, 5);
+        WordPosition p5 = new WordPosition(0, 4, Alignment.HORIZONTAL, 5);
+        WordPosition[] posArray = {p1, p2, p3, p4, p5};
         CustomArrayList<WordPosition> positions = new CustomArrayList<>();
-        positions.add(p1);
-        positions.add(p2);
-        positions.add(p3);
-        positions.add(p4);
-        positions.add(p5);
+        positions.addArray(posArray);
 
         String[] words = {"ahava", "alati", "saada", "laaja", "orava", "akana"};
         CustomArrayList<String> wordList = new CustomArrayList<>();

@@ -87,7 +87,7 @@ public class Lexicon {
      * @param word
      * @param c
      */
-    private void addPlural(CustomArrayList<String> wordList, String word, int c) {
+    public void addPlural(CustomArrayList<String> wordList, String word, int c) {
 
         Integer[] initSimple = {1, 2, 3, 5, 6, 8, 9, 10, 11, 12, 13, 15, 17, 18,
             19, 20, 21};

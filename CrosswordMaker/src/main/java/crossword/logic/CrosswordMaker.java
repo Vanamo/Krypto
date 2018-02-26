@@ -73,7 +73,7 @@ public class CrosswordMaker {
         System.out.println("Kryptoon tulee " + positions.size() + " sanaa");
 
         //Remove firstword position
-        positions.remove(new WordPosition(0, 0, 0, this.firstWord.length()));
+        positions.remove(new WordPosition(0, 0, Alignment.HORIZONTAL, this.firstWord.length()));
         
         //Draw first word after the positions are found, otherwise the letters 
         //of the first word will interfere finding of word positions.

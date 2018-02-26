@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
  * @author Vanamo Piirainen
  */
 public class WordPositionFinderTest {
-
+    
     public WordPositionFinderTest() {
     }
 
@@ -34,10 +34,10 @@ public class WordPositionFinderTest {
         CustomArrayList<WordPosition> expResult = new CustomArrayList<>();
         CustomArrayList result = instance.findPositions();
 
-        expResult.add(new WordPosition(0, 1, 1, 2));
-        expResult.add(new WordPosition(1, 0, 0, 2));
-        expResult.add(new WordPosition(2, 0, 1, 2));
-        expResult.add(new WordPosition(0, 2, 0, 2));
+        expResult.add(new WordPosition(1, 0, Alignment.HORIZONTAL, 2));
+        expResult.add(new WordPosition(0, 1, Alignment.VERTICAL, 2));
+        expResult.add(new WordPosition(0, 2, Alignment.HORIZONTAL, 2));
+        expResult.add(new WordPosition(2, 0, Alignment.VERTICAL, 2));
 
         assertArrayEquals(expResult.toArray(), result.toArray());
     }

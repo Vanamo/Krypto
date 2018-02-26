@@ -33,10 +33,10 @@ public class WordPositionFinder {
 
         char prev = 'X';
         this.wordLength = 0;
-        int alignment;
+        Alignment alignment;
 
         //Find horizontal positions 
-        alignment = 0;
+        alignment = Alignment.HORIZONTAL;
         for (int y = 0; y < this.hight; y++) {
             for (int x = 0; x < this.width; x++) {
                 this.addPosition(prev, x, y, alignment, this.boardOfWords[y][x]);
@@ -49,7 +49,7 @@ public class WordPositionFinder {
         }
 
         //Find vertical positions 
-        alignment = 1;
+        alignment = Alignment.VERTICAL;
         for (int x = 0; x < this.width; x++) {
             for (int y = 0; y < this.hight; y++) {
                 this.addPosition(prev, x, y, alignment, this.boardOfWords[y][x]);
@@ -62,74 +62,23 @@ public class WordPositionFinder {
         }
 
         if (this.positions.size() > 1) {
-            this.sort();
+            QuickSort quickSort = new QuickSort();
+            quickSort.sort(this.positions);
         }
-        
+
         return this.positions;
     }
 
     /**
-     * Uses quick sort to sort the contents of the custom arraylist. Code
-     * from http://www.java2novice.com/java-sorting-algorithms/quick-sort/
-     */
-    public void sort() {
-        this.quicksort(0, positions.size() - 1);
-    }
-
-    private void quicksort(int left, int right) {
-        int[] partition = this.makePartition(left, right);
-        int i = partition[0];
-        int j = partition[1];
-        if (left < j) {
-            quicksort(left, j);
-        }
-        if (i < right) {
-            quicksort(i, right);
-        }
-
-    }
-
-    /**
-     * Helper method for quicksort
+     * Helper method for findPositions.
      *
-     * @param left
-     * @param right
-     * @return
+     * @param prev
+     * @param x
+     * @param y
+     * @param alignment
+     * @param current
      */
-    private int[] makePartition(int left, int right) {
-        WordPosition partitionElement = positions.get(left);
-        int i = left;
-        int j = right;
-        while (i <= j) {
-            while (positions.get(i).compareTo(partitionElement) == -1) {
-                i++;
-            }
-            while (positions.get(j).compareTo(partitionElement) == 1) {
-                j--;
-            }
-            if (i <= j) {
-                this.switchPlaces(i, j);
-                i++;
-                j--;
-            }
-        }
-        int[] ij = {i, j};
-        return ij;
-    }
-
-    /**
-     * Helper method for quicksort
-     *
-     * @param i
-     * @param j
-     */
-    private void switchPlaces(int i, int j) {
-        WordPosition temp = positions.get(i);
-        positions.replace(i, positions.get(j));
-        positions.replace(j, temp);
-    }
-
-    private void addPosition(char prev, int x, int y, int alignment, char current) {
+    private void addPosition(char prev, int x, int y, Alignment alignment, char current) {
         if (prev == 'X' && current == 'O') {
             this.wordLength = 1;
             this.startX = x;

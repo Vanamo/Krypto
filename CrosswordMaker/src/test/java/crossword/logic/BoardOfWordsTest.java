@@ -169,7 +169,7 @@ public class BoardOfWordsTest {
         String word = "ai";
         int x = 3;
         int y = 3;
-        int alignment = 0;
+        Alignment alignment = Alignment.HORIZONTAL;
         int boardWidth = 5;
         int boardHight = 5;
         WordPosition position = new WordPosition(x, y, alignment, word.length());
@@ -201,7 +201,7 @@ public class BoardOfWordsTest {
         String word = "ai";
         int x = 3;
         int y = 3;
-        int alignment = 1;
+        Alignment alignment = Alignment.VERTICAL;
         int boardWidth = 5;
         int boardHight = 5;
         WordPosition position = new WordPosition(x, y, alignment, word.length());
@@ -269,7 +269,7 @@ public class BoardOfWordsTest {
         String word = "a";
         int x = 0;
         int y = 0;
-        int alignment = 1;
+        Alignment alignment = Alignment.VERTICAL;
         WordPosition position = new WordPosition(x, y, alignment, word.length());
         BoardOfWords instance = new BoardOfWords(5, 5);
         instance.createBoard("testi");

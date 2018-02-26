@@ -25,7 +25,8 @@ public class BoardOfWords {
 
     public void createBoard(String firstWord) {
         //alignment of the first word is horizontal
-        this.firstPosition = new WordPosition(0, 0, 0, firstWord.length());
+        this.firstPosition = new WordPosition(0, 0, Alignment.HORIZONTAL,
+                firstWord.length());
         //Create board first
         this.boardOfWords = new char[this.hight][this.width];
         this.createBoard();
@@ -126,7 +127,7 @@ public class BoardOfWords {
      */
     public void drawWord(String word, WordPosition p) {
         for (int i = 0; i < word.length(); i++) {
-            if (p.getAlignment() == 0) {
+            if (p.getAlignment() == Alignment.HORIZONTAL) {
                 this.boardOfWords[p.getY()][i + p.getX()] = word.charAt(i);
             } else {
                 this.boardOfWords[i + p.getY()][p.getX()] = word.charAt(i);
@@ -137,7 +138,7 @@ public class BoardOfWords {
     public void drawFirstWord(String word) {
         WordPosition p = this.firstPosition;
         for (int i = 0; i < word.length(); i++) {
-            if (p.getAlignment() == 0) {
+            if (p.getAlignment() == Alignment.HORIZONTAL) {
                 this.boardOfWords[p.getY()][i + p.getX()] = word.charAt(i);
             } else {
                 this.boardOfWords[i + p.getY()][p.getX()] = word.charAt(i);
