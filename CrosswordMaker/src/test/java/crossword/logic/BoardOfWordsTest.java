@@ -62,8 +62,7 @@ public class BoardOfWordsTest {
                 expResult[i][j] = 'O';
             }
         }   
-        expResult[0][5] = 'X';
-        expResult[0][7] = 'X';
+
         expResult[1][1] = 'X';
         expResult[1][3] = 'X';
         expResult[2][5] = 'X';
