@@ -66,18 +66,23 @@ public class CrosswordMaker {
      * @return
      */
     public BoardOfWords fillBoard() {
-        WordFinder wordFinder =
-                new WordFinder(this.boardOfWords, this.wordsByLength, this.maxWordLength);
+        WordFinder wordFinder
+                = new WordFinder(this.boardOfWords, this.wordsByLength, this.maxWordLength);
         WordPositionFinder positionFinder = new WordPositionFinder(this.boardOfWords.getBoard());
         CustomArrayList positions = positionFinder.findPositions();
         System.out.println("Kryptoon tulee " + positions.size() + " sanaa");
 
         //Remove firstword position
         positions.remove(new WordPosition(0, 0, Alignment.HORIZONTAL, this.firstWord.length()));
+
+        for (int i = 0; i < positions.size(); i++) {
+            System.out.println(positions.get(i));
+        }
         
         //Draw first word after the positions are found, otherwise the letters 
         //of the first word will interfere finding of word positions.
         this.boardOfWords.drawFirstWord(firstWord);
+                
         long startTime = System.currentTimeMillis();
         BoardOfWords result = wordFinder.findWordsForAllPositions(positions);
         long endTime = System.currentTimeMillis();
@@ -105,8 +110,8 @@ public class CrosswordMaker {
      * Assuming there are no words longer than maxWordLength.
      */
     public void makeWordListsAccordingToLength() {
-        this.wordsByLength =
-                new CustomArrayList<CustomArrayList<String>>(this.maxWordLength);
+        this.wordsByLength
+                = new CustomArrayList<CustomArrayList<String>>(this.maxWordLength);
         for (int i = 1; i < this.maxWordLength; i++) {
             wordsByLength.add(i, new CustomArrayList<String>());
         }
@@ -115,7 +120,7 @@ public class CrosswordMaker {
             wordsByLength.get(word.length()).add(word);
         }
     }
-    
+
     public BoardOfWords getBoardOfWords() {
         return this.boardOfWords;
     }

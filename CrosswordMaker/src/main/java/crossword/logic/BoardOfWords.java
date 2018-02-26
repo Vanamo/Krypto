@@ -77,14 +77,14 @@ public class BoardOfWords {
         charsForBoard.add("OXOXOOOOOOXOXOO".toCharArray());
         charsForBoard.add("OOOOOXOXOOOOOOX".toCharArray());
         charsForBoard.add("XOXOXOOOOXOXOOO".toCharArray());
-        charsForBoard.add("OOOOOOXOOOOOOXO".toCharArray());
-        charsForBoard.add("XOXOXOOOXXOXOOO".toCharArray());
-        charsForBoard.add("OOOOOXOOOOOOOXO".toCharArray());
+        charsForBoard.add("OOOOOOXOXOOOOXO".toCharArray());
         charsForBoard.add("XOXOXOOOOXOXOOO".toCharArray());
-        charsForBoard.add("OOOOOXOXOOOOXOX".toCharArray());
-        charsForBoard.add("OXOXOOOOOOXOXOO".toCharArray());
+        charsForBoard.add("OOOOOXXOOOOOOXO".toCharArray());
+        charsForBoard.add("XOXOXOOOOXOXOOO".toCharArray());
         charsForBoard.add("OOOOOXOXOOOOOOX".toCharArray());
-        charsForBoard.add("OXOXOOOOXOXOXOO".toCharArray());
+        charsForBoard.add("OXOXOOOOOOXOXOO".toCharArray());
+        charsForBoard.add("OOOOOXOXXOOOOOX".toCharArray());
+        charsForBoard.add("OXOXOOOOOOXOXOO".toCharArray());
 
         for (int y = 0; y < this.hight; y++) {
             for (int x = 0; x < this.width; x++) {
@@ -102,6 +102,8 @@ public class BoardOfWords {
                 }
             }
         }
+
+        removeTwoLetterWordsFromEdges();
     }
 
     /**
@@ -189,5 +191,28 @@ public class BoardOfWords {
         }
         board = board.concat("\n");
         return board;
+    }
+
+    private void removeTwoLetterWordsFromEdges() {
+        //Remove from the last row
+        int y = this.hight - 1;
+        for (int x = 0; x < this.width - 1; x++) {
+            char char0 = this.boardOfWords[y][x];
+            char char1 = this.boardOfWords[y - 1][x];
+            char char2 = this.boardOfWords[y - 2][x];
+            if (char0 == 'O' && char1 == 'O' && char2 == 'X') {
+                this.boardOfWords[y][x] = 'X';
+            }
+        }
+        //Remove from the last column
+        int x = this.width - 1;
+        for (y = 0; y < this.hight - 1; y++) {
+            char char0 = this.boardOfWords[y][x];
+            char char1 = this.boardOfWords[y][x - 1];
+            char char2 = this.boardOfWords[y][x - 2];
+            if (char0 == 'O' && char1 == 'O' && char2 == 'X') {
+                this.boardOfWords[y][x] = 'X';
+            }
+        }
     }
 }

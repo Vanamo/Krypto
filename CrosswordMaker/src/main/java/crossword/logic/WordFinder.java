@@ -65,6 +65,7 @@ public class WordFinder {
         for (int i = 0; i < fittingWords.size(); i++) {
             BoardOfWords copyOfBoard = board.makeCopy();
             WordPosition p = this.positions.get(positionIndex);
+            //System.out.println("taso " + positionIndex + " sana " + i + "/" + fittingWords.size());
             copyOfBoard.drawWord(fittingWords.get(i), p);
             CustomArrayList<String> copyOfUsedWords = new CustomArrayList<>(usedWords);
             copyOfUsedWords.add(fittingWords.get(i));

@@ -72,8 +72,11 @@ public class BoardOfWordsTest {
         expResult[4][5] = 'X';
         expResult[4][7] = 'X';
         expResult[5][0] = 'X';
+        expResult[5][1] = 'X';
         expResult[5][2] = 'X';
+        expResult[5][3] = 'X';
         expResult[5][4] = 'X';
+        expResult[5][7] = 'X';
         
         assertArrayEquals(expResult, result);
     }    
