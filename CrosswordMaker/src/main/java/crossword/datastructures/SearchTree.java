@@ -63,19 +63,6 @@ public class SearchTree {
         }
         return null;
     }
-
-    public void printTree() {
-        preorderTreeWalk(this.root);
-    }
-
-    private void preorderTreeWalk(SearchTreeNode node) {
-        System.out.println(node.getKey() + " (" + node.getWord() + ") ");
-        SearchTreeNode childNode = node.getChild();
-        while (childNode != null) {
-            preorderTreeWalk(childNode);
-            childNode = childNode.getNext();
-        }
-    }
     
     public SearchTreeNode getRoot() {
         return this.root;

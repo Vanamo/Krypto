@@ -41,18 +41,18 @@ public class CustomArrayListTest {
 
         CustomArrayList<Integer> result = new CustomArrayList<>(arrayWithManyIntegers);
         result.add(3);
-        
+
         CustomArrayList<Integer> expResult = arrayWithManyIntegers;
         expResult.add(3);
 
         assertArrayEquals(expResult.toArray(), result.toArray());
-    }    
-    
+    }
+
     /**
      * Test of add method, of class CustomArrayList.
      */
     @Test
-    public void testAdd() {
+    public void testAdd_GenericType() {
         System.out.println("add");
 
         Object[] result = arrayWithOneInteger.getCustomArrayForTesting();
@@ -164,7 +164,7 @@ public class CustomArrayListTest {
     public void testRemove() {
         System.out.println("remove");
         TestCustomArrayList<Integer> expResult = new TestCustomArrayList<>();
-        TestCustomArrayList<Integer> result = arrayWithOneInteger; 
+        TestCustomArrayList<Integer> result = arrayWithOneInteger;
         arrayWithOneInteger.remove(1);
         assertArrayEquals(expResult.toArray(), result.toArray());
     }
@@ -175,22 +175,22 @@ public class CustomArrayListTest {
     @Test
     public void testRemoveFromCopiedArray() {
         System.out.println("remove from copied array");
-        
+
         Integer[] testIntegers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         CustomArrayList<Integer> testArray = new CustomArrayList<>();
-        testArray.addArray(testIntegers);    
-        
-        CustomArrayList<Integer> result = 
-                new CustomArrayList<>(testArray);
+        testArray.addArray(testIntegers);
+
+        CustomArrayList<Integer> result
+                = new CustomArrayList<>(testArray);
         result.remove(10);
-        
+
         CustomArrayList<Integer> expResult = new CustomArrayList<>();
         Integer[] expIntegers = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         expResult.addArray(expIntegers);
-        
+
         assertArrayEquals(expResult.toArray(), result.toArray());
     }
-    
+
     /**
      * Test of remove method, of class CustomArrayList.
      */
@@ -214,5 +214,39 @@ public class CustomArrayListTest {
         Integer result = arrayWithOneInteger.get(index);
         Integer expResult = 2;
         assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of add method, of class CustomArrayList.
+     */
+    @Test
+    public void testAdd_int_GenericType() {
+        System.out.println("add");
+        int index = 11;
+        Integer o = 1;
+        CustomArrayList<Integer> instance = new CustomArrayList<>(12);
+        instance.add(index, o);
+        Object[] result = instance.toArray();
+
+        Object[] expResult = new Object[12];
+        expResult[11] = 1;
+
+        assertArrayEquals(expResult, result);
+    }
+
+
+    /**
+     * Test of toArray method, of class CustomArrayList.
+     */
+    @Test
+    public void testToArray() {
+        System.out.println("toArray");
+        CustomArrayList instance = arrayWithOneInteger;
+        Object[] result = instance.toArray();
+        
+        Object[] expResult = new Object[1];
+        expResult[0] = 1;
+        
+        assertArrayEquals(expResult, result);
     }
 }
