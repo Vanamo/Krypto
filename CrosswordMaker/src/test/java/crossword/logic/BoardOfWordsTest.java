@@ -132,7 +132,6 @@ public class BoardOfWordsTest {
         expResult[7][9] = 'X';
         expResult[7][11] = 'X';
         expResult[7][15] = 'X';
-        expResult[8][5] = 'X';
         expResult[8][6] = 'X';
         expResult[8][13] = 'X';
         expResult[8][15] = 'X';

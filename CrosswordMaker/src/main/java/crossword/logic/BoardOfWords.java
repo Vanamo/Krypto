@@ -79,7 +79,7 @@ public class BoardOfWords {
         charsForBoard.add("XOXOXOOOOXOXOOO".toCharArray());
         charsForBoard.add("OOOOOOXOXOOOOXO".toCharArray());
         charsForBoard.add("XOXOXOOOOXOXOOO".toCharArray());
-        charsForBoard.add("OOOOOXXOOOOOOXO".toCharArray());
+        charsForBoard.add("OOOOOOXOOOOOOXO".toCharArray());
         charsForBoard.add("XOXOXOOOOXOXOOO".toCharArray());
         charsForBoard.add("OOOOOXOXOOOOOOX".toCharArray());
         charsForBoard.add("OXOXOOOOOOXOXOO".toCharArray());

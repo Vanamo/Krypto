@@ -32,7 +32,7 @@ public class WordFinderTest {
                 firstWord, wordList);
         BoardOfWords board = crosswordMaker.getBoardOfWords();
         board.drawFirstWord(firstWord);
-        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength(), 50);
+        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength());
         CustomArrayList<String> result = wordFinder.findWords(newPosition);
 
         String[] expWords = {"alkaa", "ammua"};
@@ -64,7 +64,7 @@ public class WordFinderTest {
 
         CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
                 firstWord, wordList);
-        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength(), 50);
+        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength());
         WordPosition position = new WordPosition(0, 0, Alignment.VERTICAL, 5);
         CustomArrayList<String> result = wordFinder.findWords(position);
 
@@ -104,7 +104,7 @@ public class WordFinderTest {
 
         CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
                 firstWord, wordList);
-        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength(),50);
+        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength());
         BoardOfWords instance = wordFinder.findWordsForAllPositions(positions);
         char[][] result = instance.getBoard();
 
@@ -147,7 +147,7 @@ public class WordFinderTest {
 
         CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
                 firstWord, wordList);
-        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength(),50);
+        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength());
         BoardOfWords instance = wordFinder.findWordsForAllPositions(positions);
         char[][] result = instance.getBoard();
 

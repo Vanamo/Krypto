@@ -13,12 +13,15 @@ public class WordFinder {
     private CustomArrayList<SearchTree> wordTreesByWordLength;
     private BoardOfWords boardOfWords;
     private CustomArrayList<WordPosition> positions;
+    private CustomArrayList<Integer> timesVisitedAtPosition;
+    private int count = 0;
 
     public WordFinder(BoardOfWords boardOfWords,
-            CustomArrayList<CustomArrayList<String>> wordsByLength, int maxWordLength) {
+            CustomArrayList<CustomArrayList<String>> wordsByLength) {
         this.boardOfWords = boardOfWords;
-        this.wordTreesByWordLength = new CustomArrayList<>(maxWordLength);
-        for (int i = 1; i < maxWordLength; i++) {
+        int size = wordsByLength.size();
+        this.wordTreesByWordLength = new CustomArrayList<>(size);
+        for (int i = 1; i < size; i++) {
             SearchTree searchTree = new SearchTree();
             searchTree.addListOfWords(wordsByLength.get(i));
             this.wordTreesByWordLength.add(i, searchTree);
@@ -34,6 +37,10 @@ public class WordFinder {
     public BoardOfWords findWordsForAllPositions(CustomArrayList<WordPosition> positions) {
         CustomArrayList<String> usedWords = new CustomArrayList<>();
         this.positions = positions;
+        this.timesVisitedAtPosition = new CustomArrayList<>(this.positions.size());
+        for (int i = 0; i < this.positions.size(); i++) {
+            this.timesVisitedAtPosition.add(0);
+        }
         return this.layWords(0, this.boardOfWords, usedWords);
     }
 
@@ -47,6 +54,10 @@ public class WordFinder {
     private BoardOfWords layWords(int positionIndex, BoardOfWords board,
             CustomArrayList<String> usedWords) {
         if (positionIndex >= positions.size()) {
+            for (int i = 0; i < this.timesVisitedAtPosition.size(); i++) {
+                System.out.println("Paikkaan " + i + " kokeiltiin eri sanoja " 
+                        + this.timesVisitedAtPosition.get(i) + " kertaa\n");
+            }
             return board;
         }
         WordPosition position = this.positions.get(positionIndex);
@@ -65,7 +76,9 @@ public class WordFinder {
         for (int i = 0; i < fittingWords.size(); i++) {
             BoardOfWords copyOfBoard = board.makeCopy();
             WordPosition p = this.positions.get(positionIndex);
-            //System.out.println("taso " + positionIndex + " sana " + i + "/" + fittingWords.size());
+
+            this.collectStatistics(positionIndex);
+
             copyOfBoard.drawWord(fittingWords.get(i), p);
             CustomArrayList<String> copyOfUsedWords = new CustomArrayList<>(usedWords);
             copyOfUsedWords.add(fittingWords.get(i));
@@ -101,7 +114,7 @@ public class WordFinder {
      * @param fittingWords
      * @return
      */
-    private CustomArrayList<String> searchWordTree(String mask, SearchTreeNode node, 
+    private CustomArrayList<String> searchWordTree(String mask, SearchTreeNode node,
             int level, CustomArrayList<String> fittingWords) {
         if (mask.charAt(level) == ' ' || mask.charAt(level) == node.getKey()) {
             if (level + 1 == mask.length()) {
@@ -154,5 +167,32 @@ public class WordFinder {
             mask = mask.concat(String.valueOf(newChar));
         }
         return mask;
+    }
+
+    /**
+     * Statistics to find out where the algorithm struggles to find a word
+     */
+    private void collectStatistics(int positionIndex) {
+        this.count++;
+        int timesVisited = timesVisitedAtPosition.get(positionIndex) + 1;
+        this.timesVisitedAtPosition.add(positionIndex, timesVisited);
+
+        if (this.count == 10000000) {
+            int max = this.timesVisitedAtPosition.get(0);
+            int iMax = 0;
+            for (int i = 1; i < this.timesVisitedAtPosition.size(); i++) {
+                int next = this.timesVisitedAtPosition.get(i);
+                if (next > max) {
+                    max = next;
+                    iMax = i;
+                }
+            }
+            WordPosition p = this.positions.get(iMax + 1);
+            System.out.println("Paikkaan " + p + " on vaikea löytää sanaa");
+            for (int i = 0; i < this.timesVisitedAtPosition.size(); i++) {
+                this.timesVisitedAtPosition.replace(i, 0);
+            }
+            this.count = 0;
+        }
     }
 }

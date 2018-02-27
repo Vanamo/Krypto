@@ -66,28 +66,27 @@ public class CrosswordMaker {
      * @return
      */
     public BoardOfWords fillBoard() {
+
         WordFinder wordFinder
-                = new WordFinder(this.boardOfWords, this.wordsByLength, this.maxWordLength);
+                = new WordFinder(this.boardOfWords, this.wordsByLength);
         WordPositionFinder positionFinder = new WordPositionFinder(this.boardOfWords.getBoard());
         CustomArrayList positions = positionFinder.findPositions();
         System.out.println("Kryptoon tulee " + positions.size() + " sanaa");
 
         //Remove firstword position
         positions.remove(new WordPosition(0, 0, Alignment.HORIZONTAL, this.firstWord.length()));
-
-        for (int i = 0; i < positions.size(); i++) {
-            System.out.println(positions.get(i));
-        }
         
         //Draw first word after the positions are found, otherwise the letters 
         //of the first word will interfere finding of word positions.
         this.boardOfWords.drawFirstWord(firstWord);
-                
+        
+        System.out.println("\nKryptolauta alussa: \n" + this.boardOfWords);
+        
         long startTime = System.currentTimeMillis();
         BoardOfWords result = wordFinder.findWordsForAllPositions(positions);
         long endTime = System.currentTimeMillis();
-        System.out.println("Krypton generointiin kului aikaa "
-                + (endTime - startTime) + "ms");
+        System.out.println("\nSanojen etsimiseen kului aikaa "
+                + (endTime - startTime) + "ms \n");
         return result;
     }
 
