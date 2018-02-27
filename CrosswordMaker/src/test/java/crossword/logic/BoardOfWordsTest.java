@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
  * @author Vanamo Piirainen
  */
 public class BoardOfWordsTest {
-    
+
     public BoardOfWordsTest() {
     }
 
@@ -24,13 +24,13 @@ public class BoardOfWordsTest {
         BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
         instance.createBoard(firstWord);
         char[][] result = instance.getBoard();
-        
+
         char[][] expResult = new char[boardHight][boardWidth];
         for (int i = 0; i < expResult.length; i++) {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';
             }
-        }   
+        }
         expResult[0][5] = 'X';
         expResult[1][1] = 'X';
         expResult[1][3] = 'X';
@@ -38,10 +38,10 @@ public class BoardOfWordsTest {
         expResult[3][1] = 'X';
         expResult[3][3] = 'X';
         expResult[3][5] = 'X';
-        
+
         assertArrayEquals(expResult, result);
     }
-    
+
     /**
      * Test of createBoard method, of class BoardOfWords.
      */
@@ -55,13 +55,13 @@ public class BoardOfWordsTest {
         instance.createBoard(firstWord);
         instance.letterPositionsForLargeBoard();
         char[][] result = instance.getBoard();
-        
+
         char[][] expResult = new char[boardHight][boardWidth];
         for (int i = 0; i < expResult.length; i++) {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';
             }
-        }   
+        }
 
         expResult[1][1] = 'X';
         expResult[1][3] = 'X';
@@ -76,10 +76,10 @@ public class BoardOfWordsTest {
         expResult[5][2] = 'X';
         expResult[5][3] = 'X';
         expResult[5][4] = 'X';
-        
+
         assertArrayEquals(expResult, result);
-    }    
-    
+    }
+
     /**
      * Test of createBoard method, of class BoardOfWords.
      */
@@ -92,13 +92,13 @@ public class BoardOfWordsTest {
         BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
         instance.createBoard(firstWord);
         char[][] result = instance.getBoard();
-        
+
         char[][] expResult = new char[boardHight][boardWidth];
         for (int i = 0; i < expResult.length; i++) {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';
             }
-        }   
+        }
         expResult[0][5] = 'X';
         expResult[0][7] = 'X';
         expResult[0][14] = 'X';
@@ -160,10 +160,10 @@ public class BoardOfWordsTest {
         expResult[14][7] = 'X';
         expResult[14][8] = 'X';
         expResult[14][14] = 'X';
-        
+
         assertArrayEquals(expResult, result);
-    } 
-    
+    }
+
     /**
      * Test of drawWord method, of class BoardOfWords.
      */
@@ -182,20 +182,19 @@ public class BoardOfWordsTest {
         instance.drawWord(word, position);
         char[][] result = instance.getBoard();
 
-        
         char[][] expResult = new char[boardHight][boardWidth];
         for (int i = 0; i < expResult.length; i++) {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';
             }
-        }   
+        }
         expResult[1][1] = 'X';
         expResult[1][3] = 'X';
         expResult[3][1] = 'X';
-        
+
         expResult[3][3] = 'a';
         expResult[3][4] = 'i';
-        
+
         assertArrayEquals(expResult, result);
     }
 
@@ -214,23 +213,22 @@ public class BoardOfWordsTest {
         instance.drawWord(word, position);
         char[][] result = instance.getBoard();
 
-        
         char[][] expResult = new char[boardHight][boardWidth];
         for (int i = 0; i < expResult.length; i++) {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';
             }
-        }   
+        }
         expResult[1][1] = 'X';
         expResult[1][3] = 'X';
         expResult[3][1] = 'X';
-        
+
         expResult[3][3] = 'a';
         expResult[4][3] = 'i';
-        
+
         assertArrayEquals(expResult, result);
     }
-    
+
     /**
      * Test of drawFirstWord method, of class BoardOfWords.
      */
@@ -250,7 +248,7 @@ public class BoardOfWordsTest {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';
             }
-        } 
+        }
         expResult[0][2] = 'X';
         expResult[0][3] = 'X';
         expResult[0][4] = 'X';
@@ -258,12 +256,13 @@ public class BoardOfWordsTest {
         expResult[1][3] = 'X';
         expResult[3][1] = 'X';
         expResult[3][3] = 'X';
-        
+
         expResult[0][0] = 'a';
         expResult[0][1] = 'i';
-        
+
         assertArrayEquals(expResult, result);
     }
+
     /**
      * Test of getLetter method, of class BoardOfWords.
      */
@@ -283,6 +282,34 @@ public class BoardOfWordsTest {
         char expResult = 'a';
         assertEquals(expResult, result);
 
-    } 
+    }
 
+    /**
+     * Test of makeCopy method, of class BoardOfWords.
+     */
+    @Test
+    public void testMakeCopy() {
+        System.out.println("makeCopy");
+        int width = 5;
+        int hight = 7;
+        BoardOfWords instance = new BoardOfWords(width, hight);
+        instance.createBoard("testi");
+        BoardOfWords result = instance.makeCopy();
+
+        char[][] expResult = new char[hight][width];
+        for (int i = 0; i < expResult.length; i++) {
+            for (int j = 0; j < expResult[0].length; j++) {
+                expResult[i][j] = 'O';
+            }
+        }
+        expResult[1][1] = 'X';
+        expResult[1][3] = 'X';
+        expResult[3][1] = 'X';
+        expResult[3][3] = 'X';
+        expResult[5][1] = 'X';
+        expResult[5][3] = 'X';
+        
+        
+        assertArrayEquals(expResult, result.getBoard());
+    }
 }

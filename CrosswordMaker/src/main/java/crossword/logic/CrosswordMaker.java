@@ -32,8 +32,8 @@ public class CrosswordMaker {
             System.out.println(ex);
         }
 
-        this.makeWordListsAccordingToLength();
-
+        this.makeWordListsAccordingToLength();        
+        
         if (firstWord.equals("r")) {
             int length = Math.min(width, 5);
             firstWord = this.getRandomWord(length);

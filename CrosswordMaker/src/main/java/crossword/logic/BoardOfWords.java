@@ -199,7 +199,7 @@ public class BoardOfWords {
 
     public BoardOfWords makeCopy() {
         BoardOfWords copy = new BoardOfWords(this.width, this.hight);
-        char[][] copyOfBoard = new char[this.width][this.hight];
+        char[][] copyOfBoard = new char[this.hight][this.width];
         for (int y = 0; y < this.hight; y++) {
             for (int x = 0; x < this.width; x++) {
                 copyOfBoard[y][x] = this.boardOfWords[y][x];
