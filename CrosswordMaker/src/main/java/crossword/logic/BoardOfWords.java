@@ -121,6 +121,35 @@ public class BoardOfWords {
     }
 
     /**
+     * Words with only two letters are so rare in Finnish language that
+     * finding solution is very difficult if there are many two-letter 
+     * words on the board. This is a clumsy solution for removing them
+     * from the edges.
+     */
+    private void removeTwoLetterWordsFromEdges() {
+        //Remove from the last row
+        int y = this.hight - 1;
+        for (int x = 0; x < this.width - 1; x++) {
+            char char0 = this.boardOfWords[y][x];
+            char char1 = this.boardOfWords[y - 1][x];
+            char char2 = this.boardOfWords[y - 2][x];
+            if (char0 == 'O' && char1 == 'O' && char2 == 'X') {
+                this.boardOfWords[y][x] = 'X';
+            }
+        }
+        //Remove from the last column
+        int x = this.width - 1;
+        for (y = 0; y < this.hight - 1; y++) {
+            char char0 = this.boardOfWords[y][x];
+            char char1 = this.boardOfWords[y][x - 1];
+            char char2 = this.boardOfWords[y][x - 2];
+            if (char0 == 'O' && char1 == 'O' && char2 == 'X') {
+                this.boardOfWords[y][x] = 'X';
+            }
+        }
+    }
+    
+    /**
      * Draws the given word on the board. Alignment: 0 = horizontal 1 =
      * vertical.
      *
@@ -193,26 +222,4 @@ public class BoardOfWords {
         return board;
     }
 
-    private void removeTwoLetterWordsFromEdges() {
-        //Remove from the last row
-        int y = this.hight - 1;
-        for (int x = 0; x < this.width - 1; x++) {
-            char char0 = this.boardOfWords[y][x];
-            char char1 = this.boardOfWords[y - 1][x];
-            char char2 = this.boardOfWords[y - 2][x];
-            if (char0 == 'O' && char1 == 'O' && char2 == 'X') {
-                this.boardOfWords[y][x] = 'X';
-            }
-        }
-        //Remove from the last column
-        int x = this.width - 1;
-        for (y = 0; y < this.hight - 1; y++) {
-            char char0 = this.boardOfWords[y][x];
-            char char1 = this.boardOfWords[y][x - 1];
-            char char2 = this.boardOfWords[y][x - 2];
-            if (char0 == 'O' && char1 == 'O' && char2 == 'X') {
-                this.boardOfWords[y][x] = 'X';
-            }
-        }
-    }
 }

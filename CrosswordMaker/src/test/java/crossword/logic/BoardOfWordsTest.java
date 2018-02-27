@@ -76,7 +76,6 @@ public class BoardOfWordsTest {
         expResult[5][2] = 'X';
         expResult[5][3] = 'X';
         expResult[5][4] = 'X';
-        expResult[5][7] = 'X';
         
         assertArrayEquals(expResult, result);
     }    
@@ -124,16 +123,19 @@ public class BoardOfWordsTest {
         expResult[5][11] = 'X';
         expResult[5][15] = 'X';
         expResult[6][6] = 'X';
+        expResult[6][8] = 'X';
         expResult[6][13] = 'X';
+        expResult[6][15] = 'X';
         expResult[7][0] = 'X';
         expResult[7][2] = 'X';
         expResult[7][4] = 'X';
-        expResult[7][8] = 'X';
         expResult[7][9] = 'X';
         expResult[7][11] = 'X';
         expResult[7][15] = 'X';
         expResult[8][5] = 'X';
+        expResult[8][6] = 'X';
         expResult[8][13] = 'X';
+        expResult[8][15] = 'X';
         expResult[9][0] = 'X';
         expResult[9][2] = 'X';
         expResult[9][4] = 'X';
@@ -142,7 +144,6 @@ public class BoardOfWordsTest {
         expResult[9][15] = 'X';
         expResult[10][5] = 'X';
         expResult[10][7] = 'X';
-        expResult[10][12] = 'X';
         expResult[10][14] = 'X';
         expResult[11][1] = 'X';
         expResult[11][3] = 'X';
@@ -150,14 +151,15 @@ public class BoardOfWordsTest {
         expResult[11][12] = 'X';
         expResult[12][5] = 'X';
         expResult[12][7] = 'X';
+        expResult[12][8] = 'X';
         expResult[12][14] = 'X';
         expResult[13][1] = 'X';
         expResult[13][3] = 'X';
-        expResult[13][8] = 'X';
         expResult[13][10] = 'X';
         expResult[13][12] = 'X';
         expResult[14][5] = 'X';
         expResult[14][7] = 'X';
+        expResult[14][8] = 'X';
         expResult[14][14] = 'X';
         
         assertArrayEquals(expResult, result);
