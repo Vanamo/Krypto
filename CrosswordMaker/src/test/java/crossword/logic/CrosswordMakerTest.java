@@ -67,4 +67,20 @@ public class CrosswordMakerTest {
         String result = instance.getRandomWord(length);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of lettersToNumbers method, of class CrosswordMaker.
+     */
+    @Test
+    public void testLettersToNumbers() {
+        System.out.println("lettersToNumbers");
+        String[] words = {"aaloe", "aatos", "raaja", "iglut", "apeus"};
+        CustomArrayList<String> wordList = new CustomArrayList<>();
+        wordList.addArray(words);
+        CrosswordMaker instance = new CrosswordMaker(5, 5, "roima", wordList);
+        instance.fillBoard();
+        String expResult = "1\t2\t3\t4\t5\t\n\n5\tX\t6\tX\t7\t\n\n5\t5\t8\t2\t9\t\n\n10\tX\t11\tX\t11\t\n\n5\t5\t12\t2\t13\t\n\n\n";
+        String result = instance.lettersToNumbers();
+        assertEquals(expResult, result);
+    }
 }

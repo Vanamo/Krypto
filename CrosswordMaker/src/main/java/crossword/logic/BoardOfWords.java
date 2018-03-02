@@ -181,6 +181,10 @@ public class BoardOfWords {
         return this.boardOfWords[y][x];
     }
 
+    public void setLetter(int x, int y, char c) {
+        this.boardOfWords[y][x] = c;
+    }
+    
     public char[][] getBoard() {
         return boardOfWords;
     }

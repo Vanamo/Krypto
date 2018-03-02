@@ -32,8 +32,8 @@ public class CrosswordMaker {
             System.out.println(ex);
         }
 
-        this.makeWordListsAccordingToLength();        
-        
+        this.makeWordListsAccordingToLength();
+
         if (firstWord.equals("r")) {
             int length = Math.min(width, 5);
             firstWord = this.getRandomWord(length);
@@ -56,6 +56,7 @@ public class CrosswordMaker {
     public CrosswordMaker(int width, int hight, String firstWord,
             CustomArrayList<String> wordList) {
         this.wordList = wordList;
+        this.firstWord = firstWord;
         this.makeWordListsAccordingToLength();
         this.boardOfWords = new BoardOfWords(width, hight);
         this.boardOfWords.createBoard(firstWord);
@@ -75,19 +76,111 @@ public class CrosswordMaker {
 
         //Remove firstword position
         positions.remove(new WordPosition(0, 0, Alignment.HORIZONTAL, this.firstWord.length()));
-        
+
         //Draw first word after the positions are found, otherwise the letters 
         //of the first word will interfere finding of word positions.
         this.boardOfWords.drawFirstWord(firstWord);
-        
+
         System.out.println("\nKryptolauta alussa: \n" + this.boardOfWords);
-        
+
         long startTime = System.currentTimeMillis();
-        BoardOfWords result = wordFinder.findWordsForAllPositions(positions);
+        this.boardOfWords = wordFinder.findWordsForAllPositions(positions);
         long endTime = System.currentTimeMillis();
         System.out.println("\nSanojen etsimiseen kului aikaa "
                 + (endTime - startTime) + "ms \n");
-        return result;
+        return this.boardOfWords;
+    }
+
+    /**
+     * Converts the letters on the board to numbers.
+     *
+     * @return
+     */
+    public String lettersToNumbers() {
+        CustomArrayList<Character> letters = new CustomArrayList<>();
+        this.getUniqueLettersFromBoard(letters);
+        int[] lettersToNumbers = new int[letters.size()];
+        this.getNumbersForLetters(lettersToNumbers);
+
+        int hight = this.boardOfWords.getHight();
+        int width = this.boardOfWords.getWidth();
+        Integer[][] boardWithNumbers = new Integer[hight][width];
+        this.fillBoardWithNumbers(letters, lettersToNumbers, boardWithNumbers);
+
+        return this.boardWithNumbersToString(boardWithNumbers);
+    }
+
+    /**
+     * Helper method for lettersToNumbers.
+     *
+     * @param letters
+     */
+    private void getUniqueLettersFromBoard(CustomArrayList<Character> letters) {
+        for (int y = 0; y < this.boardOfWords.getHight(); y++) {
+            for (int x = 0; x < this.boardOfWords.getWidth(); x++) {
+                Character letter = this.boardOfWords.getLetter(x, y);
+                if (!letters.contains(letter) && letter != 'X') {
+                    letters.add(letter);
+                }
+            }
+        }
+    }
+
+    /**
+     * Helper method for lettersToNumbers.
+     *
+     * @param lettersToNumbers
+     * @param itLetters
+     */
+    private void getNumbersForLetters(int[] lettersToNumbers) {
+        int nextInt = 1;
+        for (int i = 0; i < lettersToNumbers.length; i++) {
+            lettersToNumbers[i] = nextInt;
+            nextInt++;
+        }
+        
+    }
+
+    /**
+     * Helper method for lettersToNumbers.
+     *
+     * @param lettersToNumbers
+     * @param boardWithNumbers
+     */
+    private void fillBoardWithNumbers(CustomArrayList<Character> letters,
+            int[] lettersToNumbers, Integer[][] boardWithNumbers) {
+        for (int y = 0; y < this.boardOfWords.getHight(); y++) {
+            for (int x = 0; x < this.boardOfWords.getWidth(); x++) {
+                Character letter = this.boardOfWords.getLetter(x, y);
+                if (letter != 'X') {
+                    Integer letterIndex = letters.indexOf(letter);
+                    boardWithNumbers[y][x] = lettersToNumbers[letterIndex];
+                }
+            }
+        }
+    }
+
+    
+    /**
+     * Helper method for lettersToNumbers.
+     * 
+     * @param boardWithNumbers
+     * @return 
+     */
+    private String boardWithNumbersToString(Integer[][] boardWithNumbers) {
+        String board = "";
+        for (int y = 0; y < boardWithNumbers.length; y++) {
+            for (int x = 0; x < boardWithNumbers[0].length; x++) {
+                if (boardWithNumbers[y][x] == null) {
+                    board = board.concat("X\t");
+                } else {
+                    board = board.concat(boardWithNumbers[y][x] + "\t");
+                }
+            }
+            board = board.concat("\n\n");
+        }
+        board = board.concat("\n");
+        return board;
     }
 
     public String getRandomWord(int length) {

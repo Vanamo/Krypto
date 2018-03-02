@@ -31,11 +31,13 @@ public class UserInterface {
         System.out.println("Generoidaan kryptoa... \n");
         
         CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight, firstWord);
-        BoardOfWords solution = crosswordMaker.fillBoard();
-        if (solution == null) {
+        BoardOfWords solutionWithLetters = crosswordMaker.fillBoard();
+        if (solutionWithLetters == null) {
             System.out.println("Ratkaisua ei löytynyt. Yritä uudestaan eri aloitussanalla.");
         } else {
-            System.out.println(solution);;
+            String solutionWithNumbers = crosswordMaker.lettersToNumbers();
+            System.out.println(solutionWithLetters);
+            System.out.println(solutionWithNumbers);
         }
     }
 }
