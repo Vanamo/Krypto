@@ -83,4 +83,28 @@ public class CrosswordMakerTest {
         String result = instance.lettersToNumbers();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of fillBoard method, of class CrosswordMaker.
+     */
+    @Test
+    public void testFillBoard() {
+        System.out.println("fillBoard");
+        CrosswordMaker instance = new CrosswordMaker(3, 3, "itu");
+        BoardOfWords result = instance.fillBoard();
+        
+        char[][] expResult = new char[3][3];
+        expResult[0][0] = 'i';
+        expResult[0][1] = 't';
+        expResult[0][2] = 'u';
+        expResult[1][0] = 'e';
+        expResult[1][1] = 'X';
+        expResult[1][2] = 'f';
+        expResult[2][0] = 'n';
+        expResult[2][1] = 'u';
+        expResult[2][2] = 'o';
+        
+        assertArrayEquals(expResult, result.getBoard());
+    }
+
 }

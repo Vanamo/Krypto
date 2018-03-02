@@ -2,7 +2,6 @@ package crossword.logic;
 
 import crossword.datastructures.CustomArrayList;
 import crossword.lexicon.Lexicon;
-import java.util.Random;
 import org.jdom2.JDOMException;
 
 /**
@@ -81,11 +80,13 @@ public class CrosswordMaker {
         //of the first word will interfere finding of word positions.
         this.boardOfWords.drawFirstWord(firstWord);
 
-        System.out.println("\nKryptolauta alussa: \n" + this.boardOfWords);
+        //System.out.println("\nKryptolauta alussa: \n" + this.boardOfWords);
 
         long startTime = System.currentTimeMillis();
         this.boardOfWords = wordFinder.findWordsForAllPositions(positions);
         long endTime = System.currentTimeMillis();
+        System.out.println(this.boardOfWords.getWidth() + "x" + this.boardOfWords.getHight() +
+            " " + this.firstWord);
         System.out.println("\nSanojen etsimiseen kului aikaa "
                 + (endTime - startTime) + "ms \n");
         return this.boardOfWords;
@@ -191,9 +192,9 @@ public class CrosswordMaker {
             }
         }
         CustomArrayList<String> words = this.wordsByLength.get(length);
-        Random rand = new Random();
-        int i = rand.nextInt(words.size());
-        String word = words.get(i);
+        long time = System.nanoTime();
+        int rand = (int) (time%words.size());
+        String word = words.get(rand);
 
         return word;
     }

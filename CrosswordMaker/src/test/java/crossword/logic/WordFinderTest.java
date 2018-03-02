@@ -162,4 +162,41 @@ public class WordFinderTest {
         assertArrayEquals(expResult, result);
     }
 
+    /**
+     * Test of findWords method, of class WordFinder.
+     */
+    @Test
+    public void testCollectStatistics() {
+        System.out.println("collectStatistics");
+        WordPosition p1 = new WordPosition(0, 0, Alignment.VERTICAL, 5);
+        WordPosition p2 = new WordPosition(2, 0, Alignment.VERTICAL, 5);
+        WordPosition p3 = new WordPosition(4, 0, Alignment.VERTICAL, 5);
+        WordPosition p4 = new WordPosition(0, 2, Alignment.HORIZONTAL, 5);
+        WordPosition p5 = new WordPosition(0, 4, Alignment.HORIZONTAL, 5);
+        WordPosition[] posArray = {p1, p2, p3, p4, p5};
+        CustomArrayList<WordPosition> positions = new CustomArrayList<>();
+        positions.addArray(posArray);
+
+        String[] words = {"ahava", "alati", "saada", "laaja", "orava", "akana"};
+        CustomArrayList<String> wordList = new CustomArrayList<>();
+        wordList.addArray(words);
+        String firstWord = "sello";
+        int width = 5;
+        int hight = 5;
+        BoardOfWords board = new BoardOfWords(width, hight);
+        board.createBoard(firstWord);
+        board.drawFirstWord(firstWord);
+
+        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
+                firstWord, wordList);
+        WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength());
+        wordFinder.findWordsForAllPositions(positions);
+        
+        CustomArrayList<Integer> result = wordFinder.getTimesVisitedAtPosition();
+        
+        Object[] expResult = {1, 1, 1, 1, 1};
+        
+        assertArrayEquals(expResult, result.toArray());
+    }
+
 }

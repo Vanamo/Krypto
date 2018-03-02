@@ -54,10 +54,6 @@ public class WordFinder {
     private BoardOfWords layWords(int positionIndex, BoardOfWords board,
             CustomArrayList<String> usedWords) {
         if (positionIndex >= positions.size()) {
-            for (int i = 0; i < this.timesVisitedAtPosition.size(); i++) {
-                System.out.println(i + ";" + this.timesVisitedAtPosition.get(i));
-            }
-            System.out.println("");
             return board;
         }
         WordPosition position = this.positions.get(positionIndex);
@@ -189,10 +185,14 @@ public class WordFinder {
             }
             WordPosition p = this.positions.get(iMax + 1);
             System.out.println("Paikkaan " + p + " on vaikea löytää sanaa");
-//            for (int i = 0; i < this.timesVisitedAtPosition.size(); i++) {
-//                this.timesVisitedAtPosition.replace(i, 0);
-//            }
+            for (int i = 0; i < this.timesVisitedAtPosition.size(); i++) {
+                this.timesVisitedAtPosition.replace(i, 0);
+            }
             this.count = 0;
         }
+    }
+
+    public CustomArrayList<Integer> getTimesVisitedAtPosition() {
+        return timesVisitedAtPosition;
     }
 }
