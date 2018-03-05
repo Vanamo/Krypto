@@ -4,7 +4,8 @@ import crossword.datastructures.CustomArrayList;
 import java.util.Random;
 
 /**
- *
+ * The crossword board where the words are drawn
+ * 
  * @author Vanamo Piirainen
  */
 public class BoardOfWords {
@@ -15,14 +16,20 @@ public class BoardOfWords {
     private WordPosition firstPosition;
 
     /**
-     * @param width
-     * @param hight
+     * @param width width of the board
+     * @param hight hight of the board
      */
     public BoardOfWords(int width, int hight) {
         this.width = width;
         this.hight = hight;
     }
 
+    
+    /**
+     * Constructs the board with the first word
+     * 
+     * @param firstWord the first word on the board 
+     */
     public void createBoard(String firstWord) {
         //alignment of the first word is horizontal
         this.firstPosition = new WordPosition(0, 0, Alignment.HORIZONTAL,
@@ -50,6 +57,9 @@ public class BoardOfWords {
         }
     }
 
+    /**
+     * There is only one word per one row / column.
+     */
     private void letterPositionsForSmallBoard() {
         //First row with the first word
         for (int x = 0; x < this.firstPosition.getWordLength(); x++) {
@@ -69,6 +79,9 @@ public class BoardOfWords {
         }
     }
 
+    /**
+     * There are several words per one row / column.
+     */
     public void letterPositionsForLargeBoard() {
         CustomArrayList<char[]> charsForBoard = new CustomArrayList<>();
         charsForBoard.add("OOOOOXOXOOOOOOX".toCharArray());
@@ -102,16 +115,18 @@ public class BoardOfWords {
                 }
             }
         }
-
+        //With many words with only two letters finding the solution (in Finnish language)
+        //is very difficult, so most of the two-letter words are removed.
         removeTwoLetterWordsFromEdges();
     }
 
     /**
-     * Helper method for the method letterPositionsForLargeBoard
+     * Helper method for the method letterPositionsForLargeBoard. If there are
+     * no more characters on charsForBoard, start from the beginning.
      *
-     * @param i
-     * @param length
-     * @return
+     * @param i         index of the character position (horizontal or vertical)
+     * @param length    index of the last character position
+     * @return          index of charsForBoard from which to take the next character
      */
     private int checkLength(int i, int length) {
         if (i >= length) {
@@ -153,8 +168,8 @@ public class BoardOfWords {
      * Draws the given word on the board. Alignment: 0 = horizontal 1 =
      * vertical.
      *
-     * @param word
-     * @param p
+     * @param word  word to be drawn
+     * @param p     position to which to draw the word
      */
     public void drawWord(String word, WordPosition p) {
         for (int i = 0; i < word.length(); i++) {
@@ -166,6 +181,12 @@ public class BoardOfWords {
         }
     }
 
+    /**
+     * Draws the starting word on the board. It is always drawn on the upper left
+     * corner of the board.
+     * 
+     * @param word  first word on the board 
+     */
     public void drawFirstWord(String word) {
         WordPosition p = this.firstPosition;
         for (int i = 0; i < word.length(); i++) {
@@ -177,30 +198,62 @@ public class BoardOfWords {
         }
     }
 
+    /**
+     * @param x horizontal index on the board
+     * @param y vertical position on the board
+     * @return  character on the board at the given position
+     */
     public char getLetter(int x, int y) {
         return this.boardOfWords[y][x];
     }
 
+    /**
+     * 
+     * @param x horizontal index on the board
+     * @param y vertical position on the board
+     * @param c character to be set on the board
+     */
     public void setLetter(int x, int y, char c) {
         this.boardOfWords[y][x] = c;
     }
     
+    /**
+     * 
+     * @return  2D array containing the characters on the board 
+     */
     public char[][] getBoard() {
         return boardOfWords;
     }
 
+    /**
+     * 
+     * @return  width of the board 
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * 
+     * @return hight of the board
+     */
     public int getHight() {
         return hight;
     }
 
+    /**
+     * 
+     * @param boardOfWords 2D array containing the characters of the board 
+     */
     private void setBoardOfWords(char[][] boardOfWords) {
         this.boardOfWords = boardOfWords;
     }
 
+    /**
+     * Creates a shallow copy of this BoardOfWords
+     * 
+     * @return copy of this BoardOfWords
+     */
     public BoardOfWords makeCopy() {
         BoardOfWords copy = new BoardOfWords(this.width, this.hight);
         char[][] copyOfBoard = new char[this.hight][this.width];

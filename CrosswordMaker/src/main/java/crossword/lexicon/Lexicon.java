@@ -9,7 +9,9 @@ import org.jdom2.input.SAXBuilder;
 public class Lexicon {
 
     /**
-     *
+     * Imports the Finnish lexicon from The Institute for the Languages of Finland 
+     * (http://kaino.kotus.fi/sanat/nykysuomi/) containing 94 110 words. Also adds 
+     * plurals for some of the words.
      */
     public Lexicon() {
     }
@@ -17,7 +19,7 @@ public class Lexicon {
     /**
      * Import lexicon from xml file using DOM.
      *
-     * @return
+     * @return      CustomArrayList containing the words of the lexicon
      * @throws JDOMException
      */
     public CustomArrayList<String> getLexicon() throws JDOMException {
@@ -80,12 +82,12 @@ public class Lexicon {
     }
 
     /**
-     * Creates plurals for some nouns according to the conjucation rules of
+     * Constructs plurals for some nouns according to the conjucation rules of
      * Kotus and adds them to the wordlist.
      *
-     * @param wordList
-     * @param word
-     * @param c
+     * @param wordList  CustomArrayList containing the words of the lexicon
+     * @param word      the word for which to construct the plural 
+     * @param c         th number of the conjucation rule
      */
     public void addPlural(CustomArrayList<String> wordList, String word, int c) {
 
