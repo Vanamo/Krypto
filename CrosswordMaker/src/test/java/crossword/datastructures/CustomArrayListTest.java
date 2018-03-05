@@ -204,19 +204,6 @@ public class CustomArrayListTest {
     }
 
     /**
-     * Test of replace method, of class CustomArrayList.
-     */
-    @Test
-    public void testReplace() {
-        System.out.println("replace");
-        int index = 0;
-        arrayWithOneInteger.replace(index, 2);
-        Integer result = arrayWithOneInteger.get(index);
-        Integer expResult = 2;
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of add method, of class CustomArrayList.
      */
     @Test

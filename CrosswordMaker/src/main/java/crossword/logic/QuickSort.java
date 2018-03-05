@@ -71,8 +71,8 @@ public class QuickSort {
      */
     private void switchPlaces(int i, int j) {
         WordPosition temp = array.get(i);
-        array.replace(i, array.get(j));
-        array.replace(j, temp);
+        array.add(i, array.get(j));
+        array.add(j, temp);
     }
 
 }

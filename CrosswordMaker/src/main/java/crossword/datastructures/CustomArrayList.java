@@ -12,6 +12,9 @@ package crossword.datastructures;
  */
 public class CustomArrayList<E> {
 
+    /**
+     *
+     */
     protected Object[] customArray;
     private int size;
 
@@ -25,6 +28,7 @@ public class CustomArrayList<E> {
 
     /**
      * Constructs a CustomArrayList of predefined length.
+     * @param length length of the array which stores the elements of the CustomArrayList 
      */
     public CustomArrayList(int length) {
         this.customArray = new Object[length];
@@ -34,7 +38,7 @@ public class CustomArrayList<E> {
     /**
      * Constructs a copy of the CustomArrayList given as a parameter
      *
-     * @param c
+     * @param c the contents of c will be copied to the new CustomArrayList 
      */
     public CustomArrayList(CustomArrayList<E> c) {
         this.size = c.size();
@@ -54,8 +58,9 @@ public class CustomArrayList<E> {
     }
 
     /**
-     *
-     * @param o
+     * Adds a new element to the CustomArrayList.
+     * 
+     * @param o element to be added
      */
     public void add(E o) {
         if (this.size >= this.customArray.length) {
@@ -66,11 +71,12 @@ public class CustomArrayList<E> {
     }
 
     /**
-     * Inserts an object to the specified index. Unlike in Java implementation,
-     * does not shift the objects. If the position is already occupied by on
-     * object, replaces the object with a new one.
+     * Inserts an element to the specified index. Unlike in Java implementation,
+     * does not shift the elements. If the position is already occupied by an
+     * element, replaces the element with a new one.
      *
-     * @param o
+     * @param index index of the array position where a new element will be added
+     * @param o     new element to be added
      */
     public void add(int index, E o) {
         this.rangeCheckForAdd(index);
@@ -81,20 +87,9 @@ public class CustomArrayList<E> {
     }
 
     /**
-     * Replaces an object at the specified index with another object.
+     * Adds the contents of an element array to the custom ArrayList
      *
-     * @param index
-     * @param o
-     */
-    public void replace(int index, E o) {
-        this.rangeCheck(index);
-        this.customArray[index] = o;
-    }
-
-    /**
-     * Adds the contents of an object array to the custom ArrayList
-     *
-     * @param array
+     * @param array array of elements to be added to the CustomArrayList
      */
     public void addArray(E[] array) {
         for (int i = 0; i < array.length; i++) {
@@ -104,8 +99,8 @@ public class CustomArrayList<E> {
 
     /**
      *
-     * @param index
-     * @return
+     * @param index the element at this position index will be returned 
+     * @return      the element to be returned
      */
     public E get(int index) {
         this.rangeCheck(index);
@@ -114,7 +109,7 @@ public class CustomArrayList<E> {
 
     /**
      *
-     * @return
+     * @return  the amount of elements in the CustomArrayList
      */
     public int size() {
         return this.size;
@@ -122,7 +117,7 @@ public class CustomArrayList<E> {
 
     /**
      *
-     * @return
+     * @return  true if there are no elements in the CustomArrayList, otherwise false
      */
     public boolean isEmpty() {
         return this.size == 0;
@@ -130,8 +125,8 @@ public class CustomArrayList<E> {
 
     /**
      *
-     * @param o
-     * @return
+     * @param o the element to be searched from the CustomArrayList
+     * @return  true if the CustomArrayList contains the element, false otherwise
      */
     public boolean contains(E o) {
         return this.indexOf(o) >= 0;
@@ -139,8 +134,8 @@ public class CustomArrayList<E> {
 
     /**
      *
-     * @param o
-     * @return
+     * @param o the element to be searched from the CustomArrayList
+     * @return  index of the element, -1 if the CustomArrayList does not contain the element
      */
     public int indexOf(E o) {
         if (o == null) {
@@ -160,9 +155,11 @@ public class CustomArrayList<E> {
     }
 
     /**
-     *
-     * @param o
-     * @return
+     * Removes the specified element from the CustomArrayList if it contains the element.
+     * Shifts the elements on the wright side of the removed element to the left.
+     * 
+     * @param o the element to be removed
+     * @return  true if the CustomArrayList contains the element, false otherwise
      */
     public boolean remove(E o) {
         if (o == null) {
@@ -183,6 +180,12 @@ public class CustomArrayList<E> {
         return false;
     }
 
+    /**
+     * Helper method for the remove method.
+     * Removes the element at the specified index of the CustomArrayList.
+     * 
+     * @param i the index position of the element to be removed 
+     */
     private void removeByIndex(int i) {
         for (int ind = i; ind < this.size - 1; ind++) {
             this.customArray[ind] = this.customArray[ind + 1];
@@ -190,18 +193,33 @@ public class CustomArrayList<E> {
         this.size--;
     }
 
+    /**
+     * Checks that there is an element at the specified index of the CustomArrayList
+     * 
+     * @param index index to be checked 
+     */
     private void rangeCheck(int index) {
         if (index >= this.size || index < 0) {
             throw new IndexOutOfBoundsException();
         }
     }
 
+    /**
+     * Checks that the array containing the elements of the CustomArrayList is large enough
+     * 
+     * @param index index to be checked 
+     */
     private void rangeCheckForAdd(int index) {
         if (index > this.customArray.length || index < 0) {
             throw new IndexOutOfBoundsException();
         }
     }
 
+    /**
+     * Returns the elements of the CustomArrayList as an array
+     * 
+     * @return  array containing the elements of the CustomArrayList
+     */
     public Object[] toArray() {
         Object[] array = new Object[this.size];
         for (int i = 0; i < this.size; i++) {

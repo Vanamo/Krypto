@@ -46,7 +46,8 @@ public class WordFinder {
 
     /**
      * Uses recursion to find a possible word combination to fit the given
-     * positions on the board.
+     * positions on the board. Pseudocode from the lecture notes of Jyrki Kivinen, 
+     * Datastructures and algorithms, fall 2017 (eight queens problem).
      *
      * @param positions
      * @param positionIndex
@@ -186,7 +187,7 @@ public class WordFinder {
             WordPosition p = this.positions.get(iMax + 1);
             System.out.println("Paikkaan " + p + " on vaikea löytää sanaa");
             for (int i = 0; i < this.timesVisitedAtPosition.size(); i++) {
-                this.timesVisitedAtPosition.replace(i, 0);
+                this.timesVisitedAtPosition.add(i, 0);
             }
             this.count = 0;
         }
