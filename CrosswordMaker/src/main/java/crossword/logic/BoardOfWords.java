@@ -5,7 +5,7 @@ import java.util.Random;
 
 /**
  * The crossword board where the words are drawn
- * 
+ *
  * @author Vanamo Piirainen
  */
 public class BoardOfWords {
@@ -24,11 +24,10 @@ public class BoardOfWords {
         this.hight = hight;
     }
 
-    
     /**
      * Constructs the board with the first word
-     * 
-     * @param firstWord the first word on the board 
+     *
+     * @param firstWord the first word on the board
      */
     public void createBoard(String firstWord) {
         //alignment of the first word is horizontal
@@ -90,7 +89,7 @@ public class BoardOfWords {
         charsForBoard.add("OXOXOOOOOOXOXOO".toCharArray());
         charsForBoard.add("OOOOOXOXOOOOOOX".toCharArray());
         charsForBoard.add("XOXOXOOOOXOXOOO".toCharArray());
-        charsForBoard.add("OOOOOOXOXOOOOXO".toCharArray());
+        charsForBoard.add("OOOOOOXOXXOOOXO".toCharArray());
         charsForBoard.add("XOXOXOOOOXOXOOO".toCharArray());
         charsForBoard.add("OOOOOOXOOOOOOXO".toCharArray());
         charsForBoard.add("XOXOXOOOOXOXOOO".toCharArray());
@@ -102,16 +101,23 @@ public class BoardOfWords {
         for (int y = 0; y < this.hight; y++) {
             for (int x = 0; x < this.width; x++) {
                 //First row with the first word
-                if (y == 0 && x <= this.firstPosition.getWordLength()) {
-                    if (x < this.firstPosition.getWordLength()) {
+                int firstWordLength = this.firstPosition.getWordLength();
+                if (y == 0 && x <= firstWordLength) {
+                    if (x < firstWordLength) {
                         this.boardOfWords[y][x] = 'O';
-                    } else if (x == this.firstPosition.getWordLength()) {
+                    } else if (x == firstWordLength) {
                         this.boardOfWords[y][x] = 'X';
                     }
                 } else {
                     int x2 = this.checkLength(x, charsForBoard.get(0).length);
                     int y2 = this.checkLength(y, charsForBoard.size());
                     this.boardOfWords[y][x] = charsForBoard.get(y2)[x2];
+                    //Check that there will be no lonely letter on the upper right corner
+                    if (firstWordLength == this.width - 2) {
+                        if (y == 0 && x == this.width - 1) {
+                            this.boardOfWords[y][x] = 'X';
+                        }
+                    }
                 }
             }
         }
@@ -124,9 +130,9 @@ public class BoardOfWords {
      * Helper method for the method letterPositionsForLargeBoard. If there are
      * no more characters on charsForBoard, start from the beginning.
      *
-     * @param i         index of the character position (horizontal or vertical)
-     * @param length    index of the last character position
-     * @return          index of charsForBoard from which to take the next character
+     * @param i index of the character position (horizontal or vertical)
+     * @param length index of the last character position
+     * @return index of charsForBoard from which to take the next character
      */
     private int checkLength(int i, int length) {
         if (i >= length) {
@@ -136,14 +142,23 @@ public class BoardOfWords {
     }
 
     /**
-     * Words with only two letters are so rare in Finnish language that
-     * finding solution is very difficult if there are many two-letter 
-     * words on the board. This is a clumsy solution for removing them
-     * from the edges.
+     * Words with only two letters are so rare in Finnish language that finding
+     * solution is very difficult if there are many two-letter words on the
+     * board. This is a clumsy solution for removing them from the edges.
      */
     private void removeTwoLetterWordsFromEdges() {
+        //Remove from the first row
+        int y = 0;
+        for (int x = 0; x < this.width - 1; x++) {
+            char char0 = this.boardOfWords[y][x];
+            char char1 = this.boardOfWords[y + 1][x];
+            char char2 = this.boardOfWords[y + 2][x];
+            if (char0 == 'O' && char1 == 'O' && char2 == 'X') {
+                this.boardOfWords[y + 1][x] = 'X';
+            }
+        }
         //Remove from the last row
-        int y = this.hight - 1;
+        y = this.hight - 1;
         for (int x = 0; x < this.width - 1; x++) {
             char char0 = this.boardOfWords[y][x];
             char char1 = this.boardOfWords[y - 1][x];
@@ -163,13 +178,13 @@ public class BoardOfWords {
             }
         }
     }
-    
+
     /**
      * Draws the given word on the board. Alignment: 0 = horizontal 1 =
      * vertical.
      *
-     * @param word  word to be drawn
-     * @param p     position to which to draw the word
+     * @param word word to be drawn
+     * @param p position to which to draw the word
      */
     public void drawWord(String word, WordPosition p) {
         for (int i = 0; i < word.length(); i++) {
@@ -182,10 +197,10 @@ public class BoardOfWords {
     }
 
     /**
-     * Draws the starting word on the board. It is always drawn on the upper left
-     * corner of the board.
-     * 
-     * @param word  first word on the board 
+     * Draws the starting word on the board. It is always drawn on the upper
+     * left corner of the board.
+     *
+     * @param word first word on the board
      */
     public void drawFirstWord(String word) {
         WordPosition p = this.firstPosition;
@@ -201,14 +216,14 @@ public class BoardOfWords {
     /**
      * @param x horizontal index on the board
      * @param y vertical position on the board
-     * @return  character on the board at the given position
+     * @return character on the board at the given position
      */
     public char getLetter(int x, int y) {
         return this.boardOfWords[y][x];
     }
 
     /**
-     * 
+     *
      * @param x horizontal index on the board
      * @param y vertical position on the board
      * @param c character to be set on the board
@@ -216,25 +231,25 @@ public class BoardOfWords {
     public void setLetter(int x, int y, char c) {
         this.boardOfWords[y][x] = c;
     }
-    
+
     /**
-     * 
-     * @return  2D array containing the characters on the board 
+     *
+     * @return 2D array containing the characters on the board
      */
     public char[][] getBoard() {
         return boardOfWords;
     }
 
     /**
-     * 
-     * @return  width of the board 
+     *
+     * @return width of the board
      */
     public int getWidth() {
         return width;
     }
 
     /**
-     * 
+     *
      * @return hight of the board
      */
     public int getHight() {
@@ -242,8 +257,8 @@ public class BoardOfWords {
     }
 
     /**
-     * 
-     * @param boardOfWords 2D array containing the characters of the board 
+     *
+     * @param boardOfWords 2D array containing the characters of the board
      */
     private void setBoardOfWords(char[][] boardOfWords) {
         this.boardOfWords = boardOfWords;
@@ -251,7 +266,7 @@ public class BoardOfWords {
 
     /**
      * Creates a shallow copy of this BoardOfWords
-     * 
+     *
      * @return copy of this BoardOfWords
      */
     public BoardOfWords makeCopy() {
@@ -279,4 +294,32 @@ public class BoardOfWords {
         return board;
     }
 
+    public String toHTML() {
+        String board = "<!DOCTYPE html>\n"
+                + "<html>\n"
+                + "<head>\n"
+                + "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">"
+                + "</head>"
+                + "<body>\n"
+                + "<h1>Krypton ratkaisu</h1>\n"
+                + "<table style=\"border: 1px solid black; border-collapse: collapse; font-size:200%\">\n";
+        for (int y = 0; y < this.hight; y++) {
+            board.concat("<tr style=\"border: 1px solid black\">\n");
+            for (int x = 0; x < this.width; x++) {
+                board = board.concat("<td style=\"border: 1px solid black; "
+                        + "width: 40px; padding: 10px; text-align: center\">");
+                Character c = this.boardOfWords[y][x];
+                if (c == 'X') {
+                    board = board.concat("<i class=\"fa fa-heart\"></i>");
+                } else {
+                    board = board.concat(c.toString().toUpperCase());
+                }
+                board = board.concat("</td>\n");
+            }
+            board = board.concat("</tr>");
+        }
+
+        board.concat("</table>\n</body>\n</html>");
+        return board;
+    }
 }

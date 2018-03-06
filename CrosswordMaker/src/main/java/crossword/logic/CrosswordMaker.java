@@ -5,11 +5,11 @@ import crossword.lexicon.Lexicon;
 import org.jdom2.JDOMException;
 
 /**
- * Calls for all the necessary methods to construct the crossword puzzle.
- * Also takes care of converting the letters to numbers in the resulting 
- * crossword puzzle and finding a random starting word from the lexicon if
- * it is not provided by the user.
- * 
+ * Calls for all the necessary methods to construct the crossword puzzle. Also
+ * takes care of converting the letters to numbers in the resulting crossword
+ * puzzle and finding a random starting word from the lexicon if it is not
+ * provided by the user.
+ *
  * @author Vanamo Piirainen
  */
 public class CrosswordMaker {
@@ -22,9 +22,9 @@ public class CrosswordMaker {
 
     /**
      * Constructor using the lexicon imported from an xml file.
-     * 
-     * @param width     width of the crossword board
-     * @param hight     hight of the crossword board
+     *
+     * @param width width of the crossword board
+     * @param hight hight of the crossword board
      * @param firstWord user defined starting word, "r" if not provided
      */
     public CrosswordMaker(int width, int hight, String firstWord) {
@@ -52,10 +52,10 @@ public class CrosswordMaker {
     /**
      * Constructor for testing, lexicon is given as a list of words.
      *
-     * @param width     width of the crossword board
-     * @param hight     hight of the crossword board
+     * @param width width of the crossword board
+     * @param hight hight of the crossword board
      * @param firstWord user defined starting word
-     * @param wordList  CustomArrayList with the words as Strings
+     * @param wordList CustomArrayList with the words as Strings
      */
     public CrosswordMaker(int width, int hight, String firstWord,
             CustomArrayList<String> wordList) {
@@ -67,7 +67,8 @@ public class CrosswordMaker {
     }
 
     /**
-     * @return  BoardOfWords with the resulting crossword puzzle filled with letters
+     * @return BoardOfWords with the resulting crossword puzzle filled with
+     * letters
      */
     public BoardOfWords fillBoard() {
 
@@ -84,13 +85,11 @@ public class CrosswordMaker {
         //of the first word will interfere finding of word positions.
         this.boardOfWords.drawFirstWord(firstWord);
 
-        //System.out.println("\nKryptolauta alussa: \n" + this.boardOfWords);
+        System.out.println("\nKryptolauta alussa: \n" + this.boardOfWords);
 
         long startTime = System.currentTimeMillis();
         this.boardOfWords = wordFinder.findWordsForAllPositions(positions);
         long endTime = System.currentTimeMillis();
-        System.out.println(this.boardOfWords.getWidth() + "x" + this.boardOfWords.getHight() +
-            " " + this.firstWord);
         System.out.println("\nSanojen etsimiseen kului aikaa "
                 + (endTime - startTime) + "ms \n");
         return this.boardOfWords;
@@ -99,7 +98,7 @@ public class CrosswordMaker {
     /**
      * Converts the letters on the board to numbers.
      *
-     * @return  String presentation of the crossword puzzle filled with numbers
+     * @return String presentation of the crossword puzzle filled with numbers
      */
     public String lettersToNumbers() {
         CustomArrayList<Character> letters = new CustomArrayList<>();
@@ -116,10 +115,10 @@ public class CrosswordMaker {
     }
 
     /**
-     * Helper method for lettersToNumbers. Finds all the unique letters from the 
+     * Helper method for lettersToNumbers. Finds all the unique letters from the
      * board of words and stores them in a CustomArrayList.
      *
-     * @param letters   empty CustomArrayList for storing the letters
+     * @param letters empty CustomArrayList for storing the letters
      */
     private void getUniqueLettersFromBoard(CustomArrayList<Character> letters) {
         for (int y = 0; y < this.boardOfWords.getHight(); y++) {
@@ -135,7 +134,7 @@ public class CrosswordMaker {
     /**
      * Helper method for lettersToNumbers. Converts letters to numbers.
      *
-     * @param lettersToNumbers  empty array for storing a number for each letter
+     * @param lettersToNumbers empty array for storing a number for each letter
      */
     private void getNumbersForLetters(int[] lettersToNumbers) {
         int nextInt = 1;
@@ -143,16 +142,18 @@ public class CrosswordMaker {
             lettersToNumbers[i] = nextInt;
             nextInt++;
         }
-        
+
     }
 
     /**
-     * Helper method for lettersToNumbers. Creates a 2D array with all the letters
-     * of the resulting crossword puzzle presented as numbers.
+     * Helper method for lettersToNumbers. Creates a 2D array with all the
+     * letters of the resulting crossword puzzle presented as numbers.
      *
-     * @param letters           CustomArrayList storing the unique letters
-     * @param lettersToNumbers  array storing the numbers which the letters are converted to
-     * @param boardWithNumbers  letters of the crossword puzzle presented as numbers
+     * @param letters CustomArrayList storing the unique letters
+     * @param lettersToNumbers array storing the numbers which the letters are
+     * converted to
+     * @param boardWithNumbers letters of the crossword puzzle presented as
+     * numbers
      */
     private void fillBoardWithNumbers(CustomArrayList<Character> letters,
             int[] lettersToNumbers, Integer[][] boardWithNumbers) {
@@ -167,13 +168,12 @@ public class CrosswordMaker {
         }
     }
 
-    
     /**
      * Helper method for lettersToNumbers. Creates a string presentation of the
      * crossword puzzle with numbers.
-     * 
-     * @param boardWithNumbers  array with the crossword puzzle as numbers
-     * @return      String presentation of the crossword puzzle with numbers
+     *
+     * @param boardWithNumbers array with the crossword puzzle as numbers
+     * @return String presentation of the crossword puzzle with numbers
      */
     private String boardWithNumbersToString(Integer[][] boardWithNumbers) {
         String board = "";
@@ -193,11 +193,11 @@ public class CrosswordMaker {
 
     /**
      * Finds a random word from the lexicon of predefined length. If words of
-     * such length are not found, tries to find a shorter word. If no words are found,
-     * returns "a".
-     * 
-     * @param length    length of the word in demand 
-     * @return          random word from the lexicon as String
+     * such length are not found, tries to find a shorter word. If no words are
+     * found, returns "a".
+     *
+     * @param length length of the word in demand
+     * @return random word from the lexicon as String
      */
     public String getRandomWord(int length) {
         while (this.wordsByLength.get(length).isEmpty()) {
@@ -208,17 +208,17 @@ public class CrosswordMaker {
         }
         CustomArrayList<String> words = this.wordsByLength.get(length);
         long time = System.nanoTime();
-        int rand = (int) (time%words.size());
+        int rand = (int) (time % words.size());
         String word = words.get(rand);
 
         return word;
     }
 
     /**
-     * Creates a CustomArrayList with word lists containing all the words of 
-     * specific length. The index of the CustomArrayList defines the length of the
-     * words in the word list at that index. Assumes there are no words longer
-     * than maxWordLength.
+     * Creates a CustomArrayList with word lists containing all the words of
+     * specific length. The index of the CustomArrayList defines the length of
+     * the words in the word list at that index. Assumes there are no words
+     * longer than maxWordLength.
      */
     public void makeWordListsAccordingToLength() {
         this.wordsByLength
@@ -234,7 +234,7 @@ public class CrosswordMaker {
 
     /**
      *
-     * @return  BoardOfWords containing the crossword puzzle at its current state
+     * @return BoardOfWords containing the crossword puzzle at its current state
      */
     public BoardOfWords getBoardOfWords() {
         return this.boardOfWords;
@@ -242,7 +242,7 @@ public class CrosswordMaker {
 
     /**
      *
-     * @return  the lexicon used for creating the crossword puzzle
+     * @return the lexicon used for creating the crossword puzzle
      */
     public CustomArrayList<String> getWordList() {
         return this.wordList;
@@ -250,7 +250,8 @@ public class CrosswordMaker {
 
     /**
      *
-     * @return  CustomArrayList containing all the words in the lexicon sorted by length
+     * @return CustomArrayList containing all the words in the lexicon sorted by
+     * length
      */
     public CustomArrayList<CustomArrayList<String>> getWordsByLength() {
         return wordsByLength;

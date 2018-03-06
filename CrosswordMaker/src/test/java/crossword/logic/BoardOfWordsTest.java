@@ -65,6 +65,8 @@ public class BoardOfWordsTest {
 
         expResult[1][1] = 'X';
         expResult[1][3] = 'X';
+        expResult[1][5] = 'X';
+        expResult[1][7] = 'X';
         expResult[2][5] = 'X';
         expResult[2][7] = 'X';
         expResult[3][1] = 'X';
@@ -124,6 +126,7 @@ public class BoardOfWordsTest {
         expResult[5][15] = 'X';
         expResult[6][6] = 'X';
         expResult[6][8] = 'X';
+        expResult[6][9] = 'X';
         expResult[6][13] = 'X';
         expResult[6][15] = 'X';
         expResult[7][0] = 'X';
