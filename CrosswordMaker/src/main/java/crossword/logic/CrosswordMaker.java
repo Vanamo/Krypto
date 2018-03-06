@@ -111,7 +111,8 @@ public class CrosswordMaker {
         Integer[][] boardWithNumbers = new Integer[hight][width];
         this.fillBoardWithNumbers(letters, lettersToNumbers, boardWithNumbers);
 
-        return this.boardWithNumbersToString(boardWithNumbers);
+        return this.boardWithNumbersToHtmlString(boardWithNumbers);
+        //return this.boardWithNumbersToString(boardWithNumbers);
     }
 
     /**
@@ -182,12 +183,43 @@ public class CrosswordMaker {
                 if (boardWithNumbers[y][x] == null) {
                     board = board.concat("X\t");
                 } else {
-                    board = board.concat(boardWithNumbers[y][x] + "\t");
+                    board = board.concat(boardWithNumbers[y][x].toString() + "\t");
                 }
             }
             board = board.concat("\n\n");
         }
         board = board.concat("\n");
+        return board;
+    }
+
+    /**
+     * Helper method for lettersToNumbers. Creates a html presentation of the
+     * crossword puzzle with numbers.
+     *
+     * @param boardWithNumbers array with the crossword puzzle as numbers
+     * @return html presentation of the crossword puzzle with numbers
+     */
+    private String boardWithNumbersToHtmlString(Integer[][] boardWithNumbers) {
+        String board = "<h1>Krypto</h1>\n"
+                + "<table style=\"border: 1px solid black; border-collapse: collapse; font-size:200%\">\n";
+        for (int y = 0; y < boardWithNumbers.length; y++) {
+            board.concat("<tr style=\"border: 1px solid black\">\n");
+            for (int x = 0; x < boardWithNumbers[0].length; x++) {
+                if (boardWithNumbers[y][x] == null) {
+                    board = board.concat("<td style=\"border: 1px solid black; "
+                            + "width: 40px; padding: 10px; text-align: center\">");
+                    board = board.concat("<i class=\"fa fa-heart\"></i>");
+                } else {
+                    board = board.concat("<td style=\"border: 1px solid black; "
+                            + "width: 40px; padding: 10px; text-align: left;"
+                            + "vertical-align: top; font-size: 50%\">");
+                    board = board.concat(boardWithNumbers[y][x].toString());
+                }
+                board = board.concat("</td>\n");
+            }
+            board = board.concat("</tr>");
+        }
+        board = board.concat("</table>");
         return board;
     }
 

@@ -60,10 +60,19 @@ public class UserInterface {
     private void printSolutionsToFile(BoardOfWords solutionWithLetters, String solutionWithNumbers) {
         String filename = "krypto_" + System.currentTimeMillis() + ".html";
         try {
-            FileWriter fw = new FileWriter("c:/temp/" + filename);
+            //FileWriter fw = new FileWriter("c:/temp/" + filename);
+            FileWriter fw = new FileWriter(filename);
             PrintWriter writer = new PrintWriter(fw);
+            writer.println("<!DOCTYPE html>\n"
+                + "<html>\n"
+                + "<head>\n"
+                + "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">"
+                + "</head>\n"
+                + "<body>\n");
+            writer.println(solutionWithNumbers);
+            writer.println("<br><br><br><br><br><br>\n");
             writer.println(solutionWithLetters.toHTML());
-            //writer.println(solutionWithNumbers);
+            writer.println("</body>\n</html>");
             writer.close();
         } catch (Exception ex) {
             ex.printStackTrace();

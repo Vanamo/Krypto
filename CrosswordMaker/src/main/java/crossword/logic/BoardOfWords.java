@@ -295,13 +295,7 @@ public class BoardOfWords {
     }
 
     public String toHTML() {
-        String board = "<!DOCTYPE html>\n"
-                + "<html>\n"
-                + "<head>\n"
-                + "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">"
-                + "</head>"
-                + "<body>\n"
-                + "<h1>Krypton ratkaisu</h1>\n"
+        String board = "<h1>Krypton ratkaisu</h1>\n"
                 + "<table style=\"border: 1px solid black; border-collapse: collapse; font-size:200%\">\n";
         for (int y = 0; y < this.hight; y++) {
             board.concat("<tr style=\"border: 1px solid black\">\n");
@@ -318,8 +312,7 @@ public class BoardOfWords {
             }
             board = board.concat("</tr>");
         }
-
-        board.concat("</table>\n</body>\n</html>");
+        board = board.concat("</table>");
         return board;
     }
 }
