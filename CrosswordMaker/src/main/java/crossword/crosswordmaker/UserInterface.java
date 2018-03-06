@@ -43,20 +43,6 @@ public class UserInterface {
         }
     }
 
-    public void makeCrossword(int width, int hight, String firstWord) {
-        System.out.println("Generoidaan kryptoa... \n");
-
-        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight, firstWord);
-        BoardOfWords solutionWithLetters = crosswordMaker.fillBoard();
-        if (solutionWithLetters == null) {
-            System.out.println("Ratkaisua ei löytynyt. Yritä uudestaan eri aloitussanalla.");
-        } else {
-            String solutionWithNumbers = crosswordMaker.lettersToNumbers();
-            System.out.println(solutionWithLetters);
-            System.out.println(solutionWithNumbers);
-        }
-    }
-
     private void printSolutionsToFile(BoardOfWords solutionWithLetters, String solutionWithNumbers) {
         String filename = "krypto_" + System.currentTimeMillis() + ".html";
         try {
