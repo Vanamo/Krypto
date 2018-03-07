@@ -46,7 +46,7 @@ public class WordPosition implements Comparable<WordPosition> {
 
     /**
      *
-     * @returnx alignment of the WordPosition
+     * @return alignment of the WordPosition
      */
     public Alignment getAlignment() {
         return alignment;
@@ -54,7 +54,7 @@ public class WordPosition implements Comparable<WordPosition> {
 
     /**
      *
-     * @returnx length of the WordPosition
+     * @return length of the WordPosition
      */
     public int getWordLength() {
         return wordLength;

@@ -8,7 +8,7 @@ package crossword.datastructures;
  * in the Java implementation of ArrayList.
  *
  * @author Vanamo Piirainen
- * @param <E>
+ * @param <E> element class
  */
 public class CustomArrayList<E> {
 

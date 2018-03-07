@@ -67,7 +67,7 @@ public class SearchTreeNode {
     /**
      * Method to set a child node manually, used only for testing
      * 
-     * @param newNext
+     * @param newNext   node to be set as next
      * @see     setChildForTesting
      */
     public void setNextForTesting(SearchTreeNode newNext) {

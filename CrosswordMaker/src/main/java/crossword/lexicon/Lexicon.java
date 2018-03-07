@@ -9,9 +9,9 @@ import org.jdom2.input.SAXBuilder;
 public class Lexicon {
 
     /**
-     * Imports the Finnish lexicon from The Institute for the Languages of Finland 
-     * (http://kaino.kotus.fi/sanat/nykysuomi/) containing 94 110 words. Also adds 
-     * plurals for some of the words.
+     * Imports the Finnish lexicon from The Institute for the Languages of
+     * Finland (http://kaino.kotus.fi/sanat/nykysuomi/) containing 94 110 words.
+     * Also adds plurals for some of the words.
      */
     public Lexicon() {
     }
@@ -19,8 +19,8 @@ public class Lexicon {
     /**
      * Import lexicon from xml file using DOM.
      *
-     * @return      CustomArrayList containing the words of the lexicon
-     * @throws JDOMException
+     * @return CustomArrayList containing the words of the lexicon
+     * @throws JDOMException   if the file is not found
      */
     public CustomArrayList<String> getLexicon() throws JDOMException {
 
@@ -28,9 +28,10 @@ public class Lexicon {
         CustomArrayList<String> wordList = new CustomArrayList<>();
 
         try {
-            File inputFile = new File("./kotus-sanalista_v1/kotus-sanalista_v1.xml");
+            File input = new File("./kotus-sanalista_v1/kotus-sanalista_v1.xml");
+            //InputStream input = getClass().getClassLoader().getResourceAsStream("kotus-sanalista_v1.xml");
             SAXBuilder saxBuilder = new SAXBuilder();
-            Document document = saxBuilder.build(inputFile);
+            Document document = saxBuilder.build(input);
             Element classElement = document.getRootElement();
 
             elementList = classElement.getChildren("st");
@@ -64,9 +65,9 @@ public class Lexicon {
     /**
      * Generate a list of words of defined length.
      *
-     * @param wordList
-     * @param wordLength
-     * @return
+     * @param wordList   array containing all the words of the lexicon 
+     * @param wordLength searches for words of this length
+     * @return           array containing all words of defined length
      */
     public CustomArrayList<String> xLetterWords(CustomArrayList<String> wordList,
             int wordLength) {
@@ -85,9 +86,9 @@ public class Lexicon {
      * Constructs plurals for some nouns according to the conjucation rules of
      * Kotus and adds them to the wordlist.
      *
-     * @param wordList  CustomArrayList containing the words of the lexicon
-     * @param word      the word for which to construct the plural 
-     * @param c         th number of the conjucation rule
+     * @param wordList CustomArrayList containing the words of the lexicon
+     * @param word the word for which to construct the plural
+     * @param c th number of the conjucation rule
      */
     public void addPlural(CustomArrayList<String> wordList, String word, int c) {
 
