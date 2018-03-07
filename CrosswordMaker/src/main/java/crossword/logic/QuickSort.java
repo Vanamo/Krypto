@@ -3,25 +3,36 @@ package crossword.logic;
 import crossword.datastructures.CustomArrayList;
 
 /**
- *
+ * My own implementation of quick sort. Code from
+ * http://www.java2novice.com/java-sorting-algorithms/quick-sort/
+ * 
  * @author Vanamo Piirainen
  */
 public class QuickSort {
 
     private CustomArrayList<WordPosition> array;
     
+    /**
+     *
+     */
     public QuickSort() {
     }
      
     /**
-     * Uses quick sort to sort the contents of the custom arraylist. Code from
-     * http://www.java2novice.com/java-sorting-algorithms/quick-sort/
+     * Uses quick sort to sort the contents of the custom arraylist. 
+     * 
+     * @param array CustomArrayList containing WordPositions to be sorted
      */
     public void sort(CustomArrayList<WordPosition> array) {
         this.array = array;
         this.quicksort(0, array.size() - 1);
     }
 
+    /**
+     * 
+     * @param left  index defining the beginning of the part of the array to be sorted out
+     * @param right index defining the end of the part of the array to be sorted out
+     */
     private void quicksort(int left, int right) {
         int[] partition = this.makePartition(left, right);
         int i = partition[0];
@@ -38,9 +49,9 @@ public class QuickSort {
     /**
      * Helper method for quicksort
      *
-     * @param left
-     * @param right
-     * @return
+     * @param left  index defining the beginning of the part of the array to be sorted out
+     * @param right index defining the end of the part of the array to be sorted out
+     * @return      array containing the indices to make the partition
      */
     private int[] makePartition(int left, int right) {
         WordPosition partitionElement = array.get(left);
@@ -66,8 +77,8 @@ public class QuickSort {
     /**
      * Helper method for quicksort
      *
-     * @param i
-     * @param j
+     * @param i index of the array
+     * @param j index of the array
      */
     private void switchPlaces(int i, int j) {
         WordPosition temp = array.get(i);

@@ -3,7 +3,9 @@ package crossword.logic;
 import crossword.datastructures.CustomArrayList;
 
 /**
- *
+ * For a board filled with 'X's (empty squares) and 'O's (to be letters),
+ * finds positions where words will be laid.
+ * 
  * @author Vanamo Piirainen
  */
 public class WordPositionFinder {
@@ -23,10 +25,8 @@ public class WordPositionFinder {
     }
 
     /**
-     * For a board filled with 'X's (empty squares) and 'O's (to be letters),
-     * find positions where words will be layed.
      *
-     * @return
+     * @return  array containing all the positions on the board where a word should be found
      */
     public CustomArrayList findPositions() {
         positions = new CustomArrayList<>();
@@ -72,11 +72,11 @@ public class WordPositionFinder {
     /**
      * Helper method for findPositions.
      *
-     * @param prev
-     * @param x
-     * @param y
-     * @param alignment
-     * @param current
+     * @param prev      previous character
+     * @param x         x coordinate of the board
+     * @param y         y coordinate of the board
+     * @param alignment horizontal/vertical
+     * @param current   character at the current coordinates
      */
     private void addPosition(char prev, int x, int y, Alignment alignment, char current) {
         if (prev == 'X' && current == 'O') {

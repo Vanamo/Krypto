@@ -100,7 +100,7 @@ public class CrosswordMaker {
      *
      * @return String presentation of the crossword puzzle filled with numbers
      */
-    public String lettersToNumbers() {
+    public Integer[][] lettersToNumbers() {
         CustomArrayList<Character> letters = new CustomArrayList<>();
         this.getUniqueLettersFromBoard(letters);
         int[] lettersToNumbers = new int[letters.size()];
@@ -111,8 +111,7 @@ public class CrosswordMaker {
         Integer[][] boardWithNumbers = new Integer[hight][width];
         this.fillBoardWithNumbers(letters, lettersToNumbers, boardWithNumbers);
 
-        return this.boardWithNumbersToHtmlString(boardWithNumbers);
-        //return this.boardWithNumbersToString(boardWithNumbers);
+        return boardWithNumbers;
     }
 
     /**
@@ -176,7 +175,7 @@ public class CrosswordMaker {
      * @param boardWithNumbers array with the crossword puzzle as numbers
      * @return String presentation of the crossword puzzle with numbers
      */
-    private String boardWithNumbersToString(Integer[][] boardWithNumbers) {
+    public String boardWithNumbersToString(Integer[][] boardWithNumbers) {
         String board = "";
         for (int y = 0; y < boardWithNumbers.length; y++) {
             for (int x = 0; x < boardWithNumbers[0].length; x++) {
@@ -199,7 +198,7 @@ public class CrosswordMaker {
      * @param boardWithNumbers array with the crossword puzzle as numbers
      * @return html presentation of the crossword puzzle with numbers
      */
-    private String boardWithNumbersToHtmlString(Integer[][] boardWithNumbers) {
+    public String boardWithNumbersToHtmlString(Integer[][] boardWithNumbers) {
         String board = "<h1>Krypto</h1>\n"
                 + "<table style=\"border: 1px solid black; border-collapse: collapse; font-size:200%\">\n";
         for (int y = 0; y < boardWithNumbers.length; y++) {
@@ -207,11 +206,11 @@ public class CrosswordMaker {
             for (int x = 0; x < boardWithNumbers[0].length; x++) {
                 if (boardWithNumbers[y][x] == null) {
                     board = board.concat("<td style=\"border: 1px solid black; "
-                            + "width: 40px; padding: 10px; text-align: center\">");
+                            + "width: 40px; hight: 40 px; padding: 10px; text-align: center\">");
                     board = board.concat("<i class=\"fa fa-heart\"></i>");
                 } else {
                     board = board.concat("<td style=\"border: 1px solid black; "
-                            + "width: 40px; padding: 10px; text-align: left;"
+                            + "width: 40px; hight: 40px; padding: 10px; text-align: left;"
                             + "vertical-align: top; font-size: 50%\">");
                     board = board.concat(boardWithNumbers[y][x].toString());
                 }

@@ -5,7 +5,8 @@ import crossword.datastructures.SearchTree;
 import crossword.datastructures.SearchTreeNode;
 
 /**
- *
+ * The core of the program. Finds words for all WordPositions on the board.
+ * 
  * @author Vanamo Piirainen
  */
 public class WordFinder {
@@ -16,10 +17,16 @@ public class WordFinder {
     private CustomArrayList<Integer> timesVisitedAtPosition;
     private int count = 0;
 
+    /**
+     * 
+     * @param boardOfWords  the words will be drawn on the board
+     * @param wordsByLength CustomArrayList containing all the words of the lexicon sorted by length
+     */
     public WordFinder(BoardOfWords boardOfWords,
             CustomArrayList<CustomArrayList<String>> wordsByLength) {
         this.boardOfWords = boardOfWords;
         int size = wordsByLength.size();
+        //Create search trees for all different word lengths
         this.wordTreesByWordLength = new CustomArrayList<>(size);
         for (int i = 1; i < size; i++) {
             SearchTree searchTree = new SearchTree();
@@ -31,8 +38,8 @@ public class WordFinder {
     /**
      * Finds words for all positions given as an ArrayList.
      *
-     * @param positions
-     * @return
+     * @param positions all word positions on the board
+     * @return          the resulting BoardOfWords, null if no solution is found
      */
     public BoardOfWords findWordsForAllPositions(CustomArrayList<WordPosition> positions) {
         CustomArrayList<String> usedWords = new CustomArrayList<>();
@@ -49,8 +56,10 @@ public class WordFinder {
      * positions on the board. Pseudocode from the lecture notes of Jyrki Kivinen, 
      * Datastructures and algorithms, fall 2017 (eight queens problem).
      *
-     * @param positions
-     * @param positionIndex
+     * @param positionIndex indicates the word position where to find a word next  
+     * @param board         board with the words already drawn
+     * @param usedWords     list of words already drawn on the board
+     * @return              BoardOfWords with all the word positions filled, null if no solution is found
      */
     private BoardOfWords layWords(int positionIndex, BoardOfWords board,
             CustomArrayList<String> usedWords) {
@@ -89,13 +98,14 @@ public class WordFinder {
     }
 
     /**
-     * Find all words that fit to the given position.
+     * Finds all words that fit to the given position.
      *
-     * @param newPosition
-     * @return
+     * @param newPosition   the position where to find a fitting word
+     * @return              list of all the fitting words
      */
     public CustomArrayList<String> findWords(WordPosition newPosition) {
         String mask = makeMask(newPosition);
+        //The first char of the mask is space to match the root of the search tree
         SearchTree wordsOfMaskLength = this.wordTreesByWordLength.get(mask.length() - 1);
         SearchTreeNode root = wordsOfMaskLength.getRoot();
         CustomArrayList<String> fittingWords = new CustomArrayList<>();
@@ -105,16 +115,16 @@ public class WordFinder {
     /**
      * A helper merhod for the findWords method using recursion.
      *
-     * @param mask
-     * @param node
-     * @param level
-     * @param fittingWords
-     * @return
+     * @param mask          String presentation of the word position to which to find a word
+     * @param node          node of the search tree to match the specified char of the mask
+     * @param index         indicates the char in the mask for which to search for a matching node
+     * @param fittingWords  if a fitting word is found it is added to this array
+     * @return              array containing all the words fitting to a certain mask
      */
     private CustomArrayList<String> searchWordTree(String mask, SearchTreeNode node,
-            int level, CustomArrayList<String> fittingWords) {
-        if (mask.charAt(level) == ' ' || mask.charAt(level) == node.getKey()) {
-            if (level + 1 == mask.length()) {
+            int index, CustomArrayList<String> fittingWords) {
+        if (mask.charAt(index) == ' ' || mask.charAt(index) == node.getKey()) {
+            if (index + 1 == mask.length()) {
                 if (node.getWord() != null) {
                     fittingWords.add(node.getWord());
                 }
@@ -122,7 +132,7 @@ public class WordFinder {
             }
             SearchTreeNode childNode = node.getChild();
             while (childNode != null) {
-                fittingWords = this.searchWordTree(mask, childNode, level + 1, fittingWords);
+                fittingWords = this.searchWordTree(mask, childNode, index + 1, fittingWords);
                 childNode = childNode.getNext();
             }
         }
@@ -133,8 +143,8 @@ public class WordFinder {
      * Creates a String (= the mask) for the word to search with the letters
      * already positioned on the board and empty squares marked with space.
      *
-     * @param newPosition
-     * @return
+     * @param newPosition   the position on the board to find the mask for
+     * @return              String presentation of the word position (mask)
      */
     private String makeMask(WordPosition newPosition) {
         String mask = " "; //To match the root of the wordTree 
@@ -149,12 +159,13 @@ public class WordFinder {
     }
 
     /**
-     * A helper method for the makeMask method.
+     * A helper method for the makeMask method. Adds the correct char to the mask 
+     * according to the board.
      *
-     * @param mask
-     * @param y
-     * @param x
-     * @return
+     * @param mask  the string where to add the char
+     * @param y     y coordinate of the character to add
+     * @param x     x coordinate of the character to add
+     * @return      the mask with a new character
      */
     private String createString(String mask, int y, int x) {
         char newChar = this.boardOfWords.getLetter(x, y);
@@ -168,6 +179,8 @@ public class WordFinder {
 
     /**
      * Statistics to find out where the algorithm struggles to find a word
+     * 
+     * @param positionIndex index of the position visited 
      */
     private void collectStatistics(int positionIndex) {
         this.count++;
@@ -193,6 +206,10 @@ public class WordFinder {
         }
     }
 
+    /**
+     *
+     * @return  array containing statistics of how many times each word position has been visited
+     */
     public CustomArrayList<Integer> getTimesVisitedAtPosition() {
         return timesVisitedAtPosition;
     }

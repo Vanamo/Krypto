@@ -80,7 +80,8 @@ public class CrosswordMakerTest {
         CrosswordMaker instance = new CrosswordMaker(5, 5, "roima", wordList);
         instance.fillBoard();
         String expResult = "1\t2\t3\t4\t5\t\n\n5\tX\t6\tX\t7\t\n\n5\t5\t8\t2\t9\t\n\n10\tX\t11\tX\t11\t\n\n5\t5\t12\t2\t13\t\n\n\n";
-        String result = instance.lettersToNumbers();
+        Integer[][] boardWithNumbers = instance.lettersToNumbers();
+        String result = instance.boardWithNumbersToString(boardWithNumbers);
         assertEquals(expResult, result);
     }
 

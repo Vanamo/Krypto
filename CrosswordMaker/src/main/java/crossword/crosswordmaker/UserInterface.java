@@ -38,7 +38,8 @@ public class UserInterface {
         if (solutionWithLetters == null) {
             System.out.println("Ratkaisua ei löytynyt. Yritä uudestaan eri aloitussanalla.");
         } else {
-            String solutionWithNumbers = crosswordMaker.lettersToNumbers();
+            Integer[][] boardWithNumbers = crosswordMaker.lettersToNumbers();
+            String solutionWithNumbers = crosswordMaker.boardWithNumbersToHtmlString(boardWithNumbers);
             printSolutionsToFile(solutionWithLetters, solutionWithNumbers);
         }
     }

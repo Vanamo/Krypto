@@ -2,7 +2,7 @@ package crossword.logic;
 
 /**
  * Defines the position of a new word on the board: x, y coordinates of the
- * starting position alignment (0 = for horizontal, 1 = for vertical alignment)
+ * starting position, alignment (horizontal or vertical alignment)
  * and length of the word.
  *
  * @author Vanamo Piirainen
@@ -14,6 +14,13 @@ public class WordPosition implements Comparable<WordPosition> {
     private Alignment alignment;
     private int wordLength;
 
+    /**
+     *
+     * @param x             x coordinate of the first letter of the word
+     * @param y             y coordinate of the first letter of the word
+     * @param alignment     alignment of the word (horizontal/vertical)
+     * @param wordLength    length of the word
+     */
     public WordPosition(int x, int y, Alignment alignment, int wordLength) {
         this.x = x;
         this.y = y;
@@ -21,18 +28,34 @@ public class WordPosition implements Comparable<WordPosition> {
         this.wordLength = wordLength;
     }
 
+    /**
+     *
+     * @return  x coordinate of the WordPosition
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     *
+     * @return  y coordinate of the WordPosition
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     *
+     * @returnx alignment of the WordPosition
+     */
     public Alignment getAlignment() {
         return alignment;
     }
 
+    /**
+     *
+     * @returnx length of the WordPosition
+     */
     public int getWordLength() {
         return wordLength;
     }

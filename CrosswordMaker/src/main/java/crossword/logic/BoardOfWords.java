@@ -301,7 +301,7 @@ public class BoardOfWords {
             board.concat("<tr style=\"border: 1px solid black\">\n");
             for (int x = 0; x < this.width; x++) {
                 board = board.concat("<td style=\"border: 1px solid black; "
-                        + "width: 40px; padding: 10px; text-align: center\">");
+                        + "width: 40px; hight: 40px; padding: 10px; text-align: center\">");
                 Character c = this.boardOfWords[y][x];
                 if (c == 'X') {
                     board = board.concat("<i class=\"fa fa-heart\"></i>");
