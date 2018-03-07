@@ -2,6 +2,7 @@ package crossword.lexicon;
 
 import crossword.datastructures.CustomArrayList;
 import java.io.*;
+import java.net.URL;
 import java.util.List;
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
@@ -28,8 +29,8 @@ public class Lexicon {
         CustomArrayList<String> wordList = new CustomArrayList<>();
 
         try {
-            File input = new File("./kotus-sanalista_v1/kotus-sanalista_v1.xml");
-            //InputStream input = getClass().getClassLoader().getResourceAsStream("kotus-sanalista_v1.xml");
+            //File input = new File("./kotus-sanalista_v1/kotus-sanalista_v1.xml");
+            InputStream input = getClass().getClassLoader().getResourceAsStream("kotus-sanalista_v1.xml");
             SAXBuilder saxBuilder = new SAXBuilder();
             Document document = saxBuilder.build(input);
             Element classElement = document.getRootElement();
