@@ -22,7 +22,7 @@ public class UserInterface {
         System.out.println("Anna krypton leveys:");
         int width = scanner.nextInt();
         System.out.println("Anna krypton korkeus:");
-        int hight = scanner.nextInt();
+        int height = scanner.nextInt();
         System.out.println("Anna aloitussana tai paina r ja enter:");
         String firstWord = scanner.next();
         while (firstWord.length() > width) {
@@ -33,7 +33,7 @@ public class UserInterface {
 
         System.out.println("Generoidaan kryptoa... \n");
 
-        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight, firstWord);
+        CrosswordMaker crosswordMaker = new CrosswordMaker(width, height, firstWord);
         BoardOfWords solutionWithLetters = crosswordMaker.fillBoard();
         if (solutionWithLetters == null) {
             System.out.println("Ratkaisua ei löytynyt. Yritä uudestaan eri aloitussanalla.");

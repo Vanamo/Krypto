@@ -24,10 +24,10 @@ public class CrosswordMaker {
      * Constructor using the lexicon imported from an xml file.
      *
      * @param width width of the crossword board
-     * @param hight hight of the crossword board
+     * @param height height of the crossword board
      * @param firstWord user defined starting word, "r" if not provided
      */
-    public CrosswordMaker(int width, int hight, String firstWord) {
+    public CrosswordMaker(int width, int height, String firstWord) {
         Lexicon lexicon = new Lexicon();
         try {
             this.wordList = lexicon.getLexicon();
@@ -44,7 +44,7 @@ public class CrosswordMaker {
             System.out.println("Aloitussanaksi arvottiin " + firstWord);
         }
         this.firstWord = firstWord;
-        this.boardOfWords = new BoardOfWords(width, hight);
+        this.boardOfWords = new BoardOfWords(width, height);
         this.boardOfWords.createBoard(firstWord);
 
     }
@@ -53,16 +53,16 @@ public class CrosswordMaker {
      * Constructor for testing, lexicon is given as a list of words.
      *
      * @param width width of the crossword board
-     * @param hight hight of the crossword board
+     * @param height height of the crossword board
      * @param firstWord user defined starting word
      * @param wordList CustomArrayList with the words as Strings
      */
-    public CrosswordMaker(int width, int hight, String firstWord,
+    public CrosswordMaker(int width, int height, String firstWord,
             CustomArrayList<String> wordList) {
         this.wordList = wordList;
         this.firstWord = firstWord;
         this.makeWordListsAccordingToLength();
-        this.boardOfWords = new BoardOfWords(width, hight);
+        this.boardOfWords = new BoardOfWords(width, height);
         this.boardOfWords.createBoard(firstWord);
     }
 
@@ -106,9 +106,9 @@ public class CrosswordMaker {
         int[] lettersToNumbers = new int[letters.size()];
         this.getNumbersForLetters(lettersToNumbers);
 
-        int hight = this.boardOfWords.getHight();
+        int height = this.boardOfWords.getHeight();
         int width = this.boardOfWords.getWidth();
-        Integer[][] boardWithNumbers = new Integer[hight][width];
+        Integer[][] boardWithNumbers = new Integer[height][width];
         this.fillBoardWithNumbers(letters, lettersToNumbers, boardWithNumbers);
 
         return boardWithNumbers;
@@ -121,7 +121,7 @@ public class CrosswordMaker {
      * @param letters empty CustomArrayList for storing the letters
      */
     private void getUniqueLettersFromBoard(CustomArrayList<Character> letters) {
-        for (int y = 0; y < this.boardOfWords.getHight(); y++) {
+        for (int y = 0; y < this.boardOfWords.getHeight(); y++) {
             for (int x = 0; x < this.boardOfWords.getWidth(); x++) {
                 Character letter = this.boardOfWords.getLetter(x, y);
                 if (!letters.contains(letter) && letter != 'X') {
@@ -157,7 +157,7 @@ public class CrosswordMaker {
      */
     private void fillBoardWithNumbers(CustomArrayList<Character> letters,
             int[] lettersToNumbers, Integer[][] boardWithNumbers) {
-        for (int y = 0; y < this.boardOfWords.getHight(); y++) {
+        for (int y = 0; y < this.boardOfWords.getHeight(); y++) {
             for (int x = 0; x < this.boardOfWords.getWidth(); x++) {
                 Character letter = this.boardOfWords.getLetter(x, y);
                 if (letter != 'X') {
@@ -206,11 +206,11 @@ public class CrosswordMaker {
             for (int x = 0; x < boardWithNumbers[0].length; x++) {
                 if (boardWithNumbers[y][x] == null) {
                     board = board.concat("<td style=\"border: 1px solid black; "
-                            + "width: 40px; hight: 40 px; padding: 10px; text-align: center\">");
+                            + "width: 40px; height: 40px; padding: 10px; text-align: center\">");
                     board = board.concat("<i class=\"fa fa-heart\"></i>");
                 } else {
                     board = board.concat("<td style=\"border: 1px solid black; "
-                            + "width: 40px; hight: 40px; padding: 10px; text-align: left;"
+                            + "width: 40px; height: 40px; padding: 10px; text-align: left;"
                             + "vertical-align: top; font-size: 50%\">");
                     board = board.concat(boardWithNumbers[y][x].toString());
                 }

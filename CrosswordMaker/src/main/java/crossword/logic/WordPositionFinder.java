@@ -11,7 +11,7 @@ import crossword.datastructures.CustomArrayList;
 public class WordPositionFinder {
 
     private char[][] boardOfWords;
-    private int hight;
+    private int height;
     private int width;
     private int wordLength;
     private int startX;
@@ -20,7 +20,7 @@ public class WordPositionFinder {
 
     public WordPositionFinder(char[][] boardOfWords) {
         this.boardOfWords = boardOfWords;
-        this.hight = boardOfWords.length;
+        this.height = boardOfWords.length;
         this.width = boardOfWords[0].length;
     }
 
@@ -37,7 +37,7 @@ public class WordPositionFinder {
 
         //Find horizontal positions 
         alignment = Alignment.HORIZONTAL;
-        for (int y = 0; y < this.hight; y++) {
+        for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 this.addPosition(prev, x, y, alignment, this.boardOfWords[y][x]);
                 prev = this.boardOfWords[y][x];
@@ -51,12 +51,12 @@ public class WordPositionFinder {
         //Find vertical positions 
         alignment = Alignment.VERTICAL;
         for (int x = 0; x < this.width; x++) {
-            for (int y = 0; y < this.hight; y++) {
+            for (int y = 0; y < this.height; y++) {
                 this.addPosition(prev, x, y, alignment, this.boardOfWords[y][x]);
                 prev = this.boardOfWords[y][x];
             }
             //end of the column
-            this.addPosition(prev, x, this.hight - 1, alignment, 'X');
+            this.addPosition(prev, x, this.height - 1, alignment, 'X');
             prev = 'X';
             this.wordLength = 0;
         }

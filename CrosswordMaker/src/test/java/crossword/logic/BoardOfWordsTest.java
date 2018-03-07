@@ -20,12 +20,12 @@ public class BoardOfWordsTest {
         System.out.println("createSmallBoard");
         String firstWord = "testi";
         int boardWidth = 6;
-        int boardHight = 4;
-        BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
+        int boardHeight = 4;
+        BoardOfWords instance = new BoardOfWords(boardWidth, boardHeight);
         instance.createBoard(firstWord);
         char[][] result = instance.getBoard();
 
-        char[][] expResult = new char[boardHight][boardWidth];
+        char[][] expResult = new char[boardHeight][boardWidth];
         for (int i = 0; i < expResult.length; i++) {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';
@@ -50,13 +50,13 @@ public class BoardOfWordsTest {
         System.out.println("createLargeBoard");
         String firstWord = "12345678";
         int boardWidth = 8;
-        int boardHight = 6;
-        BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
+        int boardHeight = 6;
+        BoardOfWords instance = new BoardOfWords(boardWidth, boardHeight);
         instance.createBoard(firstWord);
         instance.letterPositionsForLargeBoard();
         char[][] result = instance.getBoard();
 
-        char[][] expResult = new char[boardHight][boardWidth];
+        char[][] expResult = new char[boardHeight][boardWidth];
         for (int i = 0; i < expResult.length; i++) {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';
@@ -90,12 +90,12 @@ public class BoardOfWordsTest {
         System.out.println("createVeryLargeBoard");
         String firstWord = "testi";
         int boardWidth = 16;
-        int boardHight = 15;
-        BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
+        int boardHeight = 15;
+        BoardOfWords instance = new BoardOfWords(boardWidth, boardHeight);
         instance.createBoard(firstWord);
         char[][] result = instance.getBoard();
 
-        char[][] expResult = new char[boardHight][boardWidth];
+        char[][] expResult = new char[boardHeight][boardWidth];
         for (int i = 0; i < expResult.length; i++) {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';
@@ -178,14 +178,14 @@ public class BoardOfWordsTest {
         int y = 3;
         Alignment alignment = Alignment.HORIZONTAL;
         int boardWidth = 5;
-        int boardHight = 5;
+        int boardHeight = 5;
         WordPosition position = new WordPosition(x, y, alignment, word.length());
-        BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
+        BoardOfWords instance = new BoardOfWords(boardWidth, boardHeight);
         instance.createBoard("testi");
         instance.drawWord(word, position);
         char[][] result = instance.getBoard();
 
-        char[][] expResult = new char[boardHight][boardWidth];
+        char[][] expResult = new char[boardHeight][boardWidth];
         for (int i = 0; i < expResult.length; i++) {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';
@@ -209,14 +209,14 @@ public class BoardOfWordsTest {
         int y = 3;
         Alignment alignment = Alignment.VERTICAL;
         int boardWidth = 5;
-        int boardHight = 5;
+        int boardHeight = 5;
         WordPosition position = new WordPosition(x, y, alignment, word.length());
-        BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
+        BoardOfWords instance = new BoardOfWords(boardWidth, boardHeight);
         instance.createBoard("testi");
         instance.drawWord(word, position);
         char[][] result = instance.getBoard();
 
-        char[][] expResult = new char[boardHight][boardWidth];
+        char[][] expResult = new char[boardHeight][boardWidth];
         for (int i = 0; i < expResult.length; i++) {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';
@@ -240,13 +240,13 @@ public class BoardOfWordsTest {
         System.out.println("drawFirstWord");
         String word = "ai";
         int boardWidth = 5;
-        int boardHight = 5;
-        BoardOfWords instance = new BoardOfWords(boardWidth, boardHight);
+        int boardHeight = 5;
+        BoardOfWords instance = new BoardOfWords(boardWidth, boardHeight);
         instance.createBoard(word);
         instance.drawFirstWord(word);
         char[][] result = instance.getBoard();
 
-        char[][] expResult = new char[boardHight][boardWidth];
+        char[][] expResult = new char[boardHeight][boardWidth];
         for (int i = 0; i < expResult.length; i++) {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';
@@ -294,12 +294,12 @@ public class BoardOfWordsTest {
     public void testMakeCopy() {
         System.out.println("makeCopy");
         int width = 5;
-        int hight = 7;
-        BoardOfWords instance = new BoardOfWords(width, hight);
+        int height = 7;
+        BoardOfWords instance = new BoardOfWords(width, height);
         instance.createBoard("testi");
         BoardOfWords result = instance.makeCopy();
 
-        char[][] expResult = new char[hight][width];
+        char[][] expResult = new char[height][width];
         for (int i = 0; i < expResult.length; i++) {
             for (int j = 0; j < expResult[0].length; j++) {
                 expResult[i][j] = 'O';

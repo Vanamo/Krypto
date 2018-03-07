@@ -26,9 +26,9 @@ public class WordFinderTest {
 
         String firstWord = "asti";
         int width = 4;
-        int hight = 5;
+        int height = 5;
 
-        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
+        CrosswordMaker crosswordMaker = new CrosswordMaker(width, height,
                 firstWord, wordList);
         BoardOfWords board = crosswordMaker.getBoardOfWords();
         board.drawFirstWord(firstWord);
@@ -54,15 +54,15 @@ public class WordFinderTest {
 
         String firstWord = "astia";
         int width = 5;
-        int hight = 5;
-        BoardOfWords board = new BoardOfWords(width, hight);
+        int height = 5;
+        BoardOfWords board = new BoardOfWords(width, height);
         board.createBoard(firstWord);
         board.drawFirstWord(firstWord);
 
         WordPosition secondWordp = new WordPosition(0, 4, Alignment.HORIZONTAL, 5);
         board.drawWord("istua", secondWordp);
 
-        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
+        CrosswordMaker crosswordMaker = new CrosswordMaker(width, height,
                 firstWord, wordList);
         WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength());
         WordPosition position = new WordPosition(0, 0, Alignment.VERTICAL, 5);
@@ -97,12 +97,12 @@ public class WordFinderTest {
         wordList.addArray(words);
         String firstWord = "sello";
         int width = 5;
-        int hight = 5;
-        BoardOfWords board = new BoardOfWords(width, hight);
+        int height = 5;
+        BoardOfWords board = new BoardOfWords(width, height);
         board.createBoard(firstWord);
         board.drawFirstWord(firstWord);
 
-        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
+        CrosswordMaker crosswordMaker = new CrosswordMaker(width, height,
                 firstWord, wordList);
         WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength());
         BoardOfWords instance = wordFinder.findWordsForAllPositions(positions);
@@ -140,12 +140,12 @@ public class WordFinderTest {
         wordList.addArray(words);
         String firstWord = "sello";
         int width = 5;
-        int hight = 5;
-        BoardOfWords board = new BoardOfWords(width, hight);
+        int height = 5;
+        BoardOfWords board = new BoardOfWords(width, height);
         board.createBoard(firstWord);
         board.drawFirstWord(firstWord);
 
-        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
+        CrosswordMaker crosswordMaker = new CrosswordMaker(width, height,
                 firstWord, wordList);
         WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength());
         BoardOfWords instance = wordFinder.findWordsForAllPositions(positions);
@@ -182,12 +182,12 @@ public class WordFinderTest {
         wordList.addArray(words);
         String firstWord = "sello";
         int width = 5;
-        int hight = 5;
-        BoardOfWords board = new BoardOfWords(width, hight);
+        int height = 5;
+        BoardOfWords board = new BoardOfWords(width, height);
         board.createBoard(firstWord);
         board.drawFirstWord(firstWord);
 
-        CrosswordMaker crosswordMaker = new CrosswordMaker(width, hight,
+        CrosswordMaker crosswordMaker = new CrosswordMaker(width, height,
                 firstWord, wordList);
         WordFinder wordFinder = new WordFinder(board, crosswordMaker.getWordsByLength());
         wordFinder.findWordsForAllPositions(positions);

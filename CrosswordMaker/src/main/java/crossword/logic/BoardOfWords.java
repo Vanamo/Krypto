@@ -12,16 +12,16 @@ public class BoardOfWords {
 
     private char[][] boardOfWords;
     private int width;
-    private int hight;
+    private int height;
     private WordPosition firstPosition;
 
     /**
      * @param width width of the board
-     * @param hight hight of the board
+     * @param height height of the board
      */
-    public BoardOfWords(int width, int hight) {
+    public BoardOfWords(int width, int height) {
         this.width = width;
-        this.hight = hight;
+        this.height = height;
     }
 
     /**
@@ -34,7 +34,7 @@ public class BoardOfWords {
         this.firstPosition = new WordPosition(0, 0, Alignment.HORIZONTAL,
                 firstWord.length());
         //Create board first
-        this.boardOfWords = new char[this.hight][this.width];
+        this.boardOfWords = new char[this.height][this.width];
         this.createBoard();
     }
 
@@ -43,13 +43,13 @@ public class BoardOfWords {
      * 'X's for empty squares.
      */
     private void createBoard() {
-        for (int y = 0; y < this.hight; y++) {
+        for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 this.boardOfWords[y][x] = 'X';
             }
         }
 
-        if (this.hight < 10 && this.width < 10) {
+        if (this.height < 10 && this.width < 10) {
             this.letterPositionsForSmallBoard();
         } else {
             this.letterPositionsForLargeBoard();
@@ -65,7 +65,7 @@ public class BoardOfWords {
             this.boardOfWords[0][x] = 'O';
         }
 
-        for (int y = 1; y < this.hight; y++) {
+        for (int y = 1; y < this.height; y++) {
             if (y % 2 == 1) {
                 for (int x = 0; x < this.width; x += 2) {
                     this.boardOfWords[y][x] = 'O';
@@ -98,7 +98,7 @@ public class BoardOfWords {
         charsForBoard.add("OOOOOXOXXOOOOOX".toCharArray());
         charsForBoard.add("OXOXOOOOOOXOXOO".toCharArray());
 
-        for (int y = 0; y < this.hight; y++) {
+        for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 //First row with the first word
                 int firstWordLength = this.firstPosition.getWordLength();
@@ -158,7 +158,7 @@ public class BoardOfWords {
             }
         }
         //Remove from the last row
-        y = this.hight - 1;
+        y = this.height - 1;
         for (int x = 0; x < this.width - 1; x++) {
             char char0 = this.boardOfWords[y][x];
             char char1 = this.boardOfWords[y - 1][x];
@@ -169,7 +169,7 @@ public class BoardOfWords {
         }
         //Remove from the last column
         int x = this.width - 1;
-        for (y = 0; y < this.hight - 1; y++) {
+        for (y = 0; y < this.height - 1; y++) {
             char char0 = this.boardOfWords[y][x];
             char char1 = this.boardOfWords[y][x - 1];
             char char2 = this.boardOfWords[y][x - 2];
@@ -250,10 +250,10 @@ public class BoardOfWords {
 
     /**
      *
-     * @return hight of the board
+     * @return height of the board
      */
-    public int getHight() {
-        return hight;
+    public int getHeight() {
+        return height;
     }
 
     /**
@@ -270,9 +270,9 @@ public class BoardOfWords {
      * @return copy of this BoardOfWords
      */
     public BoardOfWords makeCopy() {
-        BoardOfWords copy = new BoardOfWords(this.width, this.hight);
-        char[][] copyOfBoard = new char[this.hight][this.width];
-        for (int y = 0; y < this.hight; y++) {
+        BoardOfWords copy = new BoardOfWords(this.width, this.height);
+        char[][] copyOfBoard = new char[this.height][this.width];
+        for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 copyOfBoard[y][x] = this.boardOfWords[y][x];
             }
@@ -284,7 +284,7 @@ public class BoardOfWords {
     @Override
     public String toString() {
         String board = "";
-        for (int y = 0; y < this.hight; y++) {
+        for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 board = board.concat(this.boardOfWords[y][x] + "\t");
             }
@@ -297,11 +297,11 @@ public class BoardOfWords {
     public String toHTML() {
         String board = "<h1>Krypton ratkaisu</h1>\n"
                 + "<table style=\"border: 1px solid black; border-collapse: collapse; font-size:200%\">\n";
-        for (int y = 0; y < this.hight; y++) {
+        for (int y = 0; y < this.height; y++) {
             board.concat("<tr style=\"border: 1px solid black\">\n");
             for (int x = 0; x < this.width; x++) {
                 board = board.concat("<td style=\"border: 1px solid black; "
-                        + "width: 40px; hight: 40px; padding: 10px; text-align: center\">");
+                        + "width: 40px; height: 40px; padding: 10px; text-align: center\">");
                 Character c = this.boardOfWords[y][x];
                 if (c == 'X') {
                     board = board.concat("<i class=\"fa fa-heart\"></i>");
