@@ -1,7 +1,6 @@
 package crossword.logic;
 
 import crossword.datastructures.CustomArrayList;
-import java.util.Random;
 
 /**
  * The crossword board where the words are drawn

@@ -2,7 +2,6 @@ package crossword.lexicon;
 
 import crossword.datastructures.CustomArrayList;
 import java.io.*;
-import java.net.URL;
 import java.util.List;
 import org.jdom2.*;
 import org.jdom2.input.SAXBuilder;
@@ -118,5 +117,4 @@ public class Lexicon {
             wordList.add(word);
         }
     }
-
 }

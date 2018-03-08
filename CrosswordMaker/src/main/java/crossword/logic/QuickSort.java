@@ -12,9 +12,6 @@ public class QuickSort {
 
     private CustomArrayList<WordPosition> array;
     
-    /**
-     *
-     */
     public QuickSort() {
     }
      
@@ -85,5 +82,4 @@ public class QuickSort {
         array.add(i, array.get(j));
         array.add(j, temp);
     }
-
 }

@@ -2,7 +2,6 @@ package crossword.crosswordmaker;
 
 import crossword.logic.BoardOfWords;
 import crossword.logic.CrosswordMaker;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner;
@@ -41,6 +40,7 @@ public class UserInterface {
             Integer[][] boardWithNumbers = crosswordMaker.lettersToNumbers();
             String solutionWithNumbers = crosswordMaker.boardWithNumbersToHtmlString(boardWithNumbers);
             printSolutionsToFile(solutionWithLetters, solutionWithNumbers);
+            System.out.println("Krypto ja sen ratkaisu ovat tähän kansioon luodussa html-tiedostossa");
         }
     }
 

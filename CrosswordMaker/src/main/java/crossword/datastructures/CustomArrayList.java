@@ -12,15 +12,9 @@ package crossword.datastructures;
  */
 public class CustomArrayList<E> {
 
-    /**
-     *
-     */
     protected Object[] customArray;
     private int size;
 
-    /**
-     *
-     */
     public CustomArrayList() {
         this.customArray = new Object[10];
         this.size = 0;

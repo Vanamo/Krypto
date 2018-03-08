@@ -287,5 +287,4 @@ public class CrosswordMaker {
     public CustomArrayList<CustomArrayList<String>> getWordsByLength() {
         return wordsByLength;
     }
-
 }
