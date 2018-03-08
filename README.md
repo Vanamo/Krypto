@@ -7,7 +7,8 @@ Dokumentointi:
 * [M‰‰rittelydokumentti](https://github.com/Vanamo/Krypto/blob/master/Dokumentaatio/Maarittelydokumentti.pdf)
 * [Toteutusdokumentti](https://github.com/Vanamo/Krypto/blob/master/Dokumentaatio/Toteutusdokumentti.pdf)
 * [Testausdokumentti](https://github.com/Vanamo/Krypto/blob/master/Dokumentaatio/Testausdokumentti.pdf)
-<br>
+
+
 * [Viikkoraportti 1 ja 2](https://github.com/Vanamo/Krypto/blob/master/Dokumentaatio/Viikkoraportti2.pdf) 
 * [Viikkoraportti 3](https://github.com/Vanamo/Krypto/blob/master/Dokumentaatio/Viikkoraportti%203.pdf)
 * [Viikkoraportti 4](https://github.com/Vanamo/Krypto/blob/master/Dokumentaatio/Viikkoraportti%204.pdf)
